@@ -1,0 +1,45 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<ui:composition>
+	<li class="header">MÓDULO DO ADMINISTRADOR</li>
+	<li class="active"><a href="#{request.contextPath}/Home.xhtml"><i
+			class="fa fa-tachometer"></i><span>DashBoard</span></a></li>
+	<li class="treeview"><a href="#"><i class="fa fa-users"></i><span>Produtores</span>
+			<i class="fa fa-angle-left pull-right"></i></a>
+		<ul class="treeview-menu">
+			<li><a href="#">Cadastrar Produtor</a></li>
+			<li><a href="#">Pesquisar Produtores</a></li>
+		</ul></li>
+
+	<li class="treeview"><a href="#"><i class="fa fa-cubes"></i><span>Distribuições</span>
+			<i class="fa fa-angle-left pull-right"></i></a>
+		<ul class="treeview-menu">
+			<li><a href="#">Registrar entrega</a></li>
+			<li><a href="#"> Pesquisar Entregas</a></li>
+		</ul></li>
+
+	<li class="treeview"><a href="#"><i class="fa fa-cogs"></i><span>Solicitação
+				de Serviços</span> <i class="fa fa-angle-left pull-right"></i></a>
+		<ul class="treeview-menu">
+			<li><a href="#">Efetuar solicitação</a></li>
+			<li><a href="#">Pesquisar Solicitações</a></li>
+			<li><a href="#">Pedidos de Solicitações</a></li>
+			<li><a href="#">Máquinas</a></li>
+		</ul></li>
+
+	<li class="treeview"><a href="#"><i class="fa fa-truck"></i><span>Recebimento
+				de Cargas</span> <i class="fa fa-angle-left pull-right"></i></a>
+		<ul class="treeview-menu">
+			<li><a href="#">Registrar Carga</a></li>
+			<li><a href="#">Pesquisar Cargas</a></li>
+			<li><a href="#">Produtos de Carga</a></li>
+		</ul></li>
+
+</ui:composition>
+</html>
