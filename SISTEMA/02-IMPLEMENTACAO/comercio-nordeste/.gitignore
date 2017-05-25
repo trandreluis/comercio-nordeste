@@ -1,6 +1,7 @@
 # Pastas e arquivos do eclipse
 
 target/
+.metadata/
 .settings/
 .classpath
 .project
