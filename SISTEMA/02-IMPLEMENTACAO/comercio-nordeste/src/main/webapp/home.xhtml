@@ -12,10 +12,25 @@
 	<ui:define name="content">
 
 		<h:body>
+			
+			<!-- class="ui-fluid" -->
 
-			<h:outputLabel value="Comércio Nordeste" />
+			<div  align="center">
+
+				<p:graphicImage library="images" name="1p.png" />
+				<br />
+				<p:inputText size="80"
+					placeholder="Ex: bicicleta sertânia, encanador, smartphone" />
+				<br />
+				<br />
+				<p:panelGrid columns="2" columnClasses="">
+					<p:commandButton value="Buscar" />
+					<p:commandButton value="Limpar" />
+				</p:panelGrid>
+			</div>
 
 		</h:body>
+
 	</ui:define>
 
 </ui:composition>
