@@ -6,8 +6,7 @@
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:c="http://java.sun.com/jstl/core"
 	xmlns:p="http://primefaces.org/ui"
-	template="/WEB-INF/templates/template_admin.xhtml">
-
+	template="/WEB-INF/templates/_template.xhtml">
 
 	<ui:define name="content">
 
@@ -15,17 +14,17 @@
 			
 			<!-- class="ui-fluid" -->
 
-			<div  align="center">
+			<div align="center">
 
 				<p:graphicImage library="images" name="1p.png" />
 				<br />
 				<p:inputText size="80"
-					placeholder="Ex: bicicleta sertânia, encanador, smartphone" />
+					placeholder="Ex: bicicleta em monteiro, encanador em caruaru, smartphone em campina grande" />
 				<br />
 				<br />
-				<p:panelGrid columns="2" columnClasses="">
-					<p:commandButton value="Buscar" />
-					<p:commandButton value="Limpar" />
+				<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+					<p:commandButton styleClass="btn btn-primary" value="Buscar" />
+					<p:commandButton styleClass="btn btn-default" value="Limpar" />
 				</p:panelGrid>
 			</div>
 
