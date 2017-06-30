@@ -16,9 +16,9 @@
   </servlet-mapping>
   <context-param>
     <param-name>primefaces.THEME</param-name>
-    <param-value>omega</param-value>
-  </context-param>
+    <param-value>admin</param-value>
+</context-param>
   <welcome-file-list>
-    <welcome-file>home.xhtml</welcome-file>
+    <welcome-file>home_lte.xhtml</welcome-file>
   </welcome-file-list>
 </web-app>
