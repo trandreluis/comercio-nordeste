@@ -17,6 +17,6 @@ public interface AnuncioDAO extends GenericDAO<Anuncio, Long> {
 	
 	List<Anuncio> buscarPorPrecoMaximo(Double precoMaximo);
 	
-	List<Anuncio> buscarPorAnunciante(Anuncio anuncio, Anunciante anunciante);
+	List<Anuncio> buscarPorAnunciante(Anunciante anunciante);
 	
 }

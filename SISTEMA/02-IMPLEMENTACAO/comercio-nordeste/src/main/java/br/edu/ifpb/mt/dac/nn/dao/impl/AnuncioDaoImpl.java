@@ -59,7 +59,7 @@ public class AnuncioDaoImpl extends GenericDaoImpl<Anuncio, Long> implements Anu
 	 * Falta implementar
 	 */
 	@Override
-	public List<Anuncio> buscarPorAnunciante(Anuncio anuncio, Anunciante anunciante) {
+	public List<Anuncio> buscarPorAnunciante(Anunciante anunciante) {
 		// TODO Auto-generated method stub
 		return null;
 	}

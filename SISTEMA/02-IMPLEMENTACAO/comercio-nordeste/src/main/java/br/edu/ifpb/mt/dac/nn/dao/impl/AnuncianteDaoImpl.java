@@ -84,7 +84,7 @@ public class AnuncianteDaoImpl extends GenericDaoImpl<Anunciante, Long> implemen
 	 * Falta implementar
 	 */
 	@Override
-	public Anunciante buscarPorAnuncio(Anunciante anunciante, Anuncio anuncio) {
+	public Anunciante buscarPorAnuncio(Anuncio anuncio) {
 		return null;
 	}
 
