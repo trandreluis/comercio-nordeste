@@ -20,6 +20,6 @@ public interface AnuncianteDAO extends GenericDAO<Anunciante, Long> {
 	
 	List<Anunciante> buscarPorNivel(NivelAnunciante nivel);
 	
-	Anuncio buscarPorAnuncio(Anunciante anunciante, Anuncio anuncio);
+	Anunciante buscarPorAnuncio(Anunciante anunciante, Anuncio anuncio);
 	
 }
