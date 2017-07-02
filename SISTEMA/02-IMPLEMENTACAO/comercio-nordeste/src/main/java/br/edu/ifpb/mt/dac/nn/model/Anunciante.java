@@ -26,6 +26,9 @@ public class Anunciante {
 
 	@Column(name = "NOME")
 	private String nome;
+	
+	@Column(name = "SOBRENOME")
+	private String sobrenome;
 
 	@Column(name = "NOME_USUARIO")
 	private String nomeUsuario;
@@ -110,4 +113,12 @@ public class Anunciante {
 		this.nivel = nivel;
 	}
 
+	public String getSobrenome() {
+		return sobrenome;
+	}
+
+	public void setSobrenome(String sobrenome) {
+		this.sobrenome = sobrenome;
+	}
+	
 }
