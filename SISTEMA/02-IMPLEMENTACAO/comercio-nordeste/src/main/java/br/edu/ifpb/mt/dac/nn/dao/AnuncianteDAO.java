@@ -4,6 +4,7 @@ import java.util.List;
 
 import br.edu.ifpb.mt.dac.nn.enumerations.NivelAnunciante;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
+import br.edu.ifpb.mt.dac.nn.model.Anuncio;
 
 public interface AnuncianteDAO extends GenericDAO<Anunciante, Long> {
 
@@ -18,5 +19,7 @@ public interface AnuncianteDAO extends GenericDAO<Anunciante, Long> {
 	Anunciante buscarPorNomeUsuario(String nomeUsuario);
 	
 	List<Anunciante> buscarPorNivel(NivelAnunciante nivel);
+	
+	Anuncio buscarPorAnuncio(Anunciante anunciante, Anuncio anuncio);
 	
 }

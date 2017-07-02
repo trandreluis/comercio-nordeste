@@ -10,6 +10,7 @@ import javax.persistence.TypedQuery;
 import br.edu.ifpb.mt.dac.nn.dao.AnuncianteDAO;
 import br.edu.ifpb.mt.dac.nn.enumerations.NivelAnunciante;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
+import br.edu.ifpb.mt.dac.nn.model.Anuncio;
 
 public class AnuncianteDaoImpl extends GenericDaoImpl<Anunciante, Long> implements AnuncianteDAO {
 
@@ -77,6 +78,14 @@ public class AnuncianteDaoImpl extends GenericDaoImpl<Anunciante, Long> implemen
 			em.close();
 		}
 		return resultado;
+	}
+
+	/*
+	 * Falta implementar
+	 */
+	@Override
+	public Anuncio buscarPorAnuncio(Anunciante anunciante, Anuncio anuncio) {
+		return null;
 	}
 
 }
