@@ -11,7 +11,7 @@ public interface AnuncianteDAO extends GenericDAO<Anunciante, Long> {
 	 * Falta declarar possiveis excecoes nos metodos
 	 */
 	
-	List<Anunciante> buscarPorNome(String name);
+	List<Anunciante> buscarPorNome(String nome);
 
 	Anunciante buscarPorEmail(String email);
 	
