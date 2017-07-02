@@ -29,7 +29,7 @@ public class Anuncio {
 	private Double preco;
 
 	@Column(name = "DATA_PUCLICACAO")
-	private LocalDateTime dataHoraPublicacao;
+	private LocalDateTime dataPublicacao;
 	
 	@ManyToOne(fetch = FetchType.EAGER)
 	@JoinColumn(name = "ANUNCIANTE_FK")
@@ -68,11 +68,11 @@ public class Anuncio {
 	}
 
 	public LocalDateTime getDataHoraPublicacao() {
-		return dataHoraPublicacao;
+		return dataPublicacao;
 	}
 
 	public void setDataHoraPublicacao(LocalDateTime dataHoraPublicacao) {
-		this.dataHoraPublicacao = dataHoraPublicacao;
+		this.dataPublicacao = dataHoraPublicacao;
 	}
 
 	public Anunciante getAnunciante() {
