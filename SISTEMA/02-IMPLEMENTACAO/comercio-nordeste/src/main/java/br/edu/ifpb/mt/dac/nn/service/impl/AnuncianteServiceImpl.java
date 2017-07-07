@@ -14,7 +14,14 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 	public AnuncianteServiceImpl() {
 		this.dao = new AnuncianteDaoImpl();
 	}
-
+	
+	public static void main(String[] args) {
+		
+		@SuppressWarnings("unused")
+		AnuncianteServiceImpl d = new AnuncianteServiceImpl();
+		
+	}
+	
 	@Override
 	public void salvar(Anunciante entidade) {
 		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;

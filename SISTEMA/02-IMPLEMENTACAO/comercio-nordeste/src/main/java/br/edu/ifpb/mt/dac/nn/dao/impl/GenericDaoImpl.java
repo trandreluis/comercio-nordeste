@@ -26,7 +26,12 @@ public abstract class GenericDaoImpl<T, ID> implements GenericDAO<T, ID> {
 	}
 	
 	static {
-		emf = Persistence.createEntityManagerFactory("bdnordeste");
+		try {
+			emf = Persistence.createEntityManagerFactory("bdnordeste");
+		} catch(Throwable t) {
+			t.printStackTrace();
+			throw t;
+		}
 	}
 
 	protected EntityManager getEntityManager() {

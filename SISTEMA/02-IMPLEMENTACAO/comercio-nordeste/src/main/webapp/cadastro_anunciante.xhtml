@@ -17,35 +17,43 @@
 			<div align="center" class="ui-fluid">
 
 				<h:form>
-				
+
 					<p:graphicImage library="images" name="users.png" />
-					
+
 					<br />
-					
+
 					<p:panelGrid columns="1" styleClass="ui-panelgrid-blank">
-					
+
 						<p:outputLabel for="nome" value="Nome" />
-						<p:inputText id="nome" />
+						<p:inputText id="nome"
+							value="#{anuncianteCadastroBean.anunciante.nome}" />
 						<p:outputLabel for="sobrenome" value="Sobrenome" />
-						<p:inputText id="sobrenome" />
+						<p:inputText id="sobrenome"
+							value="#{anuncianteCadastroBean.anunciante.sobrenome}" />
 						<p:outputLabel for="nomeUsuario" value="Nome de usuario" />
-						<p:inputText id="nomeUsuario" />
+						<p:inputText id="nomeUsuario"
+							value="#{anuncianteCadastroBean.anunciante.nomeUsuario}" />
 						<p:outputLabel for="dataNascimento" value="Data de nascimento" />
-						<p:calendar id="dataNascimento" size="20" pattern="dd/MM/yyyy" showButtonPanel="true" />
+						<p:calendar id="dataNascimento"
+							value="#{anuncianteCadastroBean.anunciante.dataNascimento}"
+							size="20" pattern="dd/MM/yyyy" showButtonPanel="true" />
 						<p:outputLabel for="email" value="E-mail" />
-						<p:inputText id="email" />
+						<p:inputText id="email"
+							value="#{anuncianteCadastroBean.anunciante.email}" />
 						<p:outputLabel for="senha" value="Senha" />
-						<p:password id="senha" />
-						
+						<p:password id="senha"
+							value="#{anuncianteCadastroBean.anunciante.senha}" />
+
 						<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-							<p:commandButton styleClass="btn btn-primary" value="Cadastrar" />
-							<p:commandButton styleClass="btn btn-default" value="Cancelar" />
+							<p:commandButton styleClass="btn btn-primary" value="Cadastrar"
+								action="{anuncianteCadastroBean.anunciante.cadastrar}" />
+							<p:button styleClass="btn btn-default" value="Cancelar" href="home.xhtml" />
 						</p:panelGrid>
-						
+
 					</p:panelGrid>
 
 				</h:form>
-				
+
 			</div>
 
 		</h:body>
