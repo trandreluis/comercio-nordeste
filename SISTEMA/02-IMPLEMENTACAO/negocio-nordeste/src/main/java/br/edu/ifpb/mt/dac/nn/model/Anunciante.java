@@ -1,10 +1,11 @@
 package br.edu.ifpb.mt.dac.nn.model;
 
-import java.time.LocalDate;
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.DiscriminatorValue;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
@@ -12,11 +13,22 @@ import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.NamedQueries;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
+import javax.persistence.Table;
 
 import br.edu.ifpb.mt.dac.nn.enumerations.NivelAnunciante;
 
 @Entity
+@Table(name = "ANUNCIANTE")
+@DiscriminatorValue("Anunciante")
+@NamedQueries({
+		@NamedQuery(name = "Anunciante.buscarPorEmail", query = "SELECT a FROM Anunciante a WHERE LOWER(a.email) LIKE LOWER(:email)"),
+		@NamedQuery(name = "Anunciante.buscarPorNome", query = "SELECT a FROM Anunciante a WHERE LOWER(a.nome) LIKE LOWER(:nome)"),
+		@NamedQuery(name = "Anunciante.buscarPorNomeUsuario", query = "SELECT a FROM Anunciante a WHERE LOWER(a.nomeUsuario) LIKE LOWER(:nomeUsuario)"),
+		@NamedQuery(name = "Anunciante.buscarPorNivel", query = "SELECT a FROM Anunciante a WHERE LOWER(a.nivel) LIKE LOWER(:nivel)")
+})
 public class Anunciante {
 
 	@Id
@@ -26,7 +38,7 @@ public class Anunciante {
 
 	@Column(name = "NOME")
 	private String nome;
-	
+
 	@Column(name = "SOBRENOME")
 	private String sobrenome;
 
@@ -34,17 +46,17 @@ public class Anunciante {
 	private String nomeUsuario;
 
 	@Column(name = "DATA_NASCIMENTO")
-	private LocalDate dataNascimento;
-	
+	private Date dataNascimento;
+
 	@Column(name = "EMAIL")
 	private String email;
-	
+
 	@Column(name = "SENHA")
 	private String senha;
-	
+
 	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "anunciante")
 	private List<Anuncio> anuncios;
-	
+
 	@Enumerated(EnumType.STRING)
 	@Column(name = "NIVEL")
 	private NivelAnunciante nivel;
@@ -73,11 +85,11 @@ public class Anunciante {
 		this.nomeUsuario = nomeUsuario;
 	}
 
-	public LocalDate getDataNascimento() {
+	public Date getDataNascimento() {
 		return dataNascimento;
 	}
 
-	public void setDataNascimento(LocalDate dataNascimento) {
+	public void setDataNascimento(Date dataNascimento) {
 		this.dataNascimento = dataNascimento;
 	}
 
@@ -120,5 +132,5 @@ public class Anunciante {
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
 	}
-	
+
 }

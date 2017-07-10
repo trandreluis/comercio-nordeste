@@ -34,9 +34,17 @@
 						<p:inputText id="nomeUsuario"
 							value="#{anuncianteCadastroBean.anunciante.nomeUsuario}" />
 						<p:outputLabel for="dataNascimento" value="Data de nascimento" />
-						<p:calendar id="dataNascimento"
-							value="#{anuncianteCadastroBean.anunciante.dataNascimento}"
-							size="20" pattern="dd/MM/yyyy" showButtonPanel="true" />
+						
+							
+							<ui:include src="/WEB-INF/templates/_calendar.xhtml">
+									<ui:param name="id" value="dataNascimento" />
+									<ui:param name="required" value="true" />
+									<ui:param name="value"
+										value="#{anuncianteCadastroBean.anunciante.dataNascimento}" />
+									<ui:param name="name" value="Data Nascimento" />
+								</ui:include>
+								
+							
 						<p:outputLabel for="email" value="E-mail" />
 						<p:inputText id="email"
 							value="#{anuncianteCadastroBean.anunciante.email}" />
@@ -46,7 +54,7 @@
 
 						<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
 							<p:commandButton styleClass="btn btn-primary" value="Cadastrar"
-								action="{anuncianteCadastroBean.anunciante.cadastrar}" />
+								action="#{anuncianteCadastroBean.cadastrar}" ajax="false" />
 							<p:button styleClass="btn btn-default" value="Cancelar" href="home.xhtml" />
 						</p:panelGrid>
 

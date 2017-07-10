@@ -36,7 +36,7 @@ public class AnuncianteDaoImpl extends GenericDaoImpl<Anunciante, Long> implemen
 		EntityManager em = getEntityManager();
 		Anunciante resultado = null;
 		try {
-			TypedQuery<Anunciante> query = em.createNamedQuery("Funcionario.findByCPF", Anunciante.class);
+			TypedQuery<Anunciante> query = em.createNamedQuery("Anunciante.buscarPorEmail", Anunciante.class);
 			query.setParameter("email", email);
 			resultado = query.getSingleResult();
 		} catch (PersistenceException pe) {
@@ -56,7 +56,7 @@ public class AnuncianteDaoImpl extends GenericDaoImpl<Anunciante, Long> implemen
 			query.setParameter("nomeUsuario", nomeUsuario);
 			resultado = query.getSingleResult();
 		} catch (PersistenceException pe) {
-			pe.printStackTrace();
+			return null;
 		} finally {
 			em.close();
 		}
