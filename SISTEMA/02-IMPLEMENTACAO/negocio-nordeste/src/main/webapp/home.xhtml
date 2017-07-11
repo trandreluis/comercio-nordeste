@@ -9,10 +9,13 @@
 	template="/WEB-INF/templates/admin/_template_admin.xhtml">
 
 	<ui:define name="title">Anunciante</ui:define>
-	<ui:define name="content-header">Anunciante <small>Pesquisar
-			funcionário cadastrado</small>
+	<ui:define name="content-header">Anunciante <small>Gerencie
+			seus anúncios de produtos e serviços</small>
 	</ui:define>
-	<ui:define name="breadcrumb-active">Anunciante</ui:define>
+	<ui:define name="breadcrumb-active">
+		<a href="#{request.contextPath}/home.xhtml"><i
+			class="fa fa-user"></i>Anunciante</a>
+	</ui:define>
 
 	<ui:define name="content">
 
