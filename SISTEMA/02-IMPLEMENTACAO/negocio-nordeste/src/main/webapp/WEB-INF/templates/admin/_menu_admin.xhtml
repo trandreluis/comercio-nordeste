@@ -8,35 +8,53 @@
 
 <ui:composition>
 
-	<li class="header">MÓDULO DO ADMINISTRADOR</li>
+	<li class="header">
+		<h5><h:outputLabel value="#{cumprimento.cumprimento}" /></h5>
+		<h6>Seja bem vindo!</h6>
+	</li>
 	<li class="active"><a href="#{request.contextPath}/home.xhtml"><i
 			class="fa fa-pie-chart"></i><span>Geral</span></a></li>
+	
+	<li class="treeview"><a href="#"><i class="fa fa-newspaper-o"></i><span>Anúncios</span>
+			<i class="fa fa-angle-left pull-right"></i></a>
+		<ul class="treeview-menu">
+			<li><a href="#">Cadastrar Novo</a></li>
+			<li><a href="#">Gerenciar Existentes</a></li>
+		</ul></li>
+	
 	<li class="treeview"><a href="#"><i class="fa fa-shopping-bag"></i><span>Produtos</span>
 			<i class="fa fa-angle-left pull-right"></i></a>
 		<ul class="treeview-menu">
-			<li><a href="#">Cadastrar Produtor</a></li>
-			<li><a href="#">Pesquisar Produtores</a></li>
+			<li><a href="#">Cadastrar Produto</a></li>
+			<li><a href="#">Listar Produtos</a></li>
 		</ul></li>
 
 	<li class="treeview"><a href="#"><i class="fa fa-wrench"></i><span>Serviços</span>
 			<i class="fa fa-angle-left pull-right"></i></a>
 		<ul class="treeview-menu">
-			<li><a href="#">Registrar entrega</a></li>
-			<li><a href="#"> Pesquisar Entregas</a></li>
+			<li><a href="#">Cadastrar Serviço</a></li>
+			<li><a href="#">Listar Serviços</a></li>
 		</ul></li>
 		
 	<li class="treeview"><a href="#"><i class="fa fa-home"></i><span>Imóveis</span>
 			<i class="fa fa-angle-left pull-right"></i></a>
 		<ul class="treeview-menu">
-			<li><a href="#">Registrar entrega</a></li>
-			<li><a href="#"> Pesquisar Entregas</a></li>
+			<li><a href="#">Cadastrar Imóvel</a></li>
+			<li><a href="#">Listar Imóveis</a></li>
 		</ul></li>
 		
 	<li class="treeview"><a href="#"><i class="fa fa-car"></i><span>Veículos</span>
 			<i class="fa fa-angle-left pull-right"></i></a>
 		<ul class="treeview-menu">
-			<li><a href="#">Registrar entrega</a></li>
-			<li><a href="#"> Pesquisar Entregas</a></li>
+			<li><a href="#">Cadastrar Veículo</a></li>
+			<li><a href="#">Listar Veículos</a></li>
+		</ul></li>
+	
+	<li class="treeview"><a href="#"><i class="fa fa-bar-chart"></i><span>Estatísticas</span>
+			<i class="fa fa-angle-left pull-right"></i></a>
+		<ul class="treeview-menu">
+			<li><a href="#">Visualização Geral</a></li>
+			<li><a href="#">Visualização Personalizada</a></li>
 		</ul></li>
 
 </ui:composition>
