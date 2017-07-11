@@ -22,7 +22,7 @@
 		<param-value>omega</param-value>
 	</context-param>
 	<welcome-file-list>
-		<welcome-file>home.xhtml</welcome-file>
+		<welcome-file>busca.xhtml</welcome-file>
 	</welcome-file-list>
 
 	<filter>

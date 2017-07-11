@@ -8,6 +8,7 @@ import br.edu.ifpb.mt.dac.nn.enumerations.NivelAnunciante;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.model.Anuncio;
 import br.edu.ifpb.mt.dac.nn.service.AnuncianteService;
+import br.edu.ifpb.mt.dac.nn.util.MessageUtils;
 
 public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> implements AnuncianteService {
 
@@ -30,16 +31,17 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 
 		if (anuncianteEmail != null) {
 			// Teste
-			System.out.println("Já existe um anunciante com este e-mail cadastrado");
+			MessageUtils.messageWarn("Já existe um anunciante com este e-mail cadastrado");
 		}
 
 		else if (anuncianteNomeUsuario != null) {
 			// Teste
-			System.out.println("Já existe um anunciante com este username cadastrado");
+			MessageUtils.messageWarn("Já existe um anunciante com este username cadastrado");
 		}
 
 		else {
 			dao.salvar(entidade);
+			MessageUtils.messageSucess("Anunciante cadastrado com sucesso!");
 		}
 	}
 	

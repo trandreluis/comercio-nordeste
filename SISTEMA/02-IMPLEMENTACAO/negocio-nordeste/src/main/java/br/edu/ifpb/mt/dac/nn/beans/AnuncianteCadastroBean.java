@@ -8,7 +8,6 @@ import javax.faces.bean.ViewScoped;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.service.AnuncianteService;
 import br.edu.ifpb.mt.dac.nn.service.impl.AnuncianteServiceImpl;
-import br.edu.ifpb.mt.dac.nn.util.MessageUtils;
 
 @ManagedBean
 @ViewScoped
@@ -23,14 +22,13 @@ public class AnuncianteCadastroBean implements Serializable {
 		this.anuncianteService = new AnuncianteServiceImpl();
 	}
 
-	public void cadastrar() {
-		System.out.println("Chamada");
+	public String cadastrar() {
 		anuncianteService.salvar(anunciante);
-		MessageUtils.messageSucess("Sucesso!");
+		return "home?faces-redirect=true";
 	}
 
 	public String cancelar() {
-		return "home?faces-redirect=true";
+		return "busca?faces-redirect=true";
 	}
 
 	public Anunciante getAnunciante() {
