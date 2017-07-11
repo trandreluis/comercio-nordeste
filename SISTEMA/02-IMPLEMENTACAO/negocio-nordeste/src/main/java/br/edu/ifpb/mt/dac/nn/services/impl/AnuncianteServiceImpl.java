@@ -1,55 +1,52 @@
-package br.edu.ifpb.mt.dac.nn.service.impl;
+package br.edu.ifpb.mt.dac.nn.services.impl;
 
 import java.util.List;
 
 import br.edu.ifpb.mt.dac.nn.dao.AnuncianteDAO;
 import br.edu.ifpb.mt.dac.nn.dao.impl.AnuncianteDaoImpl;
 import br.edu.ifpb.mt.dac.nn.enumerations.NivelAnunciante;
+import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.model.Anuncio;
-import br.edu.ifpb.mt.dac.nn.service.AnuncianteService;
-import br.edu.ifpb.mt.dac.nn.util.MessageUtils;
+import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
 
 public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> implements AnuncianteService {
 
 	public AnuncianteServiceImpl() {
 		this.dao = new AnuncianteDaoImpl();
 	}
-	
+
 	public static void main(String[] args) {
-		
+
 		@SuppressWarnings("unused")
 		AnuncianteServiceImpl d = new AnuncianteServiceImpl();
-		
+
 	}
-	
+
 	@Override
-	public void salvar(Anunciante entidade) {
+	public void salvar(Anunciante entidade) throws NegocioNordesteException {
 		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
 		Anunciante anuncianteEmail = anuncianteDAO.buscarPorEmail(entidade.getEmail());
 		Anunciante anuncianteNomeUsuario = anuncianteDAO.buscarPorNomeUsuario(entidade.getNomeUsuario());
 
 		if (anuncianteEmail != null) {
-			// Teste
-			MessageUtils.messageWarn("Já existe um anunciante com este e-mail cadastrado");
+			throw new NegocioNordesteException("Já existe um anunciante com este e-mail cadastrado.");
 		}
 
 		else if (anuncianteNomeUsuario != null) {
-			// Teste
-			MessageUtils.messageWarn("Já existe um anunciante com este username cadastrado");
+			throw new NegocioNordesteException("Já existe um anunciante com este username cadastrado");
 		}
 
 		else {
 			dao.salvar(entidade);
-			MessageUtils.messageSucess("Anunciante cadastrado com sucesso!");
 		}
 	}
-	
+
 	@Override
 	public List<Anunciante> buscarPorNome(String nome) {
 		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
 		List<Anunciante> anunciantes = anuncianteDAO.buscarPorNome(nome);
-		
+
 		return anunciantes;
 	}
 
@@ -57,7 +54,7 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 	public Anunciante buscarPorEmail(String email) {
 		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
 		Anunciante anunciante = anuncianteDAO.buscarPorEmail(email);
-		
+
 		return anunciante;
 	}
 
@@ -65,7 +62,7 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 	public Anunciante buscarPorNomeUsuario(String nomeUsuario) {
 		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
 		Anunciante anunciante = anuncianteDAO.buscarPorNomeUsuario(nomeUsuario);
-		
+
 		return anunciante;
 	}
 
@@ -73,7 +70,7 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 	public List<Anunciante> buscarPorNivel(NivelAnunciante nivel) {
 		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
 		List<Anunciante> anunciantes = anuncianteDAO.buscarPorNivel(nivel);
-		
+
 		return anunciantes;
 	}
 
@@ -81,7 +78,7 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 	public Anunciante buscarPorAnuncio(Anuncio anuncio) {
 		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
 		Anunciante anunciante = anuncianteDAO.buscarPorAnuncio(anuncio);
-		
+
 		return anunciante;
 	}
 

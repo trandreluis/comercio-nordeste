@@ -1,4 +1,4 @@
-package br.edu.ifpb.mt.dac.nn.service;
+package br.edu.ifpb.mt.dac.nn.services;
 
 import java.util.List;
 

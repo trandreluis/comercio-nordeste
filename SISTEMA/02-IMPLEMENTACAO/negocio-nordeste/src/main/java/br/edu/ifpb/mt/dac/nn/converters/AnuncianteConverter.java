@@ -9,8 +9,8 @@ import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
-import br.edu.ifpb.mt.dac.nn.service.AnuncianteService;
-import br.edu.ifpb.mt.dac.nn.service.impl.AnuncianteServiceImpl;
+import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
+import br.edu.ifpb.mt.dac.nn.services.impl.AnuncianteServiceImpl;
 
 @RequestScoped
 @FacesConverter(forClass=Anunciante.class)

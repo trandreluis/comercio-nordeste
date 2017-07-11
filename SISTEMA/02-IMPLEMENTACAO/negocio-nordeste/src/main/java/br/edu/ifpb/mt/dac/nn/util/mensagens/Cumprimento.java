@@ -1,4 +1,4 @@
-package br.edu.ifpb.mt.dac.nn.util;
+package br.edu.ifpb.mt.dac.nn.util.mensagens;
 
 import java.time.LocalDateTime;
 import java.time.ZoneId;
