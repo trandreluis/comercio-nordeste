@@ -27,7 +27,7 @@ public class SobrenomeValidator implements Validator {
 		this.matcher = this.padrao.matcher(nome);
 
 		if (!matcher.matches()) {
-			throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "Username inválido!",
+			throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "Sobrenome inválido!",
 					"O sobrenome deve ter somente caracters albfabéticos com ou sem acento e/ou espaços."));
 		}				
 		

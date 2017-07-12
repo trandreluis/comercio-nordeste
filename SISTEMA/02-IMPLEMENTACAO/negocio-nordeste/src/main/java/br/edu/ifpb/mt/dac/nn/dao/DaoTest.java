@@ -26,7 +26,6 @@ public class DaoTest {
 		try {
 			service.salvar(anunciante);
 		} catch (NegocioNordesteException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

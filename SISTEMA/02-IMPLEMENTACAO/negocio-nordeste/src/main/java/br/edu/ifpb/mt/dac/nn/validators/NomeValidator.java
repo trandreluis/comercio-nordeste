@@ -22,12 +22,14 @@ public class NomeValidator implements Validator {
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
 		String nome = (String) value;
+		
+		nome = nome.trim();
 
 		this.padrao = Pattern.compile(PADRAO_NOME);
 		this.matcher = this.padrao.matcher(nome);
 
 		if (!matcher.matches()) {
-			throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "Username inválido!",
+			throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "Nome inválido!",
 					"O nome deve ter somente caracters albfabéticos com ou sem acento."));
 		}				
 		
