@@ -14,7 +14,7 @@
 
 			<!-- HIBERNATE -->
 
-			<!-- Configuração Hibernate SGBD MySQL Create Database -->
+			<!-- Configuração Hibernate SGBD MySQL Para Criar Banco -->
 
 			<!-- Configuração Hibernate SGBD MySQL -->
 			<property name="hibernate.connection.url"
