@@ -16,11 +16,10 @@ public class DaoTest {
 
 		Anunciante anunciante = new Anunciante();
 
-		anunciante.setEmail("email@mail.com");
-		anunciante.setNome("andre");
-		anunciante.setSobrenome("luis");
+		anunciante.setEmail("emaithbxdfhdfgndxrbgl@mail.com");
+		anunciante.setSobrenome("lubgdrbis");
 		anunciante.setDataNascimento(new Date());
-		anunciante.setUsername("trandreluis");
+		anunciante.setUsername("trandredddhthhtluis");
 		anunciante.setSenha("123");
 
 		try {

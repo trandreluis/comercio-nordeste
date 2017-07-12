@@ -1,13 +1,16 @@
 package br.edu.ifpb.mt.dac.nn.services.impl;
 
+import java.io.Serializable;
 import java.util.List;
 
 import br.edu.ifpb.mt.dac.nn.dao.GenericDAO;
 import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
 import br.edu.ifpb.mt.dac.nn.services.GenericService;
 
-public class GenericServiceImpl<T, ID> implements GenericService<T, ID> {
+public class GenericServiceImpl<T, ID> implements GenericService<T, ID>, Serializable {
 
+	private static final long serialVersionUID = 76538538274567236L;
+	
 	protected GenericDAO<T, ID> dao;
 	
 	@Override

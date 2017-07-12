@@ -1,5 +1,6 @@
 package br.edu.ifpb.mt.dac.nn.model;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 
 import javax.persistence.Column;
@@ -12,8 +13,10 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 
 @Entity
-public class Anuncio {
-
+public class Anuncio implements Serializable {
+	
+	private static final long serialVersionUID = 63847683749347364L;
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "ID")

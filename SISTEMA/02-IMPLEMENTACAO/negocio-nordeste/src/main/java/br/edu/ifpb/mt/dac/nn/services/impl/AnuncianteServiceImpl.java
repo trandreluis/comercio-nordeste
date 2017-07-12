@@ -12,6 +12,8 @@ import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
 
 public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> implements AnuncianteService {
 
+	private static final long serialVersionUID = 1L;
+	
 	public AnuncianteServiceImpl() {
 		this.dao = new AnuncianteDaoImpl();
 	}
@@ -36,10 +38,8 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 		else if (anuncianteUsername != null) {
 			throw new NegocioNordesteException("Já existe um anunciante com este username cadastrado");
 		}
-
-		else {
-			dao.salvar(entidade);
-		}
+	
+		dao.salvar(entidade);
 	}
 
 	@Override

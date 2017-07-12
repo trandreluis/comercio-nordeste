@@ -24,7 +24,6 @@ public class MessageUtils implements Serializable {
 
 	public static void messageWarn(String msg) {
 		messageFaces(MessagesType.WARNING.getMessage(), msg);
-
 	}
 
 	private static void messageFaces(String type, String message) {

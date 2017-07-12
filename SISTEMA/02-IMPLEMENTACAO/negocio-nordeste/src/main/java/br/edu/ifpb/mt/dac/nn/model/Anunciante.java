@@ -1,5 +1,6 @@
 package br.edu.ifpb.mt.dac.nn.model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -33,7 +34,9 @@ import br.edu.ifpb.mt.dac.nn.enumerations.NivelAnunciante;
 		@NamedQuery(name = "Anunciante.buscarPorUsername", query = "SELECT a FROM Anunciante a WHERE LOWER(a.username) LIKE LOWER(:username)"),
 		@NamedQuery(name = "Anunciante.buscarPorNivel", query = "SELECT a FROM Anunciante a WHERE LOWER(a.nivel) LIKE LOWER(:nivel)")
 })
-public class Anunciante {
+public class Anunciante implements Serializable {
+	
+	private static final long serialVersionUID = 245483248935007L;
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

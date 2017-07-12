@@ -14,6 +14,8 @@ import br.edu.ifpb.mt.dac.nn.model.Anuncio;
 
 public class AnuncianteDaoImpl extends GenericDaoImpl<Anunciante, Long> implements AnuncianteDAO {
 
+	private static final long serialVersionUID = 1L;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Anunciante> buscarPorNome(String nome) {
@@ -40,7 +42,7 @@ public class AnuncianteDaoImpl extends GenericDaoImpl<Anunciante, Long> implemen
 			query.setParameter("email", email);
 			resultado = query.getSingleResult();
 		} catch (PersistenceException pe) {
-			pe.printStackTrace();
+			return null;
 		} finally {
 			em.close();
 		}

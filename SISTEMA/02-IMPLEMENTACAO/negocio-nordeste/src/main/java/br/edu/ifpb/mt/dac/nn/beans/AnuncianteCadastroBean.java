@@ -28,7 +28,7 @@ public class AnuncianteCadastroBean implements Serializable {
 	public void cadastrar() {
 		try{
 			anuncianteService.salvar(anunciante);			
-			MessageUtils.messageSucess("Cadastrado realizado com sucesso!");
+			MessageUtils.messageSucess("Cadastro realizado!");
 			JSFUtils.rederTo("home.xhtml");
 			JSFUtils.setParam("anunciante", anunciante);
 		} catch(NegocioNordesteException e) {

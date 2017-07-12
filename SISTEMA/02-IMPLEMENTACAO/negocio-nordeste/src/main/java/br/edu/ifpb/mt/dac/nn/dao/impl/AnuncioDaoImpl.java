@@ -12,6 +12,8 @@ import br.edu.ifpb.mt.dac.nn.model.Anuncio;
 
 public class AnuncioDaoImpl extends GenericDaoImpl<Anuncio, Long> implements AnuncioDAO {
 
+	private static final long serialVersionUID = 1L;
+	
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Anuncio> buscarPorTitulo(String titulo) {

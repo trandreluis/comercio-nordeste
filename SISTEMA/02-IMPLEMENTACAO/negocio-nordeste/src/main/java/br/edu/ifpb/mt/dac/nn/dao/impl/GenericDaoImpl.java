@@ -1,5 +1,6 @@
 package br.edu.ifpb.mt.dac.nn.dao.impl;
 
+import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.List;
@@ -13,7 +14,9 @@ import javax.persistence.Query;
 
 import br.edu.ifpb.mt.dac.nn.dao.GenericDAO;
 
-public abstract class GenericDaoImpl<T, ID> implements GenericDAO<T, ID> {
+public abstract class GenericDaoImpl<T, ID> implements GenericDAO<T, ID>, Serializable {
+
+	private static final long serialVersionUID = -1421441012226531273L;
 
 	static EntityManagerFactory emf;
 	private Class<T> tipo;
