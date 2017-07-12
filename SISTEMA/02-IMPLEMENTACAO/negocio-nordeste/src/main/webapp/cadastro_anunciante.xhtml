@@ -31,19 +31,20 @@
 
 						<h:outputLabel for="nome" value="Nome" />
 						<p:inputText id="nome" required="true"
-							value="#{anuncianteCadastroBean.anunciante.nome}"
-							validator="nomeValidator" />
+							requiredMessage="Por favor, informe o nome!"
+							value="#{anuncianteCadastroBean.anunciante.nome}" />
 
 						<h:outputLabel for="sobrenome" value="Sobrenome" />
 						<p:inputText id="sobrenome" required="true"
-							value="#{anuncianteCadastroBean.anunciante.sobrenome}"
-							validator="sobrenomeValidator" />
+							requiredMessage="Por favor, informe o sobrenome!"
+							value="#{anuncianteCadastroBean.anunciante.sobrenome}" />
 
 						<h:outputLabel for="username" value="Username" />
 						<p:inputText id="username" required="true"
+							requiredMessage="Por favor, informe o username!"
 							value="#{anuncianteCadastroBean.anunciante.username}"
 							validator="usernameValidator" />
-							
+
 						<h:outputLabel for="dataNascimento" value="Data de nascimento" />
 
 						<ui:include src="/WEB-INF/templates/_calendar.xhtml">
@@ -56,12 +57,14 @@
 
 						<h:outputLabel for="email" value="E-mail" />
 						<p:inputText id="email" required="true"
+							requiredMessage="Por favor, informe o e-mail!"
 							value="#{anuncianteCadastroBean.anunciante.email}"
-							requiredMessage="Pro favor, informe o e-mail." />
+							validator="emailValidator" />
+
 						<h:outputLabel for="senha" value="Senha" />
 						<p:password id="senha" required="true"
-							value="#{anuncianteCadastroBean.anunciante.senha}"
-							requiredMessage="Pro favor, informe a senha." />
+							requiredMessage="Por favor, informe a senha!"
+							value="#{anuncianteCadastroBean.anunciante.senha}" />
 
 						<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
 							<p:commandButton styleClass="btn btn-primary" value="Cadastrar"

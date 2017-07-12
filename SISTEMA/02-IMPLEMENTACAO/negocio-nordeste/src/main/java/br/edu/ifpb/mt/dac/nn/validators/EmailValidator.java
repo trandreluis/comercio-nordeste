@@ -10,27 +10,28 @@ import javax.faces.validator.FacesValidator;
 import javax.faces.validator.Validator;
 import javax.faces.validator.ValidatorException;
 
-@FacesValidator(value = "sobrenomeValidator")
-public class SobrenomeValidator implements Validator {
+@FacesValidator(value = "emailValidator")
+public class EmailValidator implements Validator {
 
 	private Pattern padrao;
 	private Matcher matcher;
-	
-	private static final String PADRAO_NOME = "^(([a-zA-Z ]|[é])*)$";
-	
+
+	private static final String PADRAO_EMAIL = "^[_A-Za-z0-9-\\+]+(\\.[_A-Za-z0-9-]+)*@"
+			+ "[A-Za-z0-9-]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+
 	@Override
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
-		String nome = (String) value;
+		String email = (String) value;
 
-		this.padrao = Pattern.compile(PADRAO_NOME);
-		this.matcher = this.padrao.matcher(nome);
+		this.padrao = Pattern.compile(PADRAO_EMAIL);
+		this.matcher = this.padrao.matcher(email);
 
 		if (!matcher.matches()) {
-			throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "Sobrenome inválido!",
-					"O sobrenome deve ter somente caracters albfabéticos com ou sem acento e/ou espaços."));
-		}				
-		
+			throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "E-mail inválido!",
+					"O e-email informado deve seguir o seguinte padrão email@mail.com ou email@mail.com.br."));
+		}
+
 	}
 
 }
