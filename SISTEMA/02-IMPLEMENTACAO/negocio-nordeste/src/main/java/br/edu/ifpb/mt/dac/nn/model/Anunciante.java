@@ -30,7 +30,7 @@ import br.edu.ifpb.mt.dac.nn.enumerations.NivelAnunciante;
 @NamedQueries({
 		@NamedQuery(name = "Anunciante.buscarPorEmail", query = "SELECT a FROM Anunciante a WHERE LOWER(a.email) LIKE LOWER(:email)"),
 		@NamedQuery(name = "Anunciante.buscarPorNome", query = "SELECT a FROM Anunciante a WHERE LOWER(a.nome) LIKE LOWER(:nome)"),
-		@NamedQuery(name = "Anunciante.buscarPorNomeUsuario", query = "SELECT a FROM Anunciante a WHERE LOWER(a.nomeUsuario) LIKE LOWER(:nomeUsuario)"),
+		@NamedQuery(name = "Anunciante.buscarPorUsername", query = "SELECT a FROM Anunciante a WHERE LOWER(a.username) LIKE LOWER(:username)"),
 		@NamedQuery(name = "Anunciante.buscarPorNivel", query = "SELECT a FROM Anunciante a WHERE LOWER(a.nivel) LIKE LOWER(:nivel)")
 })
 public class Anunciante {
@@ -47,8 +47,8 @@ public class Anunciante {
 	@Column(name = "SOBRENOME", nullable=false)
 	private String sobrenome;
 
-	@Column(name = "NOME_USUARIO", nullable=false)
-	private String nomeUsuario;
+	@Column(name = "USERNAME", nullable=false)
+	private String username;
 
 	@Temporal(TemporalType.DATE)
 	@Column(name = "DATA_NASCIMENTO", nullable=false)
@@ -83,12 +83,12 @@ public class Anunciante {
 		this.nome = nome;
 	}
 
-	public String getNomeUsuario() {
-		return nomeUsuario;
+	public String getUsername() {
+		return username;
 	}
 
-	public void setNomeUsuario(String nomeUsuario) {
-		this.nomeUsuario = nomeUsuario;
+	public void setUsername(String username) {
+		this.username = username;
 	}
 
 	public Date getDataNascimento() {

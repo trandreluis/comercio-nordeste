@@ -20,7 +20,7 @@ public class DaoTest {
 		anunciante.setNome("andre");
 		anunciante.setSobrenome("luis");
 		anunciante.setDataNascimento(new Date());
-		anunciante.setNomeUsuario("trandreluis");
+		anunciante.setUsername("trandreluis");
 		anunciante.setSenha("123");
 
 		try {

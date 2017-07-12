@@ -48,12 +48,12 @@ public class AnuncianteDaoImpl extends GenericDaoImpl<Anunciante, Long> implemen
 	}
 
 	@Override
-	public Anunciante buscarPorNomeUsuario(String nomeUsuario) {
+	public Anunciante buscarPorUsername(String username) {
 		EntityManager em = getEntityManager();
 		Anunciante resultado = null;
 		try {
-			TypedQuery<Anunciante> query = em.createNamedQuery("Anunciante.buscarPorNomeUsuario", Anunciante.class);
-			query.setParameter("nomeUsuario", nomeUsuario);
+			TypedQuery<Anunciante> query = em.createNamedQuery("Anunciante.buscarPorUsername", Anunciante.class);
+			query.setParameter("username", username);
 			resultado = query.getSingleResult();
 		} catch (PersistenceException pe) {
 			return null;

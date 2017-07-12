@@ -16,7 +16,7 @@ public interface AnuncianteDAO extends GenericDAO<Anunciante, Long> {
 
 	Anunciante buscarPorEmail(String email);
 	
-	Anunciante buscarPorNomeUsuario(String nomeUsuario);
+	Anunciante buscarPorUsername(String username);
 	
 	List<Anunciante> buscarPorNivel(NivelAnunciante nivel);
 	

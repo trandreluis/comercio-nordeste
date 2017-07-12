@@ -12,7 +12,7 @@ public interface AnuncianteService extends GenericService<Anunciante, Long> {
 
 	Anunciante buscarPorEmail(String email);
 	
-	Anunciante buscarPorNomeUsuario(String nomeUsuario);
+	Anunciante buscarPorUsername(String username);
 	
 	List<Anunciante> buscarPorNivel(NivelAnunciante nivel);
 	

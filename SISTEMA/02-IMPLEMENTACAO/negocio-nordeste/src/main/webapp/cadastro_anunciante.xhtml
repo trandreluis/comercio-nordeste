@@ -32,24 +32,18 @@
 						<h:outputLabel for="nome" value="Nome" />
 						<p:inputText id="nome" required="true"
 							value="#{anuncianteCadastroBean.anunciante.nome}"
-							requiredMessage="Por favor, informe o nome."
-							validatorMessage="Nome inválido! O nome só deve possuir caracters alfabéticos." />
+							validator="nomeValidator" />
 
 						<h:outputLabel for="sobrenome" value="Sobrenome" />
 						<p:inputText id="sobrenome" required="true"
 							value="#{anuncianteCadastroBean.anunciante.sobrenome}"
-							requiredMessage="Por favor, informe o sobrenome."
-							validatorMessage="Sobrenome inválido! O sobrenome só deve possuir caracters alfabéticos." />
+							validator="sobrenomeValidator" />
 
-						<h:outputLabel for="nomeUsuario" value="Nome de usuario" />
-						<p:inputText id="nomeUsuario" required="true"
-							value="#{anuncianteCadastroBean.anunciante.nomeUsuario}"
-							requiredMessage="Por favor, informe o username."
-							validatorMessage="Username inválido! O username deve ter no mínimo 3 e no maximo 15 caracters minúsculos sem acentos.">
-
-							<f:validateRegex pattern="^[a-z0-9_-]{3,15}$" />
-
-						</p:inputText>
+						<h:outputLabel for="username" value="Username" />
+						<p:inputText id="username" required="true"
+							value="#{anuncianteCadastroBean.anunciante.username}"
+							validator="usernameValidator" />
+							
 						<h:outputLabel for="dataNascimento" value="Data de nascimento" />
 
 						<ui:include src="/WEB-INF/templates/_calendar.xhtml">

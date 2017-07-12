@@ -27,13 +27,13 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 	public void salvar(Anunciante entidade) throws NegocioNordesteException {
 		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
 		Anunciante anuncianteEmail = anuncianteDAO.buscarPorEmail(entidade.getEmail());
-		Anunciante anuncianteNomeUsuario = anuncianteDAO.buscarPorNomeUsuario(entidade.getNomeUsuario());
+		Anunciante anuncianteUsername = anuncianteDAO.buscarPorUsername(entidade.getUsername());
 
 		if (anuncianteEmail != null) {
 			throw new NegocioNordesteException("Já existe um anunciante com este e-mail cadastrado.");
 		}
 
-		else if (anuncianteNomeUsuario != null) {
+		else if (anuncianteUsername != null) {
 			throw new NegocioNordesteException("Já existe um anunciante com este username cadastrado");
 		}
 
@@ -59,9 +59,9 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 	}
 
 	@Override
-	public Anunciante buscarPorNomeUsuario(String nomeUsuario) {
+	public Anunciante buscarPorUsername(String username) {
 		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
-		Anunciante anunciante = anuncianteDAO.buscarPorNomeUsuario(nomeUsuario);
+		Anunciante anunciante = anuncianteDAO.buscarPorUsername(username);
 
 		return anunciante;
 	}
