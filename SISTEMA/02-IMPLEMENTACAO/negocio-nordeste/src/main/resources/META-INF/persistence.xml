@@ -6,6 +6,7 @@
 	<persistence-unit name="bdnordeste" transaction-type="RESOURCE_LOCAL">
 
 		<provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+		<non-jta-data-source>jdbc/negocio_nordeste</non-jta-data-source>
 		
 		<class>br.edu.ifpb.mt.dac.nn.model.Anunciante</class>
 		<class>br.edu.ifpb.mt.dac.nn.model.Anuncio</class>
@@ -13,21 +14,22 @@
 		<properties>
 
 			<!-- HIBERNATE -->
-
+			
+			<!-- Comentada para que o GlassFish passe a controlar o pool de conexões -->
 			<!-- Configuração Hibernate SGBD MySQL Para Criar Banco -->
-
-			<!-- Configuração Hibernate SGBD MySQL -->
+			<!--
 			<property name="hibernate.connection.url"
 				value="jdbc:mysql://localhost:3306/bdnordeste?useSSL=false&amp;serverTimezone=GMT-3&amp;createDatabaseIfNotExist=true" />
 			<property name="hibernate.dialect" value="org.hibernate.dialect.MySQL57Dialect" />
 			<property name="hibernate.connection.driver_class" value="com.mysql.cj.jdbc.Driver" />
 			<property name="hibernate.connection.username" value="root" />
 			<property name="hibernate.connection.password" value="root" />
-			<property name="hibernate.default_catalog" value="bdnordeste" />
-			<property name="hibernate.hbm2ddl.auto" value="update" />
-			<property name="hibernate.show_sql" value="true" />
-			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.use_sql_comments" value="true" />
+			<property name="hibernate.format_sql" value="true" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.hbm2ddl.auto" value="update" />
+			<property name="hibernate.default_catalog" value="bdnordeste" />
+			  -->
 			<!-- /Configuração Hibernate SGBD MySQL -->
 
 			<!-- Configuração do Pool de conexões Hibernate -->

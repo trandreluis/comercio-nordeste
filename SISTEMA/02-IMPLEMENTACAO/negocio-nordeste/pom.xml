@@ -34,12 +34,16 @@
 			<version>${hibernate.version}</version>
 		</dependency>
 
+		<!-- Comentado pois a conexão será realizada pelo servidor de aplicação 
+			GlassFish -->
 		<!-- JDBC Driver do MySQL -->
+		<!-- 
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
 			<version>6.0.6</version>
 		</dependency>
+		 -->
 
 		<!-- Dependencia do Java EE completo -->
 		<dependency>
@@ -62,7 +66,7 @@
 			<artifactId>all-themes</artifactId>
 			<version>1.0.10</version>
 		</dependency>
-		
+
 		<!-- Hibernate Validator -->
 		<dependency>
 			<groupId>org.hibernate</groupId>
