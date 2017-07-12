@@ -17,6 +17,10 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Temporal;
+import javax.persistence.TemporalType;
+
+import org.hibernate.validator.constraints.NotBlank;
 
 import br.edu.ifpb.mt.dac.nn.enumerations.NivelAnunciante;
 
@@ -36,22 +40,24 @@ public class Anunciante {
 	@Column(name = "ID")
 	private Long id;
 
-	@Column(name = "NOME")
+	@NotBlank
+	@Column(name = "NOME", nullable=false)
 	private String nome;
 
-	@Column(name = "SOBRENOME")
+	@Column(name = "SOBRENOME", nullable=false)
 	private String sobrenome;
 
-	@Column(name = "NOME_USUARIO")
+	@Column(name = "NOME_USUARIO", nullable=false)
 	private String nomeUsuario;
 
-	@Column(name = "DATA_NASCIMENTO")
+	@Temporal(TemporalType.DATE)
+	@Column(name = "DATA_NASCIMENTO", nullable=false)
 	private Date dataNascimento;
 
-	@Column(name = "EMAIL")
+	@Column(name = "EMAIL", nullable=false)
 	private String email;
 
-	@Column(name = "SENHA")
+	@Column(name = "SENHA", nullable=false)
 	private String senha;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "anunciante")

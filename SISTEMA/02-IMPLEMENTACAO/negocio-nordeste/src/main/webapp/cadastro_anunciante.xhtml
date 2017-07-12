@@ -21,7 +21,7 @@
 
 			<div align="center" class="ui-fluid">
 
-				<h:form>
+				<h:form id="formCadastroAnunciante">
 
 					<p:graphicImage library="images" name="users.png" />
 
@@ -31,13 +31,25 @@
 
 						<h:outputLabel for="nome" value="Nome" />
 						<p:inputText id="nome" required="true"
-							value="#{anuncianteCadastroBean.anunciante.nome}" />
+							value="#{anuncianteCadastroBean.anunciante.nome}"
+							requiredMessage="Por favor, informe o nome."
+							validatorMessage="Nome inválido! O nome só deve possuir caracters alfabéticos." />
+
 						<h:outputLabel for="sobrenome" value="Sobrenome" />
 						<p:inputText id="sobrenome" required="true"
-							value="#{anuncianteCadastroBean.anunciante.sobrenome}" />
+							value="#{anuncianteCadastroBean.anunciante.sobrenome}"
+							requiredMessage="Por favor, informe o sobrenome."
+							validatorMessage="Sobrenome inválido! O sobrenome só deve possuir caracters alfabéticos." />
+
 						<h:outputLabel for="nomeUsuario" value="Nome de usuario" />
 						<p:inputText id="nomeUsuario" required="true"
-							value="#{anuncianteCadastroBean.anunciante.nomeUsuario}" />
+							value="#{anuncianteCadastroBean.anunciante.nomeUsuario}"
+							requiredMessage="Por favor, informe o username."
+							validatorMessage="Username inválido! O username deve ter no mínimo 3 e no maximo 15 caracters minúsculos sem acentos.">
+
+							<f:validateRegex pattern="^[a-z0-9_-]{3,15}$" />
+
+						</p:inputText>
 						<h:outputLabel for="dataNascimento" value="Data de nascimento" />
 
 						<ui:include src="/WEB-INF/templates/_calendar.xhtml">
@@ -50,10 +62,12 @@
 
 						<h:outputLabel for="email" value="E-mail" />
 						<p:inputText id="email" required="true"
-							value="#{anuncianteCadastroBean.anunciante.email}" />
+							value="#{anuncianteCadastroBean.anunciante.email}"
+							requiredMessage="Pro favor, informe o e-mail." />
 						<h:outputLabel for="senha" value="Senha" />
 						<p:password id="senha" required="true"
-							value="#{anuncianteCadastroBean.anunciante.senha}" />
+							value="#{anuncianteCadastroBean.anunciante.senha}"
+							requiredMessage="Pro favor, informe a senha." />
 
 						<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
 							<p:commandButton styleClass="btn btn-primary" value="Cadastrar"
