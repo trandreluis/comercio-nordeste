@@ -1,27 +1,26 @@
 package br.edu.ifpb.mt.dac.nn.converters;
 
+import javax.enterprise.context.RequestScoped;
 import javax.faces.application.FacesMessage;
-import javax.faces.bean.RequestScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
 import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
-import br.edu.ifpb.mt.dac.nn.services.impl.AnuncianteServiceImpl;
 
+@Named
 @RequestScoped
 @FacesConverter(forClass=Anunciante.class)
 public class AnuncianteConverter implements Converter {
 
+	@Inject
 	private AnuncianteService anuncianteService;
 	
-	public AnuncianteConverter() {
-		this.anuncianteService = new AnuncianteServiceImpl();
-	}
-
 	@Override
 	public Object getAsObject(FacesContext context, UIComponent component,
 			String value) {

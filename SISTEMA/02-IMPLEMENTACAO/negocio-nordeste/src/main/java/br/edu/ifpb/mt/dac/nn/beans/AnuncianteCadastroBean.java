@@ -2,36 +2,39 @@ package br.edu.ifpb.mt.dac.nn.beans;
 
 import java.io.Serializable;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.view.ViewScoped;
+import javax.inject.Inject;
+import javax.inject.Named;
 
 import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
-import br.edu.ifpb.mt.dac.nn.services.impl.AnuncianteServiceImpl;
 import br.edu.ifpb.mt.dac.nn.util.jsf.JSFUtils;
 import br.edu.ifpb.mt.dac.nn.util.mensagens.MessageUtils;
 
-@ManagedBean
+@Named
 @ViewScoped
 public class AnuncianteCadastroBean implements Serializable {
 
 	private static final long serialVersionUID = 1587624597465L;
+	
+	@Inject
 	private AnuncianteService anuncianteService;
+	
 	private Anunciante anunciante;
 
 	public AnuncianteCadastroBean() {
 		this.anunciante = new Anunciante();
-		this.anuncianteService = new AnuncianteServiceImpl();
 	}
 
 	public void cadastrar() {
-		try{
-			anuncianteService.salvar(anunciante);			
+		try {
+			System.out.println("Cadastrando");
+			anuncianteService.salvar(anunciante);
 			MessageUtils.messageSucess("Cadastro realizado!");
 			JSFUtils.rederTo("home.xhtml");
 			JSFUtils.setParam("anunciante", anunciante);
-		} catch(NegocioNordesteException e) {
+		} catch (NegocioNordesteException e) {
 			MessageUtils.messageError(e.getMessage());
 		}
 	}
@@ -47,5 +50,4 @@ public class AnuncianteCadastroBean implements Serializable {
 	public void setAnunciante(Anunciante anunciante) {
 		this.anunciante = anunciante;
 	}
-
 }

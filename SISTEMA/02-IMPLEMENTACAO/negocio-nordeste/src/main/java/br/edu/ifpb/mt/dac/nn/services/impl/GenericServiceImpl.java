@@ -10,9 +10,9 @@ import br.edu.ifpb.mt.dac.nn.services.GenericService;
 public class GenericServiceImpl<T, ID> implements GenericService<T, ID>, Serializable {
 
 	private static final long serialVersionUID = 76538538274567236L;
-	
+
 	protected GenericDAO<T, ID> dao;
-	
+
 	@Override
 	public void salvar(T entidade) throws NegocioNordesteException {
 		dao.salvar(entidade);
@@ -37,5 +37,5 @@ public class GenericServiceImpl<T, ID> implements GenericService<T, ID>, Seriali
 	public List<T> buscarTodos() {
 		return dao.buscarTodos();
 	}
-	
+
 }

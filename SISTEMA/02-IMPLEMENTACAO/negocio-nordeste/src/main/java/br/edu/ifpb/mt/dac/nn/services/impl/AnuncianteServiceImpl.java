@@ -2,8 +2,9 @@ package br.edu.ifpb.mt.dac.nn.services.impl;
 
 import java.util.List;
 
+import javax.inject.Inject;
+
 import br.edu.ifpb.mt.dac.nn.dao.AnuncianteDAO;
-import br.edu.ifpb.mt.dac.nn.dao.impl.AnuncianteDaoImpl;
 import br.edu.ifpb.mt.dac.nn.enumerations.NivelAnunciante;
 import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
@@ -12,17 +13,14 @@ import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
 
 public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> implements AnuncianteService {
 
-	private static final long serialVersionUID = 1L;
-	
+	private static final long serialVersionUID = 1865434577L;
+
 	public AnuncianteServiceImpl() {
-		this.dao = new AnuncianteDaoImpl();
 	}
 
-	public static void main(String[] args) {
-
-		@SuppressWarnings("unused")
-		AnuncianteServiceImpl d = new AnuncianteServiceImpl();
-
+	@Inject
+	public AnuncianteServiceImpl(AnuncianteDAO anuncianteDAO) {
+		this.dao = anuncianteDAO;
 	}
 
 	@Override
@@ -38,7 +36,7 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 		else if (anuncianteUsername != null) {
 			throw new NegocioNordesteException("Já existe um anunciante com este username cadastrado");
 		}
-	
+
 		dao.salvar(entidade);
 	}
 
@@ -67,10 +65,14 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 	}
 
 	@Override
-	public List<Anunciante> buscarPorNivel(NivelAnunciante nivel) {
+	public List<Anunciante> buscarPorNivel(NivelAnunciante nivel) throws NegocioNordesteException {
 		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
-		List<Anunciante> anunciantes = anuncianteDAO.buscarPorNivel(nivel);
-
+		List<Anunciante> anunciantes = null;
+		try {
+			anunciantes = anuncianteDAO.buscarPorNivel(nivel);
+		} catch (NegocioNordesteException e) {
+			throw new NegocioNordesteException("Já existe um anunciante com este username cadastrado");
+		}
 		return anunciantes;
 	}
 
