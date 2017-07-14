@@ -19,7 +19,7 @@ public class GenericServiceImpl<T, ID> implements GenericService<T, ID>, Seriali
 	}
 
 	@Override
-	public T atualizar(T entidade) {
+	public T atualizar(T entidade) throws NegocioNordesteException {
 		return dao.atualizar(entidade);
 	}
 

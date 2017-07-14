@@ -17,30 +17,43 @@ import br.edu.ifpb.mt.dac.nn.util.mensagens.MessageUtils;
 public class AnuncianteCadastroBean implements Serializable {
 
 	private static final long serialVersionUID = 1587624597465L;
-	
+
 	@Inject
 	private AnuncianteService anuncianteService;
 	
 	private Anunciante anunciante;
 
-	public AnuncianteCadastroBean() {
-		this.anunciante = new Anunciante();
+	public void preRenderView() {
+		anunciante = (Anunciante) JSFUtils.getParam("anunciante");
+		if (anunciante == null) {
+			anunciante = new Anunciante();
+		}
 	}
 
 	public void cadastrar() {
 		try {
-			System.out.println("Cadastrando");
-			anuncianteService.salvar(anunciante);
-			MessageUtils.messageSucess("Cadastro realizado!");
-			JSFUtils.rederTo("home.xhtml");
+			if (isEdicao()) {
+				anuncianteService.atualizar(anunciante);
+				MessageUtils.messageSucess("Perfil atualizado!");
+			} else {
+				anuncianteService.salvar(anunciante);
+				MessageUtils.messageSucess("Cadastro realizado!");
+			}
+			
+			JSFUtils.rederTo("anunciante.xhtml");
 			JSFUtils.setParam("anunciante", anunciante);
-		} catch (NegocioNordesteException e) {
-			MessageUtils.messageError(e.getMessage());
+
+		} catch (NegocioNordesteException nne) {
+			MessageUtils.messageSucess(nne.getMessage());
 		}
 	}
 
 	public void cancelar() {
 		JSFUtils.rederTo("busca.xhtml");
+	}
+
+	public boolean isEdicao() {
+		return anunciante.getId() != null;
 	}
 
 	public Anunciante getAnunciante() {
@@ -50,4 +63,5 @@ public class AnuncianteCadastroBean implements Serializable {
 	public void setAnunciante(Anunciante anunciante) {
 		this.anunciante = anunciante;
 	}
+	
 }

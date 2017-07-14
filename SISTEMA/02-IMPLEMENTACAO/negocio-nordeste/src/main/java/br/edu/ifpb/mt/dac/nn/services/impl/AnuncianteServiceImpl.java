@@ -41,6 +41,34 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 	}
 
 	@Override
+	public Anunciante atualizar(Anunciante entidade) throws NegocioNordesteException {
+		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
+		Anunciante anuncianteAntigo = anuncianteDAO.buscarPorID(entidade.getId());
+
+		// Se não alterou e-mail nem username, prossegue sem necessidade de
+		// comparar com já existentes
+		if (anuncianteAntigo.getEmail().equals(entidade.getEmail())
+				&& anuncianteAntigo.getUsername().equals(entidade.getUsername())) {
+			return anuncianteDAO.atualizar(entidade);
+		}
+
+		// Senão busca todos e verifica a disponiblidade do e-mail e username no
+		// sistema
+		List<Anunciante> anunciantes = anuncianteDAO.buscarTodos();
+
+		for (Anunciante anuncianteCadastrado : anunciantes) {
+			if (anuncianteCadastrado.getEmail().equals(entidade.getEmail())) {
+				throw new NegocioNordesteException("Já existe um anunciante cadastrado com este e-mail.");
+			}
+			if (anuncianteCadastrado.getUsername().equals(entidade.getUsername())) {
+				throw new NegocioNordesteException("Já existe um anunciante cadastrado com este username.");
+			}
+		}
+		// Caso seja uma atualização válida, prossegue normalmente e retorna a nova instancia atualizada
+		return anuncianteDAO.atualizar(entidade);
+	}
+
+	@Override
 	public List<Anunciante> buscarPorNome(String nome) {
 		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
 		List<Anunciante> anunciantes = anuncianteDAO.buscarPorNome(nome);

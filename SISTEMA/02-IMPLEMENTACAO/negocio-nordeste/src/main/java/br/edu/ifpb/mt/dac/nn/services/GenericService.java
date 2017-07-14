@@ -8,7 +8,7 @@ public interface GenericService<T, ID> {
 
 	public void salvar(T entidade) throws NegocioNordesteException;
 
-	public T atualizar(T entidade);
+	public T atualizar(T entidade) throws NegocioNordesteException;
 
 	public void deletar(T entidade);
 
