@@ -34,7 +34,7 @@ import br.edu.ifpb.mt.dac.nn.enumerations.NivelAnunciante;
 		@NamedQuery(name = "Anunciante.buscarPorUsername", query = "SELECT a FROM Anunciante a WHERE LOWER(a.username) LIKE LOWER(:username)"),
 		@NamedQuery(name = "Anunciante.buscarPorNivel", query = "SELECT a FROM Anunciante a WHERE LOWER(a.nivel) LIKE LOWER(:nivel)")
 })
-public class Anunciante implements Serializable {
+public class Anunciante extends Usuario implements Serializable {
 	
 	private static final long serialVersionUID = 245483248935007L;
 
