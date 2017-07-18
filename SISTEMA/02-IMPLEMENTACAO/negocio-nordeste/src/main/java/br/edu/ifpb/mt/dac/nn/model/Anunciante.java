@@ -34,7 +34,7 @@ import br.edu.ifpb.mt.dac.nn.enumerations.NivelAnunciante;
 		@NamedQuery(name = "Anunciante.buscarPorUsername", query = "SELECT a FROM Anunciante a WHERE LOWER(a.username) LIKE LOWER(:username)"),
 		@NamedQuery(name = "Anunciante.buscarPorNivel", query = "SELECT a FROM Anunciante a WHERE LOWER(a.nivel) LIKE LOWER(:nivel)")
 })
-public class Anunciante extends Usuario implements Serializable {
+public class Anunciante implements Serializable {
 	
 	private static final long serialVersionUID = 245483248935007L;
 
@@ -140,6 +140,13 @@ public class Anunciante extends Usuario implements Serializable {
 
 	public void setSobrenome(String sobrenome) {
 		this.sobrenome = sobrenome;
+	}
+
+	@Override
+	public String toString() {
+		return "Anunciante [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome + ", username=" + username
+				+ ", dataNascimento=" + dataNascimento + ", email=" + email + ", senha=" + senha + ", anuncios="
+				+ anuncios + ", nivel=" + nivel + "]";
 	}
 
 }

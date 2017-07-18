@@ -10,6 +10,7 @@ import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.model.Anuncio;
 import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
+import br.edu.ifpb.mt.dac.nn.util.jpa.Transactional;
 
 public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> implements AnuncianteService {
 
@@ -24,6 +25,7 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 	}
 
 	@Override
+	@Transactional
 	public void salvar(Anunciante entidade) throws NegocioNordesteException {
 		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
 		Anunciante anuncianteEmail = anuncianteDAO.buscarPorEmail(entidade.getEmail());
@@ -41,6 +43,7 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 	}
 
 	@Override
+	@Transactional
 	public Anunciante atualizar(Anunciante entidade) throws NegocioNordesteException {
 		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
 		Anunciante anuncianteAntigo = anuncianteDAO.buscarPorID(entidade.getId());

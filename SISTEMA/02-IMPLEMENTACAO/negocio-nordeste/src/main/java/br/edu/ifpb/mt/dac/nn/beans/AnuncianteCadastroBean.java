@@ -20,7 +20,7 @@ public class AnuncianteCadastroBean implements Serializable {
 
 	@Inject
 	private AnuncianteService anuncianteService;
-	
+
 	private Anunciante anunciante;
 
 	public void preRenderView() {
@@ -31,15 +31,19 @@ public class AnuncianteCadastroBean implements Serializable {
 	}
 
 	public void cadastrar() {
+		
 		try {
-			if (isEdicao()) {
+			if (anunciante.getId() != null) {
+				System.out.println("ATUALIZADO");
 				anuncianteService.atualizar(anunciante);
 				MessageUtils.messageSucess("Perfil atualizado!");
 			} else {
+				System.out.println("SALVO");
 				anuncianteService.salvar(anunciante);
 				MessageUtils.messageSucess("Cadastro realizado!");
+				MessageUtils.messageSucess(anunciante.toString());
 			}
-			
+
 			JSFUtils.rederTo("anunciante.xhtml");
 			JSFUtils.setParam("anunciante", anunciante);
 
@@ -63,5 +67,5 @@ public class AnuncianteCadastroBean implements Serializable {
 	public void setAnunciante(Anunciante anunciante) {
 		this.anunciante = anunciante;
 	}
-	
+
 }

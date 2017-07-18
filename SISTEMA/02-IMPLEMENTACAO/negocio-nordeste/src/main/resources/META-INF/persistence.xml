@@ -25,11 +25,11 @@
 			<property name="hibernate.connection.username" value="root" />
 			<property name="hibernate.connection.password" value="root" />
 			<property name="hibernate.use_sql_comments" value="true" />
+			  -->
 			<property name="hibernate.format_sql" value="true" />
 			<property name="hibernate.show_sql" value="true" />
 			<property name="hibernate.hbm2ddl.auto" value="update" />
 			<property name="hibernate.default_catalog" value="bdnordeste" />
-			  -->
 			<!-- /Configuração Hibernate SGBD MySQL -->
 
 			<!-- Configuração do Pool de conexões Hibernate -->
