@@ -16,9 +16,10 @@
 	</f:metadata>
 
 	<ui:define name="breadcrumb-active">
-		<a href="#{request.contextPath}/paginas/anunciante/cadastro_anunciante.xhtml"><i
-			class="fa fa-user"></i>#{anuncianteCadastroBean.isEdicao() ?
-			'Editar dados' : 'Realizar cadastro'}</a>
+		<a
+			href="#{request.contextPath}/paginas/anunciante/cadastro_anunciante.xhtml"><i
+			class="fa fa-user"></i>#{anuncianteCadastroBean.isEdicao() ? 'Editar
+			dados' : 'Realizar cadastro'}</a>
 	</ui:define>
 
 	<ui:define name="content">
@@ -75,7 +76,9 @@
 							value="#{anuncianteCadastroBean.anunciante.senha}" />
 
 						<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-							<p:commandButton styleClass="btn btn-primary" value="Cadastrar"
+							<p:commandButton styleClass="btn btn-primary"
+								value="#{anuncianteCadastroBean.isEdicao() ?
+			'Atualizar' : 'Cadastrar'}"
 								action="#{anuncianteCadastroBean.cadastrar}" ajax="false" />
 							<p:button styleClass="btn btn-default" value="Cancelar"
 								href="home.xhtml" />
