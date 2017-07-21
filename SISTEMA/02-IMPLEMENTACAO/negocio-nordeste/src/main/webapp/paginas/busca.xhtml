@@ -8,10 +8,15 @@
 	xmlns:p="http://primefaces.org/ui"
 	template="/WEB-INF/templates/_template.xhtml">
 
-	<ui:define name="content">
+	<f:metadata>
+		<f:event listener="#{buscaBean.preRenderView}"
+			type="preRenderView" />
+	</f:metadata>
 
-		<h:body>
+	<ui:define name="content">
 			
+		<h:body>
+
 			<!-- class="ui-fluid" -->
 
 			<div align="center">
@@ -20,8 +25,7 @@
 				<br />
 				<p:inputText size="80"
 					placeholder="Ex: bicicleta em monteiro, encanador em caruaru, smartphone em campina grande" />
-				<br />
-				<br />
+				<br /> <br />
 				<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
 					<p:commandButton styleClass="btn btn-primary" value="Buscar" />
 					<p:commandButton styleClass="btn btn-default" value="Limpar" />

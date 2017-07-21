@@ -12,7 +12,7 @@ import br.edu.ifpb.mt.dac.nn.model.Anuncio;
 
 public class AnuncioDaoImpl extends GenericDaoImpl<Anuncio, Long> implements AnuncioDAO {
 
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 167764111111111L;
 
 	@SuppressWarnings("unchecked")
 	@Override

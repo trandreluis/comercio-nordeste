@@ -1,39 +1,51 @@
-//package br.edu.ifpb.mt.dac.nn.dao;
-//
-//import java.util.ArrayList;
-//import java.util.Date;
-//
-//import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
-//import br.edu.ifpb.mt.dac.nn.model.Anunciante;
-//import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
-//import br.edu.ifpb.mt.dac.nn.services.impl.AnuncianteServiceImpl;
-//
-//public class DaoTest {
-//
-//	public static void main(String[] args) {
-//
-//		AnuncianteService service = new AnuncianteServiceImpl();
-//
-//		Anunciante anunciante = new Anunciante();
-//
-//		anunciante.setEmail("emaithbxdfhdfgndxrbgl@mail.com");
-//		anunciante.setSobrenome("lubgdrbis");
-//		anunciante.setDataNascimento(new Date());
-//		anunciante.setUsername("trandredddhthhtluis");
-//		anunciante.setSenha("123");
-//
-//		try {
-//			service.salvar(anunciante);
-//		} catch (NegocioNordesteException e) {
-//			e.printStackTrace();
-//		}
-//
-//		ArrayList<Anunciante> a = (ArrayList<Anunciante>) service.buscarTodos();
-//
-//		for (Anunciante anunciante2 : a) {
-//			System.out.println(anunciante2);
-//		}
-//
-//	}
-//
-//}
+package br.edu.ifpb.mt.dac.nn.dao;
+
+import java.util.Date;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.EntityTransaction;
+import javax.persistence.Persistence;
+
+import br.edu.ifpb.mt.dac.nn.enumerations.TipoUsuario;
+import br.edu.ifpb.mt.dac.nn.model.Anunciante;
+import br.edu.ifpb.mt.dac.nn.model.Conta;
+import br.edu.ifpb.mt.dac.nn.model.Operador;
+
+public class DaoTest {
+
+	public static void main(String[] args) {
+
+		EntityManagerFactory emf = null;
+		EntityManager em = null;
+		EntityTransaction tx = null;
+
+		try {
+			emf = Persistence.createEntityManagerFactory("bdnordesteP");
+			em = emf.createEntityManager();
+
+			Operador operador = new Operador(); 
+			
+			Conta conta = new Conta();
+			conta.setEmail("admin");
+			conta.setSenha("admin");
+			conta.setTipo(TipoUsuario.ADMIN);
+			conta.setUsername("admin");
+
+			operador.setConta(conta);
+
+			tx = em.getTransaction();
+			tx.begin();
+
+			em.persist(operador);
+
+			tx.commit();
+
+		} catch (Exception pe) {
+			tx.rollback();
+			em.close();
+		}
+
+	}
+
+}

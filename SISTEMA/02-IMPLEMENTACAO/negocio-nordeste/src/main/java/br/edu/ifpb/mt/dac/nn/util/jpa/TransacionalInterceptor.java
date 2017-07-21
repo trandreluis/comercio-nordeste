@@ -1,5 +1,7 @@
 package br.edu.ifpb.mt.dac.nn.util.jpa;
 
+import java.io.Serializable;
+
 import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.Interceptor;
@@ -15,8 +17,10 @@ import javax.persistence.EntityTransaction;
  */
 @Interceptor
 @Transactional
-public class TransacionalInterceptor {
+public class TransacionalInterceptor implements Serializable {
 
+	private static final long serialVersionUID = 74757653753444L;
+	
 	@Inject
 	private EntityManager manager;
 	

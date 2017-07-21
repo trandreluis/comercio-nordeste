@@ -1,4 +1,4 @@
-package br.edu.ifpb.mt.dac.nn.beans;
+package br.edu.ifpb.mt.dac.nn.beans.anunciante;
 
 import java.io.Serializable;
 
@@ -6,6 +6,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.edu.ifpb.mt.dac.nn.beans.AbstractBean;
 import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
@@ -14,7 +15,7 @@ import br.edu.ifpb.mt.dac.nn.util.mensagens.MessageUtils;
 
 @Named
 @ViewScoped
-public class AnuncianteCadastroBean implements Serializable {
+public class AnuncianteCadastroBean extends AbstractBean implements Serializable {
 
 	private static final long serialVersionUID = 1587624597465L;
 
@@ -33,7 +34,7 @@ public class AnuncianteCadastroBean implements Serializable {
 	public void cadastrar() {
 		
 		try {
-			if (anunciante.getId() != null) {
+			if (isEdicao()) {
 				System.out.println("ATUALIZADO");
 				anuncianteService.atualizar(anunciante);
 				MessageUtils.messageSucess("Perfil atualizado!");

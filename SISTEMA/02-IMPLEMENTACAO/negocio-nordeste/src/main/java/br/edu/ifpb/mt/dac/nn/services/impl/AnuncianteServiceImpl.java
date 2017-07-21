@@ -28,18 +28,18 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 	@Transactional
 	public void salvar(Anunciante entidade) throws NegocioNordesteException {
 		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
-		Anunciante anuncianteEmail = anuncianteDAO.buscarPorEmail(entidade.getEmail());
-		Anunciante anuncianteUsername = anuncianteDAO.buscarPorUsername(entidade.getUsername());
+//		Anunciante anuncianteEmail = anuncianteDAO.buscarPorEmail(entidade.getEmail());
+//		Anunciante anuncianteUsername = anuncianteDAO.buscarPorUsername(entidade.getUsername());
+//
+//		if (anuncianteEmail != null) {
+//			throw new NegocioNordesteException("Já existe um anunciante com este e-mail cadastrado.");
+//		}
+//
+//		else if (anuncianteUsername != null) {
+//			throw new NegocioNordesteException("Já existe um anunciante com este username cadastrado");
+//		}
 
-		if (anuncianteEmail != null) {
-			throw new NegocioNordesteException("Já existe um anunciante com este e-mail cadastrado.");
-		}
-
-		else if (anuncianteUsername != null) {
-			throw new NegocioNordesteException("Já existe um anunciante com este username cadastrado");
-		}
-
-		dao.salvar(entidade);
+		anuncianteDAO.salvar(entidade);
 	}
 
 	@Override
@@ -50,22 +50,22 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 
 		// Se não alterou e-mail nem username, prossegue sem necessidade de
 		// comparar com já existentes
-		if (anuncianteAntigo.getEmail().equals(entidade.getEmail())
-				&& anuncianteAntigo.getUsername().equals(entidade.getUsername())) {
-			return anuncianteDAO.atualizar(entidade);
-		}
+//		if (anuncianteAntigo.getEmail().equals(entidade.getEmail())
+//				&& anuncianteAntigo.getUsername().equals(entidade.getUsername())) {
+//			return anuncianteDAO.atualizar(entidade);
+//		}
 
 		// Senão busca todos e verifica a disponiblidade do e-mail e username no
 		// sistema
 		List<Anunciante> anunciantes = anuncianteDAO.buscarTodos();
 
 		for (Anunciante anuncianteCadastrado : anunciantes) {
-			if (anuncianteCadastrado.getEmail().equals(entidade.getEmail())) {
-				throw new NegocioNordesteException("Já existe um anunciante cadastrado com este e-mail.");
-			}
-			if (anuncianteCadastrado.getUsername().equals(entidade.getUsername())) {
-				throw new NegocioNordesteException("Já existe um anunciante cadastrado com este username.");
-			}
+//			if (anuncianteCadastrado.getEmail().equals(entidade.getEmail())) {
+//				throw new NegocioNordesteException("Já existe um anunciante cadastrado com este e-mail.");
+//			}
+//			if (anuncianteCadastrado.getUsername().equals(entidade.getUsername())) {
+//				throw new NegocioNordesteException("Já existe um anunciante cadastrado com este username.");
+//			}
 		}
 		// Caso seja uma atualização válida, prossegue normalmente e retorna a nova instancia atualizada
 		return anuncianteDAO.atualizar(entidade);

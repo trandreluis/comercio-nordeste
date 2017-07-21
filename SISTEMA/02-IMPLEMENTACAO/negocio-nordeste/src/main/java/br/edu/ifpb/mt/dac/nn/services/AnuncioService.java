@@ -1,4 +1,4 @@
-package br.edu.ifpb.mt.dac.nn.dao;
+package br.edu.ifpb.mt.dac.nn.services;
 
 import java.util.List;
 
@@ -6,18 +6,14 @@ import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.model.Anuncio;
 
-public interface AnuncioDAO extends GenericDAO<Anuncio, Long> {
-
-	/*
-	 * Falta declarar possiveis excecoes nos metodos
-	 */
+public interface AnuncioService extends GenericService<Anuncio, Long> {
 
 	List<Anuncio> buscarPorTitulo(String titulo) throws NegocioNordesteException;
 
 	List<Anuncio> buscarPorDescricao(String descricao) throws NegocioNordesteException;
 
-	List<Anuncio> buscarPorPrecoMaximo(Double precoMaximo);
+	List<Anuncio> buscarPorPrecoMaximo(Double precoMaximo) throws NegocioNordesteException;
 
-	List<Anuncio> buscarPorAnunciante(Anunciante anunciante);
+	List<Anuncio> buscarPorAnunciante(Anunciante Anunciante) throws NegocioNordesteException;
 
 }

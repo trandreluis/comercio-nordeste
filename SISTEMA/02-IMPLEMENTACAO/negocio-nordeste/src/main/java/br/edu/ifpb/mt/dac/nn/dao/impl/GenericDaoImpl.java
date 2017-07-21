@@ -60,5 +60,4 @@ public abstract class GenericDaoImpl<T, ID> implements GenericDAO<T, ID>, Serial
 		return resultado;
 	}
 
-	//protected abstract EntityManager getEM();
 }

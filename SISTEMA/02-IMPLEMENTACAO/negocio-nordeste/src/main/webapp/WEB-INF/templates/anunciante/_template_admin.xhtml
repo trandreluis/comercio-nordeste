@@ -8,7 +8,7 @@
 	xmlns:p="http://primefaces.org/ui">
 
 <h:head>
-	
+
 	<meta charset="utf-8" />
 	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
 	<meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -31,14 +31,16 @@
 		href="#{request.contextPath}/resources/pace/pace.min.css" />
 
 	<style>
-		.ui-growl {
-			position: fixed;
-			top: 10%;
-		}
-	</style>
+.ui-growl {
+	position: fixed;
+	top: 10%;
+}
+</style>
 
 </h:head>
 <h:body class="hold-transition skin-blue sidebar-mini">
+
+	<p:growl id="growl" showDetail="true" redisplay="false" />
 
 	<ui:debug hotkey="z" />
 
@@ -95,7 +97,8 @@
 					</div>
 
 					<ul class="sidebar-menu">
-						<ui:include src="/WEB-INF/templates/anunciante/_menu_anunciante.xhtml" />
+						<ui:include
+							src="/WEB-INF/templates/anunciante/_menu_anunciante.xhtml" />
 					</ul>
 				</section>
 			</aside>

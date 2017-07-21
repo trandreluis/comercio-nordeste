@@ -5,34 +5,34 @@
 	xmlns:f="http://xmlns.jcp.org/jsf/core"
 	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
 	xmlns:c="http://java.sun.com/jstl/core"
-	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:p="http://primefaces.org/ui"
+	xmlns:o="http://omnifaces.org/ui"
 	template="/WEB-INF/templates/_template.xhtml">
 
 	<f:metadata>
 		<o:viewParam name="anunciante"
-			value="#{anuncianteCadastroBean.anunciante}" />
-		<f:event listener="#{anuncianteCadastroBean.preRenderView}"
+			value="#{loggedBean.anunciante}" />
+		<f:event listener="#{loggedBean.preRenderView}"
 			type="preRenderView" />
 	</f:metadata>
 
 	<ui:define name="breadcrumb-active">
 		<a
 			href="#{request.contextPath}/paginas/anunciante/cadastro_anunciante.xhtml"><i
-			class="fa fa-user"></i>#{anuncianteCadastroBean.isEdicao() ? 'Editar
-			dados' : 'Realizar cadastro'}</a>
+			class="fa fa-newspaper-o"></i>Cadastrar anúncio</a>
 	</ui:define>
 
 	<ui:define name="content">
 
 		<h:body>
 
-			<p:growl id="growl" showDetail="true" redisplay="false" />
+			<p:growl id="growl" showDetail="true" />
 
 			<div align="center" class="ui-fluid">
 
-				<h:form id="formCadastroAnunciante">
+				<h:form id="formCadastroAnuncio">
 
-					<p:graphicImage library="images" name="users.png" />
+					<p:graphicImage library="images" name="anuncio.png" />
 
 					<br />
 

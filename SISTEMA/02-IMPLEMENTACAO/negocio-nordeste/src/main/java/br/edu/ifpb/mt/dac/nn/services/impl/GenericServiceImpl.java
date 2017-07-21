@@ -28,7 +28,7 @@ public class GenericServiceImpl<T, ID> implements GenericService<T, ID>, Seriali
 
 	@Override
 	@Transactional
-	public void deletar(T entidade) {
+	public void deletar(T entidade) throws NegocioNordesteException {
 		dao.deletar(entidade);
 	}
 

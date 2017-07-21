@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:of="http://omnifaces.org/functions"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+
+<h:head>
+	<title>Login</title>
+</h:head>
+
+<h:body>
+
+	<p:outputPanel style="width: 100%; text-align:center" layout="block">
+		<!-- <form method="post" action="j_security_check"> -->
+		<h:form id="formLogin" prependId="false"
+			onsubmit="action='j_security_check';">
+
+			<p:panelGrid columns="2" style="text-align:center; margin: auto;">
+				<p:outputLabel for="j_username" value="Login:" />
+				<h:inputText id="j_username" />
+
+				<p:outputLabel for="j_password" value="Senha:" />
+				<h:inputSecret id="j_password" />
+				<p:commandButton id="btnLogin" value="Login" ajax="false" />
+				<p:commandButton id="btnReset" value="Reset" ajax="false"
+					type="reset" />
+			</p:panelGrid>
+		</h:form>
+	</p:outputPanel>
+
+</h:body>
+
+</html>

@@ -10,7 +10,7 @@ public interface GenericService<T, ID> {
 
 	public T atualizar(T entidade) throws NegocioNordesteException;
 
-	public void deletar(T entidade);
+	public void deletar(T entidade) throws NegocioNordesteException;
 
 	public T buscarPorID(ID id);
 
