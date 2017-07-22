@@ -26,8 +26,6 @@
 
 		<h:body>
 
-			<p:growl id="growl" showDetail="true" redisplay="false" />
-
 			<div align="center" class="ui-fluid">
 
 				<h:form id="formCadastroAnunciante">
@@ -51,7 +49,7 @@
 						<h:outputLabel for="username" value="Username" />
 						<p:inputText id="username" required="true"
 							requiredMessage="Por favor, informe o username!"
-							value="#{anuncianteCadastroBean.anunciante.username}"
+							value="#{anuncianteCadastroBean.conta.username}"
 							validator="usernameValidator" />
 
 						<h:outputLabel for="dataNascimento" value="Data de nascimento" />
@@ -67,13 +65,13 @@
 						<h:outputLabel for="email" value="E-mail" />
 						<p:inputText id="email" required="true"
 							requiredMessage="Por favor, informe o e-mail!"
-							value="#{anuncianteCadastroBean.anunciante.email}"
+							value="#{anuncianteCadastroBean.conta.email}"
 							validator="emailValidator" />
 
 						<h:outputLabel for="senha" value="Senha" />
 						<p:password id="senha" required="true"
 							requiredMessage="Por favor, informe a senha!"
-							value="#{anuncianteCadastroBean.anunciante.senha}" />
+							value="#{anuncianteCadastroBean.conta.senha}" />
 
 						<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
 							<p:commandButton styleClass="btn btn-primary"

@@ -9,7 +9,9 @@ import javax.inject.Named;
 import br.edu.ifpb.mt.dac.nn.beans.AbstractBean;
 import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
+import br.edu.ifpb.mt.dac.nn.model.Conta;
 import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
+import br.edu.ifpb.mt.dac.nn.services.ContaService;
 import br.edu.ifpb.mt.dac.nn.util.jsf.JSFUtils;
 import br.edu.ifpb.mt.dac.nn.util.mensagens.MessageUtils;
 
@@ -22,24 +24,33 @@ public class AnuncianteCadastroBean extends AbstractBean implements Serializable
 	@Inject
 	private AnuncianteService anuncianteService;
 
+	@Inject
+	private ContaService contaService;
+
 	private Anunciante anunciante;
 
+	private Conta conta;
+
 	public void preRenderView() {
-		anunciante = (Anunciante) JSFUtils.getParam("anunciante");
-		if (anunciante == null) {
+		try {
 			anunciante = new Anunciante();
+			conta = contaService.buscarPorUsername(getUsernameUsuarioLogado());
+			if(conta == null){
+				MessageUtils.messageSucess("Conta nula");				
+			}
+			anunciante = conta.getAnunciante();
+		} catch(Exception e) {
+			e.printStackTrace();
 		}
 	}
 
 	public void cadastrar() {
-		
+
 		try {
 			if (isEdicao()) {
-				System.out.println("ATUALIZADO");
 				anuncianteService.atualizar(anunciante);
 				MessageUtils.messageSucess("Perfil atualizado!");
 			} else {
-				System.out.println("SALVO");
 				anuncianteService.salvar(anunciante);
 				MessageUtils.messageSucess("Cadastro realizado!");
 				MessageUtils.messageSucess(anunciante.toString());
@@ -58,6 +69,7 @@ public class AnuncianteCadastroBean extends AbstractBean implements Serializable
 	}
 
 	public boolean isEdicao() {
+		anunciante = new Anunciante();
 		return anunciante.getId() != null;
 	}
 
@@ -67,6 +79,14 @@ public class AnuncianteCadastroBean extends AbstractBean implements Serializable
 
 	public void setAnunciante(Anunciante anunciante) {
 		this.anunciante = anunciante;
+	}
+	
+	public Conta getConta() {
+		return conta;
+	}
+
+	public void setConta(Conta conta) {
+		this.conta = conta;
 	}
 
 }

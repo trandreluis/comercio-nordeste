@@ -10,7 +10,7 @@ import javax.servlet.http.HttpSession;
 
 @Named
 @RequestScoped
-public class Logout extends AbstractBean {
+public class LoggedBean extends AbstractBean {
 
 	private static final long serialVersionUID = -7437667367775973347L;
 

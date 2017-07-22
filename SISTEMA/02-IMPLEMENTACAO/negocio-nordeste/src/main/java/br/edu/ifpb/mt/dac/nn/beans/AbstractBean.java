@@ -46,7 +46,7 @@ public abstract class AbstractBean implements Serializable {
 		return externalContext.isUserInRole(role);
 	}
 	
-	public String getUsuarioLogado() {
+	public String getUsernameUsuarioLogado() {
 		FacesContext facesContext = FacesContext.getCurrentInstance();
 		ExternalContext externalContext = facesContext.getExternalContext();
 		Principal userPrincipal = externalContext.getUserPrincipal();

@@ -3,16 +3,16 @@ package br.edu.ifpb.mt.dac.nn.services.impl;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.persistence.PersistenceException;
 
-import br.edu.ifpb.mt.dac.nn.dao.AnuncioDAO;
+import br.edu.ifpb.mt.dac.nn.dao.ContaDAO;
+import br.edu.ifpb.mt.dac.nn.dao.impl.ContaDaoImpl;
+import br.edu.ifpb.mt.dac.nn.enumerations.TipoUsuario;
 import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
-import br.edu.ifpb.mt.dac.nn.model.Anunciante;
-import br.edu.ifpb.mt.dac.nn.model.Anuncio;
-import br.edu.ifpb.mt.dac.nn.services.AnuncioService;
+import br.edu.ifpb.mt.dac.nn.model.Conta;
+import br.edu.ifpb.mt.dac.nn.services.ContaService;
 import br.edu.ifpb.mt.dac.nn.util.jpa.Transactional;
 
-public class ContaServiceImpl extends GenericServiceImpl<Anuncio, Long> implements AnuncioService {
+public class ContaServiceImpl extends GenericServiceImpl<Conta, Long> implements ContaService {
 
 	private static final long serialVersionUID = 18654878732134577L;
 
@@ -20,81 +20,45 @@ public class ContaServiceImpl extends GenericServiceImpl<Anuncio, Long> implemen
 	}
 
 	@Inject
-	public ContaServiceImpl(AnuncioDAO anuncioDAO) {
-		this.dao = anuncioDAO;
+	public ContaServiceImpl(ContaDAO contaDAO) {
+		this.dao = contaDAO;
 	}
-
+	
 	@Override
 	@Transactional
-	public void salvar(Anuncio entidade) throws NegocioNordesteException {
-		try {
-			dao.salvar(entidade);
-		} catch (PersistenceException pe) {
-			throw new NegocioNordesteException("Ocorreu um erro ao tentar cadastrar o anúncio.");
+	public void salvar(Conta entidade) throws NegocioNordesteException {
+		ContaDAO contaDAO = (ContaDAO) this.dao;
+		
+		Conta contaUsername = contaDAO.buscarPorUsername(entidade.getUsername());
+		Conta contaEmail = contaDAO.buscarPorEmail(entidade.getEmail());
+		
+		if(contaUsername != null) {
+			throw new NegocioNordesteException("Já existe um anunciante com este username cadastrado.");
 		}
+		
+		if(contaEmail != null) {
+			throw new NegocioNordesteException("Já existe um anunciante com este username cadastrado.");
+		}
+		
+		contaDAO.salvar(entidade);
 	}
 
 	@Override
-	@Transactional
-	public Anuncio atualizar(Anuncio entidade) throws NegocioNordesteException {
-		try {
-			return dao.atualizar(entidade);
-		} catch (PersistenceException pe) {
-			throw new NegocioNordesteException("Ocorreu um erro ao tentar atualizar o anúncio.");
-		}
+	public List<Conta> buscarPorTipo(TipoUsuario tipo) {
+		
+		return null;
 	}
 
 	@Override
-	@Transactional
-	public void deletar(Anuncio entidade) throws NegocioNordesteException {
-		try {
-			dao.deletar(entidade);
-		} catch (PersistenceException pe) {
-			throw new NegocioNordesteException("Ocorreu um erro ao tentar deletar o anúncio.");
-		}
+	public Conta buscarPorEmail(String email) {
+		return null;
 	}
 
 	@Override
-	public List<Anuncio> buscarPorTitulo(String titulo) throws NegocioNordesteException {
-		AnuncioDAO anuncioDAO = (AnuncioDAO) this.dao;
-
-		try {
-			return anuncioDAO.buscarPorTitulo(titulo);
-		} catch (PersistenceException pe) {
-			throw new NegocioNordesteException("Ocorreu um erro ao tentar buscar o anúncio pelo título.");
-		}
-
-	}
-
-	@Override
-	public List<Anuncio> buscarPorDescricao(String descricao) throws NegocioNordesteException {
-		AnuncioDAO anuncioDAO = (AnuncioDAO) this.dao;
-
-		try {
-			return anuncioDAO.buscarPorDescricao(descricao);
-		} catch (PersistenceException pe) {
-			throw new NegocioNordesteException("Ocorreu um erro ao tentar buscar o anúncio pela descrição.");
-		}
-	}
-
-	@Override
-	public List<Anuncio> buscarPorPrecoMaximo(Double precoMaximo) throws NegocioNordesteException {
-		AnuncioDAO anuncioDAO = (AnuncioDAO) this.dao;
-		try {
-			return anuncioDAO.buscarPorPrecoMaximo(precoMaximo);
-		} catch (PersistenceException pe) {
-			throw new NegocioNordesteException("Ocorreu um erro ao tentar buscar o anúncio pelo preço máximo.");
-		}
-	}
-
-	@Override
-	public List<Anuncio> buscarPorAnunciante(Anunciante anunciante) throws NegocioNordesteException {
-		AnuncioDAO anuncioDAO = (AnuncioDAO) this.dao;
-		try {
-			return anuncioDAO.buscarPorAnunciante(anunciante);
-		} catch (PersistenceException pe) {
-			throw new NegocioNordesteException("Ocorreu um erro ao tentar buscar o anúncio pelo anunciante.");
-		}
+	public Conta buscarPorUsername(String username) {
+		ContaDAO contaDAO = (ContaDAO) this.dao;
+		
+		return contaDAO.buscarPorUsername(username);
 	}
 
 }

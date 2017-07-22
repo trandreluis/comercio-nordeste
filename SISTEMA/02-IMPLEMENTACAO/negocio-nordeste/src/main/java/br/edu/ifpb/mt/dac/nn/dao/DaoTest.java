@@ -21,25 +21,32 @@ public class DaoTest {
 		EntityTransaction tx = null;
 
 		try {
+//			emf = Persistence.createEntityManagerFactory("bdnordesteP");
+//			em = emf.createEntityManager();
+//
+//			Operador operador = new Operador(); 
+//			
+//			Conta conta = new Conta();
+//			conta.setEmail("admin");
+//			conta.setSenha("admin");
+//			conta.setTipo(TipoUsuario.ADMIN);
+//			conta.setUsername("admin");
+//
+//			operador.setConta(conta);
+//
+//			tx = em.getTransaction();
+//			tx.begin();
+//
+//			em.persist(operador);
+//
+//			tx.commit();
+			
 			emf = Persistence.createEntityManagerFactory("bdnordesteP");
 			em = emf.createEntityManager();
-
-			Operador operador = new Operador(); 
 			
 			Conta conta = new Conta();
-			conta.setEmail("admin");
-			conta.setSenha("admin");
-			conta.setTipo(TipoUsuario.ADMIN);
-			conta.setUsername("admin");
-
-			operador.setConta(conta);
-
-			tx = em.getTransaction();
-			tx.begin();
-
-			em.persist(operador);
-
-			tx.commit();
+			
+			em.persist(conta);
 
 		} catch (Exception pe) {
 			tx.rollback();
