@@ -46,11 +46,9 @@
 				<li class="user-header">
 					<p style="font-size: 17px !important;"></p>
 					<p>
+						#{buscaBean.isLogged() ? "Usuário: " : "Realize login"}
 						<p:outputLabel value="#{buscaBean.conta.username}"
 							rendered="#{buscaBean.isLogged()}" />
-					</p>
-					<p>
-						<small>Último acesso foi em: </small>
 					</p>
 				</li>
 

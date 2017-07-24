@@ -13,13 +13,16 @@
 			type="preRenderView" />
 	</f:metadata>
 
-	<ui:define name="title">Anunciante - Edição</ui:define>
+	<ui:define name="title">Anunciante - Edição Perfil</ui:define>
 	<ui:define name="content-header">Anunciante <small>Visualize
 			e altere os dados básicos de sua conta</small>
 	</ui:define>
 	<ui:define name="breadcrumb-active">
 		<a href="#{request.contextPath}/paginas/anunciante/anunciante.xhtml"><i
-			class="fa fa-user"></i>Editar dados básicos</a>
+			class="fa fa-user"></i>Anunciante</a>
+		<li class="active"><a
+			href="#{request.contextPath}/paginas/anunciante/edicao_anunciante.xhtml"><i
+				class="fa fa-pencil-square-o"></i>Editar dados básicos</a></li>
 	</ui:define>
 
 	<ui:define name="content">
@@ -76,18 +79,15 @@
 				<li class="user-header">
 					<p style="font-size: 17px !important;"></p>
 					<p>
-						<p:outputLabel value="#{anuncianteBean.conta.username}" />
-					</p>
-					<p>
-						<small>Último acesso foi em: </small>
+						Usuário: 
+						<p:outputLabel value="#{anuncianteEdicaoBean.conta.username}" />
 					</p>
 				</li>
 
 				<li class="user-footer">
 					<div class="pull-left">
-						<p:commandButton value="Minha conta"
-							styleClass="btnn btnn-primary"
-							action="#{anuncianteBean.minhaConta()}" ajax="false" />
+						<p:button value="Minha conta" styleClass="btnn btnn-primary"
+							outcome="/paginas/anunciante/anunciante.xhtml" />
 					</div>
 					<div class="pull-right">
 						<p:commandButton value="Sair" styleClass="btnn btnn-primary"

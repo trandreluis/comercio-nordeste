@@ -1,4 +1,4 @@
-package br.edu.ifpb.mt.dac.nn.beans.anunciante;
+package br.edu.ifpb.mt.dac.nn.beans.conta;
 
 import java.io.Serializable;
 import java.util.Date;
@@ -29,21 +29,12 @@ public class AnuncianteEdicaoBean extends AbstractBean implements Serializable {
 
 	private Anunciante anunciante;
 
-	private String nomeAntigo;
-
-	private String sobrenomeAntigo;
-
-	private Date dataNascimentoAntiga;
-
 	private Conta conta;
 	
 	public void preRenderView() {
 		try {
 			conta = contaService.buscarPorUsername(getUsernameUsuarioLogado());
 			anunciante = conta.getAnunciante();
-			nomeAntigo = anunciante.getNome();
-			sobrenomeAntigo = anunciante.getSobrenome();
-			dataNascimentoAntiga = anunciante.getDataNascimento();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -51,13 +42,13 @@ public class AnuncianteEdicaoBean extends AbstractBean implements Serializable {
 
 	public void atualizar() {
 		try {
-			if (anunciante.getNome().equals(nomeAntigo) && anunciante.getSobrenome().equals(sobrenomeAntigo)
-					&& anunciante.getDataNascimento().equals(dataNascimentoAntiga)) {
+//			if (anunciante.getNome().equals(nomeAntigo) && anunciante.getSobrenome().equals(sobrenomeAntigo)
+//					&& anunciante.getDataNascimento().equals(dataNascimentoAntiga)) {
 				MessageUtils.messageWarn("Nenhum dado alterado.");
-			} else {
+//			} else {
 				anuncianteService.atualizar(anunciante);
 				MessageUtils.messageSucess("Perfil atualizado.");
-			}
+//			}
 		} catch (Exception e) {
 			MessageUtils.messageError(e.getMessage());
 		}
