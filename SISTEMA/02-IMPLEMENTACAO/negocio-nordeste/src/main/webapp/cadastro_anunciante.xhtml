@@ -9,17 +9,13 @@
 	template="/WEB-INF/templates/_template.xhtml">
 
 	<f:metadata>
-		<o:viewParam name="anunciante"
-			value="#{anuncianteCadastroBean.anunciante}" />
 		<f:event listener="#{anuncianteCadastroBean.preRenderView}"
 			type="preRenderView" />
 	</f:metadata>
 
 	<ui:define name="breadcrumb-active">
-		<a
-			href="#{request.contextPath}/paginas/anunciante/cadastro_anunciante.xhtml"><i
-			class="fa fa-user"></i>#{anuncianteCadastroBean.isEdicao() ? 'Editar
-			dados' : 'Realizar cadastro'}</a>
+		<a href="#{request.contextPath}/cadastro_anunciante.xhtml"><i
+			class="fa fa-user"></i>Realizar cadastro</a>
 	</ui:define>
 
 	<ui:define name="content">
@@ -71,12 +67,17 @@
 						<h:outputLabel for="senha" value="Senha" />
 						<p:password id="senha" required="true"
 							requiredMessage="Por favor, informe a senha!"
-							value="#{anuncianteCadastroBean.conta.senha}" />
+							value="#{anuncianteCadastroBean.conta.senha}"
+							validator="senhaValidator" />
+
+						<h:outputLabel for="confirmaSenha" value="Confirmação de senha" />
+						<p:password id="confirmaSenha" required="true"
+							requiredMessage="Por favor, informe a confirmação da senha!"
+							value="#{anuncianteCadastroBean.senha}"
+							validator="senhaValidator" />
 
 						<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-							<p:commandButton styleClass="btn btn-primary"
-								value="#{anuncianteCadastroBean.isEdicao() ?
-			'Atualizar' : 'Cadastrar'}"
+							<p:commandButton styleClass="btn btn-primary" value="Cadastrar"
 								action="#{anuncianteCadastroBean.cadastrar}" ajax="false" />
 							<p:button styleClass="btn btn-default" value="Cancelar"
 								href="home.xhtml" />

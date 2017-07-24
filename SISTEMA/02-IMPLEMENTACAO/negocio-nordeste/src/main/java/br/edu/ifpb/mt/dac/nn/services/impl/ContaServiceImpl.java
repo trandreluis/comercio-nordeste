@@ -1,11 +1,14 @@
 package br.edu.ifpb.mt.dac.nn.services.impl;
 
+import java.io.UnsupportedEncodingException;
+import java.math.BigInteger;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 import javax.inject.Inject;
 
 import br.edu.ifpb.mt.dac.nn.dao.ContaDAO;
-import br.edu.ifpb.mt.dac.nn.dao.impl.ContaDaoImpl;
 import br.edu.ifpb.mt.dac.nn.enumerations.TipoUsuario;
 import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
 import br.edu.ifpb.mt.dac.nn.model.Conta;
@@ -42,7 +45,7 @@ public class ContaServiceImpl extends GenericServiceImpl<Conta, Long> implements
 		
 		contaDAO.salvar(entidade);
 	}
-
+	
 	@Override
 	public List<Conta> buscarPorTipo(TipoUsuario tipo) {
 		
@@ -59,6 +62,23 @@ public class ContaServiceImpl extends GenericServiceImpl<Conta, Long> implements
 		ContaDAO contaDAO = (ContaDAO) this.dao;
 		
 		return contaDAO.buscarPorUsername(username);
+	}
+	
+	@Override
+	public String criptografarSenha(String senha) throws NegocioNordesteException {
+		MessageDigest md;
+		try {
+			md = MessageDigest.getInstance("SHA-256");
+			md.update(senha.getBytes("UTF-8"));
+			byte[] digest = md.digest();
+			BigInteger bigInt = new BigInteger(1, digest);
+			String senhaCriptografada = bigInt.toString(16);
+			return senhaCriptografada;
+		} catch (NoSuchAlgorithmException e) {
+			throw new NegocioNordesteException("Ocorreu um erro ao critografar a senha!");
+		} catch (UnsupportedEncodingException e) {
+			throw new NegocioNordesteException("Ocorreu um erro ao critografar a senha!");
+		}
 	}
 
 }

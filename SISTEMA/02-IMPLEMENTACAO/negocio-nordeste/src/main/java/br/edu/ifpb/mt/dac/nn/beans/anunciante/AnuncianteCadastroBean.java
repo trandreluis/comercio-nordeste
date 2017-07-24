@@ -7,7 +7,7 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.edu.ifpb.mt.dac.nn.beans.AbstractBean;
-import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
+import br.edu.ifpb.mt.dac.nn.enumerations.TipoUsuario;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.model.Conta;
 import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
@@ -31,15 +31,17 @@ public class AnuncianteCadastroBean extends AbstractBean implements Serializable
 
 	private Conta conta;
 
+	private String confirmacaoSenha;
+
 	public void preRenderView() {
 		try {
-			anunciante = new Anunciante();
-			conta = contaService.buscarPorUsername(getUsernameUsuarioLogado());
-			if(conta == null){
-				MessageUtils.messageSucess("Conta nula");				
+			if (conta == null) {
+				conta = new Conta();
 			}
-			anunciante = conta.getAnunciante();
-		} catch(Exception e) {
+			if (anunciante == null) {
+				anunciante = new Anunciante();
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -47,30 +49,22 @@ public class AnuncianteCadastroBean extends AbstractBean implements Serializable
 	public void cadastrar() {
 
 		try {
-			if (isEdicao()) {
-				anuncianteService.atualizar(anunciante);
-				MessageUtils.messageSucess("Perfil atualizado!");
-			} else {
+			conta.setTipo(TipoUsuario.ANUNCIANTE);
+			if (conta.getSenha().equals(confirmacaoSenha)) {
+				String senhaCriptografada = contaService.criptografarSenha(confirmacaoSenha);
+				conta.setSenha(senhaCriptografada);
+				anunciante.setConta(conta);
 				anuncianteService.salvar(anunciante);
-				MessageUtils.messageSucess("Cadastro realizado!");
-				MessageUtils.messageSucess(anunciante.toString());
+				JSFUtils.rederTo("paginas/login.xhtml?faces-redirect=true");
+				MessageUtils.messageSucess("Cadastro realizado com sucesso!");
+				MessageUtils.messageWarn("Realize login para acesar sua conta.");
+			} else {
+				MessageUtils.messageWarn("As senhas não conferem!");
 			}
-
-			JSFUtils.rederTo("anunciante.xhtml");
-			JSFUtils.setParam("anunciante", anunciante);
-
-		} catch (NegocioNordesteException nne) {
-			MessageUtils.messageSucess(nne.getMessage());
+		} catch (Exception e) {
+			MessageUtils.messageError(e.getMessage());
 		}
-	}
 
-	public void cancelar() {
-		JSFUtils.rederTo("busca.xhtml");
-	}
-
-	public boolean isEdicao() {
-		anunciante = new Anunciante();
-		return anunciante.getId() != null;
 	}
 
 	public Anunciante getAnunciante() {
@@ -80,13 +74,21 @@ public class AnuncianteCadastroBean extends AbstractBean implements Serializable
 	public void setAnunciante(Anunciante anunciante) {
 		this.anunciante = anunciante;
 	}
-	
+
 	public Conta getConta() {
 		return conta;
 	}
 
 	public void setConta(Conta conta) {
 		this.conta = conta;
+	}
+
+	public String getSenha() {
+		return confirmacaoSenha;
+	}
+
+	public void setSenha(String senha) {
+		this.confirmacaoSenha = senha;
 	}
 
 }

@@ -106,6 +106,7 @@ public class Conta implements Serializable {
 		this.admin = admin;
 	}
 
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;

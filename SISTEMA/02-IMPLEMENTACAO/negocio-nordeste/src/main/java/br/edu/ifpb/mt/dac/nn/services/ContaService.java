@@ -3,6 +3,7 @@ package br.edu.ifpb.mt.dac.nn.services;
 import java.util.List;
 
 import br.edu.ifpb.mt.dac.nn.enumerations.TipoUsuario;
+import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
 import br.edu.ifpb.mt.dac.nn.model.Conta;
 
 public interface ContaService extends GenericService<Conta, Long> {
@@ -13,4 +14,6 @@ public interface ContaService extends GenericService<Conta, Long> {
 
 	Conta buscarPorUsername(String username);
 
+	String criptografarSenha(String senha) throws NegocioNordesteException;
+	
 }

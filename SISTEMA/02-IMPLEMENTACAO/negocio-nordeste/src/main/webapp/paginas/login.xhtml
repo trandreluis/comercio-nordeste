@@ -8,9 +8,18 @@
 
 <h:head>
 	<title>Login</title>
+
+	<style>
+.ui-growl {
+	position: fixed;
+	top: 10%;
+}
+</style>
 </h:head>
 
 <h:body>
+
+	<p:growl id="growl" showDetail="true" redisplay="false" />
 
 	<p:outputPanel style="width: 100%; text-align:center" layout="block">
 		<!-- <form method="post" action="j_security_check"> -->

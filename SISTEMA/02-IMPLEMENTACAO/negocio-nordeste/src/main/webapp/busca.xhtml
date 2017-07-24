@@ -9,12 +9,11 @@
 	template="/WEB-INF/templates/_template.xhtml">
 
 	<f:metadata>
-		<f:event listener="#{buscaBean.preRenderView}"
-			type="preRenderView" />
+		<f:event listener="#{buscaBean.preRenderView}" type="preRenderView" />
 	</f:metadata>
 
 	<ui:define name="content">
-			
+
 		<h:body>
 
 			<!-- class="ui-fluid" -->
@@ -33,6 +32,45 @@
 			</div>
 
 		</h:body>
+
+	</ui:define>
+
+	<ui:define name="user-logged">
+
+		<li class="dropdown user user-menu"><a href="#"
+			class="dropdown-toggle" data-toggle="dropdown"> <i
+				class="fa fa-user" aria-hidden="true"></i> <span class="hidden-xs">
+			</span> <i class="fa fa-caret-down" aria-hidden="true"></i>
+		</a>
+			<ul class="dropdown-menu">
+				<li class="user-header">
+					<p style="font-size: 17px !important;"></p>
+					<p>
+						<p:outputLabel value="#{buscaBean.conta.username}"
+							rendered="#{buscaBean.isLogged()}" />
+					</p>
+					<p>
+						<small>Último acesso foi em: </small>
+					</p>
+				</li>
+
+				<li class="user-footer">
+					<div class="pull-left">
+						<p:commandButton value="#{buscaBean.textoBotaoNovo}"
+							styleClass="btnn btnn-primary" action="#{buscaBean.novo}"
+							ajax="false" />
+					</div>
+					<div class="pull-right">
+						<p:commandButton value="Sair" rendered="#{buscaBean.isLogged()}"
+							styleClass="btnn btnn-primary" ajax="false"
+							action="#{loggedBean.logout()}" />
+					</div>
+					<div class="pull-right">
+						<p:button value="Login" rendered="${!buscaBean.isLogged()}"
+							outcome="paginas/login.xhtml?faces-redirect=true" />
+					</div>
+				</li>
+			</ul></li>
 
 	</ui:define>
 

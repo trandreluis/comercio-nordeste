@@ -27,72 +27,56 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 	@Override
 	@Transactional
 	public void salvar(Anunciante entidade) throws NegocioNordesteException {
-		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
-//		Anunciante anuncianteEmail = anuncianteDAO.buscarPorEmail(entidade.getEmail());
-//		Anunciante anuncianteUsername = anuncianteDAO.buscarPorUsername(entidade.getUsername());
-//
-//		if (anuncianteEmail != null) {
-//			throw new NegocioNordesteException("Já existe um anunciante com este e-mail cadastrado.");
-//		}
-//
-//		else if (anuncianteUsername != null) {
-//			throw new NegocioNordesteException("Já existe um anunciante com este username cadastrado");
-//		}
-
-		anuncianteDAO.salvar(entidade);
+		try {
+			AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
+			anuncianteDAO.salvar(entidade);
+		} catch (Exception e) {
+			throw new NegocioNordesteException("Ocorreu um erro ao tentar salvar o anunciante.");
+		}
 	}
 
 	@Override
 	@Transactional
 	public Anunciante atualizar(Anunciante entidade) throws NegocioNordesteException {
-		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
-		Anunciante anuncianteAntigo = anuncianteDAO.buscarPorID(entidade.getId());
-
-		// Se não alterou e-mail nem username, prossegue sem necessidade de
-		// comparar com já existentes
-//		if (anuncianteAntigo.getEmail().equals(entidade.getEmail())
-//				&& anuncianteAntigo.getUsername().equals(entidade.getUsername())) {
-//			return anuncianteDAO.atualizar(entidade);
-//		}
-
-		// Senão busca todos e verifica a disponiblidade do e-mail e username no
-		// sistema
-		List<Anunciante> anunciantes = anuncianteDAO.buscarTodos();
-
-		for (Anunciante anuncianteCadastrado : anunciantes) {
-//			if (anuncianteCadastrado.getEmail().equals(entidade.getEmail())) {
-//				throw new NegocioNordesteException("Já existe um anunciante cadastrado com este e-mail.");
-//			}
-//			if (anuncianteCadastrado.getUsername().equals(entidade.getUsername())) {
-//				throw new NegocioNordesteException("Já existe um anunciante cadastrado com este username.");
-//			}
+		try {
+			AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
+			return anuncianteDAO.atualizar(entidade);
+		} catch (Exception e) {
+			throw new NegocioNordesteException("Ocorreu um erro ao tentar atualizar o anunciante.");
 		}
-		// Caso seja uma atualização válida, prossegue normalmente e retorna a nova instancia atualizada
-		return anuncianteDAO.atualizar(entidade);
 	}
 
 	@Override
-	public List<Anunciante> buscarPorNome(String nome) {
-		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
-		List<Anunciante> anunciantes = anuncianteDAO.buscarPorNome(nome);
-
-		return anunciantes;
+	public List<Anunciante> buscarPorNome(String nome) throws NegocioNordesteException {
+		try {
+			AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
+			List<Anunciante> anunciantes = anuncianteDAO.buscarPorNome(nome);
+			return anunciantes;
+		} catch (Exception e) {
+			throw new NegocioNordesteException("Ocorreu um erro ao buscar o anunciante pelo nome.");
+		}
 	}
 
 	@Override
-	public Anunciante buscarPorEmail(String email) {
-		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
-		Anunciante anunciante = anuncianteDAO.buscarPorEmail(email);
-
-		return anunciante;
+	public Anunciante buscarPorEmail(String email) throws NegocioNordesteException {
+		try {
+			AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
+			Anunciante anunciante = anuncianteDAO.buscarPorEmail(email);
+			return anunciante;
+		} catch (Exception e) {
+			throw new NegocioNordesteException("Ocorreu um erro ao buscar o anunciante pelo e-mail.");
+		}
 	}
 
 	@Override
-	public Anunciante buscarPorUsername(String username) {
-		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
-		Anunciante anunciante = anuncianteDAO.buscarPorUsername(username);
-
-		return anunciante;
+	public Anunciante buscarPorUsername(String username) throws NegocioNordesteException {
+		try {
+			AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
+			Anunciante anunciante = anuncianteDAO.buscarPorUsername(username);
+			return anunciante;
+		} catch (Exception e) {
+			throw new NegocioNordesteException("Ocorreu um erro ao buscar o anunciante pelo username.");
+		}
 	}
 
 	@Override
@@ -108,11 +92,14 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 	}
 
 	@Override
-	public Anunciante buscarPorAnuncio(Anuncio anuncio) {
-		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
-		Anunciante anunciante = anuncianteDAO.buscarPorAnuncio(anuncio);
-
-		return anunciante;
+	public Anunciante buscarPorAnuncio(Anuncio anuncio) throws NegocioNordesteException {
+		try {
+			AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
+			Anunciante anunciante = anuncianteDAO.buscarPorAnuncio(anuncio);
+			return anunciante;
+		} catch (Exception e) {
+			throw new NegocioNordesteException("Ocorreu um erro ao buscar o anunciante pelo anuncio.");
+		}
 	}
 
 }

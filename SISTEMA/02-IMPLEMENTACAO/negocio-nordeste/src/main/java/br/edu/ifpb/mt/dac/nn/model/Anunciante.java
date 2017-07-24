@@ -98,13 +98,12 @@ public class Anunciante implements Serializable {
 	public void setConta(Conta conta) {
 		this.conta = conta;
 	}
-
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((anuncios == null) ? 0 : anuncios.hashCode());
-		result = prime * result + ((conta == null) ? 0 : conta.hashCode());
 		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
@@ -125,11 +124,6 @@ public class Anunciante implements Serializable {
 			if (other.anuncios != null)
 				return false;
 		} else if (!anuncios.equals(other.anuncios))
-			return false;
-		if (conta == null) {
-			if (other.conta != null)
-				return false;
-		} else if (!conta.equals(other.conta))
 			return false;
 		if (dataNascimento == null) {
 			if (other.dataNascimento != null)
