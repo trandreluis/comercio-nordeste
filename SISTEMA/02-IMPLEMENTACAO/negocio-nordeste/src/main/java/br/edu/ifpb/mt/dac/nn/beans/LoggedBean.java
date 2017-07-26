@@ -14,7 +14,7 @@ public class LoggedBean extends AbstractBean {
 
 	private static final long serialVersionUID = -7437667367775973347L;
 
-	public void logout() {
+	public static void logout() {
 		try {
 			FacesContext fc = FacesContext.getCurrentInstance();
 			ExternalContext ec = fc.getExternalContext();

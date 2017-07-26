@@ -29,7 +29,7 @@ public class Operador implements Serializable {
 	private String nome;
 	
 	@NotNull
-	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REMOVE })
 	@JoinColumn(name = "FK_CONTA", nullable = false)
 	private Conta conta;
 

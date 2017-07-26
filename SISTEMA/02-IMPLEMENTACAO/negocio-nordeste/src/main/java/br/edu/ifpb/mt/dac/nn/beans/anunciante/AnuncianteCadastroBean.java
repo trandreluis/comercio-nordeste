@@ -55,9 +55,9 @@ public class AnuncianteCadastroBean extends AbstractBean implements Serializable
 				conta.setSenha(senhaCriptografada);
 				anunciante.setConta(conta);
 				anuncianteService.salvar(anunciante);
-				JSFUtils.rederTo("paginas/login.xhtml?faces-redirect=true");
 				MessageUtils.messageSucess("Cadastro realizado com sucesso!");
-				MessageUtils.messageWarn("Realize login para acesar sua conta.");
+				MessageUtils.messageWarn("Realize login para acessar sua conta.");
+				JSFUtils.rederTo("paginas/login.xhtml?faces-redirect=true");
 			} else {
 				MessageUtils.messageWarn("As senhas não conferem!");
 			}

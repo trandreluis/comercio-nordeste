@@ -14,6 +14,8 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import org.hibernate.validator.constraints.Length;
+
 import br.edu.ifpb.mt.dac.nn.enumerations.TipoUsuario;
 
 @Entity
@@ -21,7 +23,7 @@ import br.edu.ifpb.mt.dac.nn.enumerations.TipoUsuario;
 @NamedQueries({
 		@NamedQuery(name = "Conta.buscarPorUsername", query = "SELECT c FROM Conta c WHERE c.username = :username"),
 		@NamedQuery(name = "Conta.buscarPorEmail", query = "SELECT c FROM Conta c WHERE c.email = :email"),
-		@NamedQuery(name = "Conta.buscarPorTipo", query = "SELECT c FROM Conta c WHERE c.tipo = :tipo")})
+		@NamedQuery(name = "Conta.buscarPorTipo", query = "SELECT c FROM Conta c WHERE c.tipo = :tipo") })
 public class Conta implements Serializable {
 
 	private static final long serialVersionUID = -4442335252642678115L;
@@ -46,7 +48,7 @@ public class Conta implements Serializable {
 
 	@OneToOne(mappedBy = "conta")
 	private Anunciante anunciante;
-	
+
 	@OneToOne(mappedBy = "conta")
 	private Operador admin;
 
@@ -105,7 +107,6 @@ public class Conta implements Serializable {
 	public void setAdmin(Operador admin) {
 		this.admin = admin;
 	}
-
 
 	@Override
 	public int hashCode() {
@@ -170,5 +171,5 @@ public class Conta implements Serializable {
 		return "Conta [id=" + id + ", tipo=" + tipo + ", username=" + username + ", senha=" + senha + ", email=" + email
 				+ ", anunciante=" + anunciante + ", admin=" + admin + "]";
 	}
-	
+
 }

@@ -21,20 +21,20 @@ public class SenhaValidator implements Validator {
 	private Matcher matcher;
 
 	private static final String PADRAO_SENHA = "^(?=.{5,15}$)(?![_.])(?!.*[_.]{2})[a-zA-Z0-9._]+(?<![_.])$";
-	
+
 	@Override
 	public void validate(FacesContext context, UIComponent component, Object value) throws ValidatorException {
 
-		String username = (String) value;
+		String senha = (String) value;
 
 		this.padrao = Pattern.compile(PADRAO_SENHA);
-		this.matcher = this.padrao.matcher(username);
+		this.matcher = this.padrao.matcher(senha);
 
-		if (!matcher.matches()) {
+		if (!matcher.matches() && senha.length() > 0) {
 			throw new ValidatorException(new FacesMessage(FacesMessage.SEVERITY_WARN, "Senha inválida!",
 					"A senha deve ter entre 5 e 15 caracters e deve iniciar e terminar com um caractere alfabético ou alfa numérico."));
 		}
-		
+
 	}
 
 }

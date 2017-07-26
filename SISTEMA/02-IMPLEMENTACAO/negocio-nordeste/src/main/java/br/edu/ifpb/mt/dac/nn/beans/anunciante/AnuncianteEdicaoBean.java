@@ -12,7 +12,6 @@ import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.model.Conta;
 import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
 import br.edu.ifpb.mt.dac.nn.services.ContaService;
-import br.edu.ifpb.mt.dac.nn.util.jsf.JSFUtils;
 import br.edu.ifpb.mt.dac.nn.util.mensagens.MessageUtils;
 
 @Named
@@ -36,7 +35,7 @@ public class AnuncianteEdicaoBean extends AbstractBean implements Serializable {
 	private Date dataNascimentoAntiga;
 
 	private Conta conta;
-	
+
 	public void preRenderView() {
 		try {
 			conta = contaService.buscarPorUsername(getUsernameUsuarioLogado());

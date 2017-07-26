@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/templates/anunciante/_template_admin.xhtml">
+
+	<f:metadata>
+		<f:event listener="#{contaEdicaoBean.preRenderView}"
+			type="preRenderView" />
+	</f:metadata>
+
+	<ui:define name="title">Editar Conta</ui:define>
+	<ui:define name="content-header">Anunciante <small>Visualize
+			e altere os dados básicos de sua conta</small>
+	</ui:define>
+	<ui:define name="breadcrumb-active">
+		<a href="#{request.contextPath}/paginas/anunciante/anunciante.xhtml"><i
+			class="fa fa-user"></i>Anunciante</a>
+		<li class="active"><a
+			href="#{request.contextPath}/paginas/conta/edicao_conta.xhtml"><i
+				class="fa fa-pencil-square-o"></i>Editar dados de acesso</a></li>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<div align="center" class="ui-fluid">
+
+
+			<h:form id="formEdicaoConta">
+
+				<p:graphicImage library="images" name="key.png" />
+
+				<br />
+				<br />
+
+				<p:panelGrid columns="1" styleClass="ui-panelgrid-blank">
+
+					<h:outputLabel for="username" value="Username" />
+					<p:inputText id="username" required="true"
+						requiredMessage="Por favor, informe o username!"
+						value="#{contaEdicaoBean.anunciante.conta.username}"
+						validator="usernameValidator" />
+
+					<h:outputLabel for="email" value="E-mail" />
+					<p:inputText id="email" required="true"
+						requiredMessage="Por favor, informe o e-mail!"
+						value="#{contaEdicaoBean.anunciante.conta.email}"
+						validator="emailValidator" />
+
+					<h:outputLabel for="novaSenha" value="Nova senha" />
+					<p:password id="novaSenha"
+						requiredMessage="Por favor, informe a nova senha!"
+						value="#{contaEdicaoBean.novaSenha}" validator="senhaValidator" />
+
+					<h:outputLabel for="novaSenhaConfirmada"
+						value="Confirmação da senha" />
+					<p:password id="novaSenhaConfirmada"
+						requiredMessage="Por favor, informe a nova senha!"
+						value="#{contaEdicaoBean.confirmacaoNovaSenha}"
+						validator="senhaValidator" />
+
+					<!-- 
+					<p:commandButton styleClass="btn btn-primary" value="Atualizar"
+						action="#{contaEdicaoBean.atualizar()}" ajax="false" />
+					-->
+
+					<p:commandButton styleClass="btn btn-primary" value="Atualizar"
+						action="#{contaEdicaoBean.atualizar()}">
+						<p:confirm
+							header="Tem certeza que deseja alterar os dados de acesso?"
+							message="Você precisará fazer login novamente."
+							icon="fa fa-fw fa-alert" />
+					</p:commandButton>
+
+					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+						<p:commandButton value="Confirmar"
+							style="color: #fff; background-color: #1f4a6d; border-color: #2e6da4;"
+							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
+							ajax="false" />
+						<p:commandButton value="Cancelar" type="button"
+							style="color: #fff; background-color: #893030; border-color: #ccc;"
+							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+					</p:confirmDialog>
+
+				</p:panelGrid>
+
+			</h:form>
+
+		</div>
+
+	</ui:define>
+
+	<ui:define name="user-logged">
+
+		<li class="dropdown user user-menu"><a href="#"
+			class="dropdown-toggle" data-toggle="dropdown"> <i
+				class="fa fa-user" aria-hidden="true"></i> <span class="hidden-xs">
+			</span> <i class="fa fa-caret-down" aria-hidden="true"></i>
+		</a>
+			<ul class="dropdown-menu">
+				<li class="user-header">
+					<p style="font-size: 17px !important;"></p>
+					<p>
+						Usuário: 
+						<p:outputLabel value="#{contaEdicaoBean.anunciante.conta.username}" />
+					</p>
+				</li>
+
+				<li class="user-footer">
+					<div class="pull-left">
+						<p:button value="Minha conta" styleClass="btnn btnn-primary"
+							outcome="/paginas/anunciante/anunciante.xhtml" />
+					</div>
+					<div class="pull-right">
+						<p:commandButton value="Sair" styleClass="btnn btnn-primary"
+							ajax="false" action="#{loggedBean.logout()}" />
+					</div>
+				</li>
+			</ul></li>
+
+	</ui:define>
+	
+	 -->
+
+</ui:composition>

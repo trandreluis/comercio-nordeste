@@ -5,9 +5,6 @@ import java.security.Principal;
 
 import javax.faces.context.ExternalContext;
 import javax.faces.context.FacesContext;
-import javax.servlet.http.HttpSession;
-
-import br.edu.ifpb.mt.dac.nn.util.mensagens.MessageUtils;
 
 public abstract class AbstractBean implements Serializable {
 
