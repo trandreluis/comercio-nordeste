@@ -45,23 +45,12 @@ public class ContaEdicaoBean extends AbstractBean implements Serializable {
 
 	public void atualizar() {
 		try {
-			if (camposDeSenhaValidos()) {
-				String senhaCriptografada = contaService.criptografarSenha(novaSenha);
-				anunciante.getConta().setSenha(senhaCriptografada);
-				anuncianteService.atualizar(anunciante);
-				MessageUtils.messageSucess("Conta atualizada.");
-				MessageUtils.messageWarn("Faça login novamente.");
-				LoggedBean.logout();
-			} else {
-				anuncianteService.atualizar(anunciante);
-				MessageUtils.messageSucess("Conta atualizada.");
-				MessageUtils.messageWarn("Faça login novamente.");
-				LoggedBean.logout();
-			}
-		} catch (
-
-		Exception e) {
-			MessageUtils.messageError("Erro no atualizar");
+			anuncianteService.atualizar(anunciante);
+			MessageUtils.messageSucess("Conta atualizada.");
+			MessageUtils.messageWarn("Faça login novamente.");
+			LoggedBean.logout();
+		} catch (Exception e) {
+			MessageUtils.messageError(e.getMessage());
 		}
 	}
 
@@ -70,28 +59,15 @@ public class ContaEdicaoBean extends AbstractBean implements Serializable {
 	}
 
 	public boolean camposDeSenhaValidos() {
-		if (novaSenha.length() != 0 || confirmacaoNovaSenha.length() != 0) {
-			if (novaSenha.length() != 0 && confirmacaoNovaSenha.length() != 0) {
-				if (!novaSenha.equals(confirmacaoNovaSenha)) {
-					MessageUtils.messageWarn("As senhas informadas diferem uma da outra.");
-					return false;
-				} else {
-					return true;
-				}
-			} else {
-				MessageUtils.messageWarn("Informe o campo de senha faltante.");
-				return false;
-			}
-		} else {
-			return true;
-		}
+		MessageUtils.messageSucess("" + novaSenha.length());
+		return true;
 	}
 
 	public boolean editarSenha() {
-		if (novaSenha.length() != 0 && confirmacaoNovaSenha.length() != 0) {
-			return true;
+		if (novaSenha.length() == 0 && confirmacaoNovaSenha.length() == 0) {
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	public String getNovaSenha() {

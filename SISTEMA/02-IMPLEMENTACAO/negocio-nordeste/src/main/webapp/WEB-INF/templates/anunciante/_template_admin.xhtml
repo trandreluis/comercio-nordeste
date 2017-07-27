@@ -40,63 +40,61 @@
 </h:head>
 <h:body class="hold-transition skin-blue sidebar-mini">
 
-	<p:growl id="growl" showDetail="true" redisplay="false" />
+	<p:growl id="growl" showDetail="true" redisplay="false" autoUpdate="true" />
 
 	<ui:debug hotkey="z" />
 
-	<h:form>
-		<div class="wrapper">
+	<div class="wrapper">
 
-			<header class="main-header">
+		<header class="main-header">
 
-				<nav class="navbar navbar-static-top" role="navigation">
-					<a class="sidebar-toggle" data-toggle="offcanvas" role="button">
-					</a>
-					<div class="navbar-custom-menu">
-						<ul class="nav navbar-nav">
-							<ui:insert name="user-logged">
-								
-							</ui:insert>
-						</ul>
-					</div>
-				</nav>
-			</header>
-			<aside class="main-sidebar">
-
-				<section class="sidebar">
-					<div class="user-panel">
-						<p:graphicImage library="images" styleClass="user-panel-image"
-							name="1p.png" />
-					</div>
-
-					<ul class="sidebar-menu">
-						<ui:include
-							src="/WEB-INF/templates/anunciante/_menu_anunciante.xhtml" />
-					</ul>
-				</section>
-			</aside>
-
-			<div class="content-wrapper">
-				<section class="content-header">
-					<h1>
-						<ui:insert name="content-header">
-								DashBoard <small>Visão geral do sistema</small>
+			<nav class="navbar navbar-static-top" role="navigation">
+				<a class="sidebar-toggle" data-toggle="offcanvas" role="button">
+				</a>
+				<div class="navbar-custom-menu">
+					<ul class="nav navbar-nav">
+						<ui:insert name="user-logged">
+							
 						</ui:insert>
-					</h1>
-					<ol class="breadcrumb">
-						<li><a href="#{request.contextPath}/busca.xhtml"><i
-								class="fa fa-search"></i>Inicio</a></li>
-						<li class="active"><ui:insert name="breadcrumb-active"></ui:insert></li>
-					</ol>
-				</section>
-				<section class="content">
+					</ul>
+				</div>
+			</nav>
+		</header>
+		<aside class="main-sidebar">
 
-					<ui:insert name="content"></ui:insert>
+			<section class="sidebar">
+				<div class="user-panel">
+					<p:graphicImage library="images" styleClass="user-panel-image"
+						name="1p.png" />
+				</div>
 
-				</section>
-			</div>
+				<ul class="sidebar-menu">
+					<ui:include
+						src="/WEB-INF/templates/anunciante/_menu_anunciante.xhtml" />
+				</ul>
+			</section>
+		</aside>
+
+		<div class="content-wrapper">
+			<section class="content-header">
+				<h1>
+					<ui:insert name="content-header">
+							DashBoard <small>Visão geral do sistema</small>
+					</ui:insert>
+				</h1>
+				<ol class="breadcrumb">
+					<li><a href="#{request.contextPath}/busca.xhtml"><i
+							class="fa fa-search"></i>Inicio</a></li>
+					<li class="active"><ui:insert name="breadcrumb-active"></ui:insert></li>
+				</ol>
+			</section>
+			<section class="content">
+
+				<ui:insert name="content"></ui:insert>
+
+			</section>
 		</div>
-	</h:form>
+	</div>
 
 	<script type="text/javascript"
 		src="#{request.contextPath}/resources/bootstrap/js/bootstrap.min.js"></script>

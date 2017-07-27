@@ -27,15 +27,13 @@
 
 	<ui:define name="content">
 
-		<div align="center" class="ui-fluid">
 
-
-			<h:form id="formEdicaoConta">
+		<h:form id="formEdicaoConta">
+			<div align="center" class="ui-fluid">
 
 				<p:graphicImage library="images" name="key.png" />
 
-				<br />
-				<br />
+				<br /> <br />
 
 				<p:panelGrid columns="1" styleClass="ui-panelgrid-blank">
 
@@ -52,45 +50,34 @@
 						validator="emailValidator" />
 
 					<h:outputLabel for="novaSenha" value="Nova senha" />
-					<p:password id="novaSenha"
-						requiredMessage="Por favor, informe a nova senha!"
+					<p:password id="novaSenha" match="novaSenhaConfirmada"
 						value="#{contaEdicaoBean.novaSenha}" validator="senhaValidator" />
 
 					<h:outputLabel for="novaSenhaConfirmada"
 						value="Confirmação da senha" />
 					<p:password id="novaSenhaConfirmada"
-						requiredMessage="Por favor, informe a nova senha!"
-						value="#{contaEdicaoBean.confirmacaoNovaSenha}"
-						validator="senhaValidator" />
-
-					<!-- 
-					<p:commandButton styleClass="btn btn-primary" value="Atualizar"
-						action="#{contaEdicaoBean.atualizar()}" ajax="false" />
-					-->
+						value="#{contaEdicaoBean.confirmacaoNovaSenha}" />
 
 					<p:commandButton styleClass="btn btn-primary" value="Atualizar"
-						action="#{contaEdicaoBean.atualizar()}">
+						action="#{contaEdicaoBean.atualizar()}" update="@form">
 						<p:confirm
 							header="Tem certeza que deseja alterar os dados de acesso?"
 							message="Você precisará fazer login novamente."
-							icon="fa fa-fw fa-alert" />
+							icon="fa fa-exclamation-triangle" />
 					</p:commandButton>
 
-					<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-						<p:commandButton value="Confirmar"
-							style="color: #fff; background-color: #1f4a6d; border-color: #2e6da4;"
-							styleClass="ui-confirmdialog-yes" icon="ui-icon-check"
-							ajax="false" />
-						<p:commandButton value="Cancelar" type="button"
-							style="color: #fff; background-color: #893030; border-color: #ccc;"
-							styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-					</p:confirmDialog>
 
 				</p:panelGrid>
 
-			</h:form>
+			</div>
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Confirmar" type="button"
+					styleClass="btn btn-primary ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Cancelar" type="button"
+					styleClass="btn btn-default ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
+		</h:form>
 
-		</div>
 
 	</ui:define>
 
@@ -105,8 +92,9 @@
 				<li class="user-header">
 					<p style="font-size: 17px !important;"></p>
 					<p>
-						Usuário: 
-						<p:outputLabel value="#{contaEdicaoBean.anunciante.conta.username}" />
+						Usuário:
+						<p:outputLabel
+							value="#{contaEdicaoBean.anunciante.conta.username}" />
 					</p>
 				</li>
 
@@ -116,14 +104,14 @@
 							outcome="/paginas/anunciante/anunciante.xhtml" />
 					</div>
 					<div class="pull-right">
-						<p:commandButton value="Sair" styleClass="btnn btnn-primary"
-							ajax="false" action="#{loggedBean.logout()}" />
+						<h:form>
+							<p:commandButton value="Sair" styleClass="btnn btnn-primary"
+								ajax="false" action="#{loggedBean.logout()}" />
+						</h:form>
 					</div>
 				</li>
 			</ul></li>
 
 	</ui:define>
-	
-	 -->
 
 </ui:composition>

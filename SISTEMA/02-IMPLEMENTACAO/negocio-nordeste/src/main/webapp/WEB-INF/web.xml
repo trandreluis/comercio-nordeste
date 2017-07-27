@@ -58,6 +58,8 @@
 			<web-resource-name>Área protegida do anunciante</web-resource-name>
 			<description></description>
 			<url-pattern>/paginas/anunciante/anunciante.xhtml</url-pattern>
+			<url-pattern>/paginas/anunciante/edicao_anunciante.xhtml</url-pattern>
+			<url-pattern>/paginas/conta/edicao_conta.xhtml</url-pattern>
 			<url-pattern>/paginas/anuncio/cadastro_anuncio.xhtml</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>

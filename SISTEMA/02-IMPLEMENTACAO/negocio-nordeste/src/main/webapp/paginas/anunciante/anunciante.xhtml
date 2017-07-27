@@ -109,19 +109,21 @@
 					<p style="font-size: 17px !important;"></p>
 					<p>
 						Usuário:
-						<p:outputLabel value="#{anuncianteBean.conta.username}" />
+						<p:outputLabel
+							value="#{anuncianteBean.anunciante.conta.username}" />
 					</p>
 				</li>
 
 				<li class="user-footer">
 					<div class="pull-left">
-						<p:commandButton value="Minha conta"
-							styleClass="btnn btnn-primary"
-							action="#{anuncianteBean.minhaConta()}" ajax="false" />
+						<p:button value="Minha conta" styleClass="btnn btnn-primary"
+							outcome="/paginas/anunciante/anunciante.xhtml" />
 					</div>
 					<div class="pull-right">
-						<p:commandButton value="Sair" styleClass="btnn btnn-primary"
-							ajax="false" action="#{loggedBean.logout()}" />
+						<h:form>
+							<p:commandButton value="Sair" styleClass="btnn btnn-primary"
+								ajax="false" action="#{loggedBean.logout()}" />
+						</h:form>
 					</div>
 				</li>
 			</ul></li>
