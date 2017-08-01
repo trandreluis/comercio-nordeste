@@ -1,0 +1,46 @@
+[{
+	"ID": "2",
+	"Sigla": "AL",
+	"Nome": "Alagoas"
+},
+     {
+	"ID": "5",
+	"Sigla": "BA",
+	"Nome": "Bahia"
+},
+     {
+	"ID": "6",
+	"Sigla": "CE",
+	"Nome": "Ceará"
+},
+     {
+	"ID": "10",
+	"Sigla": "MA",
+	"Nome": "Maranhão"
+},
+     {
+	"ID": "15",
+	"Sigla": "PB",
+	"Nome": "Paraíba"
+},
+     {
+	"ID": "16",
+	"Sigla": "PE",
+	"Nome": "Pernambuco"
+},
+     {
+	"ID": "20",
+	"Sigla": "RN",
+	"Nome": "Rio Grande do Norte"
+},
+     {
+	"ID": "25",
+	"Sigla": "SE",
+	"Nome": "Sergipe"
+},
+     {
+	"ID": "17",
+	"Sigla": "PI",
+	"Nome": "Piauí"
+}
+]

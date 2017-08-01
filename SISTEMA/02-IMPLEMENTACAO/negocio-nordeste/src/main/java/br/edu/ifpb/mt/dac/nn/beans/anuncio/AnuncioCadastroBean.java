@@ -1,56 +1,69 @@
 package br.edu.ifpb.mt.dac.nn.beans.anuncio;
 
 import java.io.Serializable;
+import java.util.List;
 
 import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.edu.ifpb.mt.dac.nn.beans.AbstractBean;
-import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.model.Anuncio;
-import br.edu.ifpb.mt.dac.nn.services.impl.AnuncianteServiceImpl;
-import br.edu.ifpb.mt.dac.nn.util.jsf.JSFUtils;
+import br.edu.ifpb.mt.dac.nn.model.Conta;
+import br.edu.ifpb.mt.dac.nn.model.Estado;
+import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
+import br.edu.ifpb.mt.dac.nn.services.ContaService;
+import br.edu.ifpb.mt.dac.nn.util.json.LocalizacaoUtils;
 import br.edu.ifpb.mt.dac.nn.util.mensagens.MessageUtils;
 
 @Named
 @ViewScoped
 public class AnuncioCadastroBean extends AbstractBean implements Serializable {
 
-	private static final long serialVersionUID = 1587624597465L;
+	private static final long serialVersionUID = 158327624597465L;
+
+	@Inject
+	private ContaService contaService;
+
+	@Inject
+	private AnuncianteService anuncianteService;
+
+	private Conta conta;
 
 	private Anunciante anunciante;
-	
-	@Inject
-	private AnuncianteServiceImpl anuncianteService;
 
 	private Anuncio anuncio;
-	
+
+	private List<Estado> estadosNordeste;
+
 	public void preRenderView() {
-		anunciante = (Anunciante) JSFUtils.getParam("anunciante");
-		if (anunciante == null) {
-			anunciante = new Anunciante();
-			anuncio = new Anuncio();
+		try {
+			conta = contaService.buscarPorUsername(getUsernameUsuarioLogado());
+			anunciante = conta.getAnunciante();
+			carregarEstados();
+			MessageUtils.messageSucess("Estados carregados.");
+		} catch (Exception e) {
+			e.printStackTrace();
+			MessageUtils.messageSucess("Erro no pre-render-view");
 		}
+	}
+
+	private void carregarEstados() {
+		LocalizacaoUtils localizacao = new LocalizacaoUtils();
+		estadosNordeste = localizacao.buscarEstadosDoNordeste();
 	}
 
 	public void cadastrar() {
-		if(anunciante.getId() != null) {
-			try {
-				anuncianteService.atualizar(anunciante);
-			} catch (NegocioNordesteException e) {
-				MessageUtils.messageError(e.getMessage());
-			}			
-		}
-		else {
-			MessageUtils.messageSucess("Você precisa estar logado para cadastrar um anúncio.");
-			JSFUtils.rederTo("busca.xhtml");
-		}
+		MessageUtils.messageSucess("Cadastrar()");
 	}
-	
-	public void cancelar() {
-		JSFUtils.rederTo("anunciante.xhtml");
+
+	public void uploadImagem() {
+		MessageUtils.messageSucess("Olha a imgem!");
+	}
+
+	public String cancelar() {
+		return null;
 	}
 
 	public Anunciante getAnunciante() {
@@ -68,5 +81,13 @@ public class AnuncioCadastroBean extends AbstractBean implements Serializable {
 	public void setAnuncio(Anuncio anuncio) {
 		this.anuncio = anuncio;
 	}
-	
+
+	public List<Estado> getEstadosNordeste() {
+		return estadosNordeste;
+	}
+
+	public void setEstadosNordeste(List<Estado> estados) {
+		this.estadosNordeste = estados;
+	}
+
 }

@@ -14,8 +14,6 @@ import javax.persistence.NamedQuery;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import org.hibernate.validator.constraints.Length;
-
 import br.edu.ifpb.mt.dac.nn.enumerations.TipoUsuario;
 
 @Entity

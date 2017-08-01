@@ -1,11 +1,15 @@
 package br.edu.ifpb.mt.dac.nn.model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
 import java.util.Arrays;
+import java.util.Date;
+import java.util.List;
 
+import javax.persistence.AttributeOverride;
+import javax.persistence.AttributeOverrides;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.Embedded;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -16,18 +20,21 @@ import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
+
+import org.hibernate.annotations.Fetch;
+import org.hibernate.annotations.FetchMode;
 
 @Entity
 @Table(name = "ANUNCIO")
 @NamedQueries({
-	@NamedQuery(name = "Anuncio.buscarPorTitulo", query = "SELECT a FROM Anuncio a WHERE LOWER(a.titulo) LIKE LOWER(:titulo)"),
-	@NamedQuery(name = "Anuncio.buscarPorDescricao", query = "SELECT a FROM Anuncio a WHERE LOWER(a.descricao) LIKE LOWER(:descricao)"),
-})
+		@NamedQuery(name = "Anuncio.buscarPorTitulo", query = "SELECT a FROM Anuncio a WHERE LOWER(a.titulo) LIKE LOWER(:titulo)"),
+		@NamedQuery(name = "Anuncio.buscarPorDescricao", query = "SELECT a FROM Anuncio a WHERE LOWER(a.descricao) LIKE LOWER(:descricao)"), })
 public class Anuncio implements Serializable {
-	
-	private static final long serialVersionUID = 63847683749347364L;
-	
+
+	private static final long serialVersionUID = 638476832749347364L;
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.SEQUENCE)
 	@Column(name = "ID")
@@ -35,23 +42,32 @@ public class Anuncio implements Serializable {
 
 	@Column(name = "TITULO")
 	private String titulo;
-	
+
 	@Column(name = "DESCRICAO")
 	private String descricao;
-	
+
 	@Column(name = "PRECO")
 	private Double preco;
 
+	@Embedded
+	@AttributeOverrides({ @AttributeOverride(name = "estado", column = @Column(name = "ESTADO")),
+			@AttributeOverride(name = "cidade", column = @Column(name = "CIDADE")) })
+	private Localizacao localizacao;
+
 	@Column(name = "DATA_PUCLICACAO")
-	private LocalDateTime dataPublicacao;
-	
+	private Date dataPublicacao;
+
 	@Lob
 	@Column(name = "IMAGEM", columnDefinition = "mediumblob")
 	private byte[] imagem;
-	
+
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "ANUNCIANTE_FK")
 	private Anunciante anunciante;
+
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "anuncio")
+	@Fetch(FetchMode.SUBSELECT)
+	private List<Visualizacao> vizualizacoes;
 
 	public Long getId() {
 		return id;
@@ -85,11 +101,11 @@ public class Anuncio implements Serializable {
 		this.preco = preco;
 	}
 
-	public LocalDateTime getDataPublicacao() {
+	public Date getDataPublicacao() {
 		return dataPublicacao;
 	}
 
-	public void setDataPublicacao(LocalDateTime dataHoraPublicacao) {
+	public void setDataPublicacao(Date dataHoraPublicacao) {
 		this.dataPublicacao = dataHoraPublicacao;
 	}
 
@@ -109,6 +125,22 @@ public class Anuncio implements Serializable {
 		this.imagem = imagem;
 	}
 
+	public List<Visualizacao> getVizualizacoes() {
+		return vizualizacoes;
+	}
+
+	public void setVizualizacoes(List<Visualizacao> vizualizacoes) {
+		this.vizualizacoes = vizualizacoes;
+	}
+
+	public Localizacao getLocalizacao() {
+		return localizacao;
+	}
+
+	public void setLocalizacao(Localizacao localizacao) {
+		this.localizacao = localizacao;
+	}
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -116,10 +148,12 @@ public class Anuncio implements Serializable {
 		result = prime * result + ((anunciante == null) ? 0 : anunciante.hashCode());
 		result = prime * result + ((dataPublicacao == null) ? 0 : dataPublicacao.hashCode());
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
+		result = prime * result + ((localizacao == null) ? 0 : localizacao.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + Arrays.hashCode(imagem);
 		result = prime * result + ((preco == null) ? 0 : preco.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
+		result = prime * result + ((vizualizacoes == null) ? 0 : vizualizacoes.hashCode());
 		return result;
 	}
 
@@ -147,6 +181,8 @@ public class Anuncio implements Serializable {
 				return false;
 		} else if (!descricao.equals(other.descricao))
 			return false;
+		if (localizacao != other.localizacao)
+			return false;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -164,14 +200,20 @@ public class Anuncio implements Serializable {
 				return false;
 		} else if (!titulo.equals(other.titulo))
 			return false;
+		if (vizualizacoes == null) {
+			if (other.vizualizacoes != null)
+				return false;
+		} else if (!vizualizacoes.equals(other.vizualizacoes))
+			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Anuncio [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", preco=" + preco
-				+ ", dataPublicacao=" + dataPublicacao + ", imagem=" + Arrays.toString(imagem) + ", anunciante="
-				+ anunciante + "]";
+				+ ", localizacao=" + localizacao + ", dataPublicacao=" + dataPublicacao
+				+ ", imagem=" + Arrays.toString(imagem) + ", anunciante=" + anunciante + ", vizualizacoes="
+				+ vizualizacoes + "]";
 	}
-	
+
 }

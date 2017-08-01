@@ -6,6 +6,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.model.Conta;
 import br.edu.ifpb.mt.dac.nn.services.ContaService;
 
@@ -24,12 +25,15 @@ public class BuscaBean extends AbstractBean implements Serializable {
 
 	private Conta conta;
 
+	private Anunciante anunciante;
+
 	public void preRenderView() {
 		conta = contaService.buscarPorUsername(getUsernameUsuarioLogado());
 		if (conta == null) {
 			textoBotaoNovo = "Novo";
 			paginaBotaoNovo = "/cadastro_anunciante.xhtml?faces-redirect=true";
 		} else {
+			anunciante = conta.getAnunciante();
 			textoBotaoNovo = "Minha conta";
 			paginaBotaoNovo = "/paginas/anunciante/anunciante.xhtml?faces-redirect=true";
 		}
@@ -57,6 +61,14 @@ public class BuscaBean extends AbstractBean implements Serializable {
 
 	public void setConta(Conta conta) {
 		this.conta = conta;
+	}
+
+	public Anunciante getAnunciante() {
+		return anunciante;
+	}
+
+	public void setAnunciante(Anunciante anunciante) {
+		this.anunciante = anunciante;
 	}
 
 }

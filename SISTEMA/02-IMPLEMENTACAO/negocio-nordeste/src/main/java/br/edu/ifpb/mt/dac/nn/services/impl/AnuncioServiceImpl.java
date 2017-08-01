@@ -28,7 +28,8 @@ public class AnuncioServiceImpl extends GenericServiceImpl<Anuncio, Long> implem
 	@Transactional
 	public void salvar(Anuncio entidade) throws NegocioNordesteException {
 		try {
-			dao.salvar(entidade);
+			AnuncioDAO anuncioDAO = (AnuncioDAO) this.dao;
+			anuncioDAO.salvar(entidade);
 		} catch (PersistenceException pe) {
 			throw new NegocioNordesteException("Ocorreu um erro ao tentar cadastrar o anúncio.");
 		}
@@ -38,7 +39,8 @@ public class AnuncioServiceImpl extends GenericServiceImpl<Anuncio, Long> implem
 	@Transactional
 	public Anuncio atualizar(Anuncio entidade) throws NegocioNordesteException {
 		try {
-			return dao.atualizar(entidade);
+			AnuncioDAO anuncioDAO = (AnuncioDAO) this.dao;
+			return anuncioDAO.atualizar(entidade);
 		} catch (PersistenceException pe) {
 			throw new NegocioNordesteException("Ocorreu um erro ao tentar atualizar o anúncio.");
 		}
@@ -48,7 +50,8 @@ public class AnuncioServiceImpl extends GenericServiceImpl<Anuncio, Long> implem
 	@Transactional
 	public void deletar(Anuncio entidade) throws NegocioNordesteException {
 		try {
-			dao.deletar(entidade);
+			AnuncioDAO anuncioDAO = (AnuncioDAO) this.dao;
+			anuncioDAO.deletar(entidade);
 		} catch (PersistenceException pe) {
 			throw new NegocioNordesteException("Ocorreu um erro ao tentar deletar o anúncio.");
 		}

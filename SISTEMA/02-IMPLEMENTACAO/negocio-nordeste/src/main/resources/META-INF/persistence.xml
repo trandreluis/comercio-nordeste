@@ -12,6 +12,7 @@
 		<class>br.edu.ifpb.mt.dac.nn.model.Anunciante</class>
 		<class>br.edu.ifpb.mt.dac.nn.model.Operador</class>
 		<class>br.edu.ifpb.mt.dac.nn.model.Conta</class>
+		<class>br.edu.ifpb.mt.dac.nn.model.Visualizacao</class>
 
 		<properties>
 
@@ -59,6 +60,7 @@
 		<class>br.edu.ifpb.mt.dac.nn.model.Anunciante</class>
 		<class>br.edu.ifpb.mt.dac.nn.model.Admin</class>
 		<class>br.edu.ifpb.mt.dac.nn.model.Conta</class>
+		<class>br.edu.ifpb.mt.dac.nn.model.Visualizacao</class>
 
 		<properties>
 

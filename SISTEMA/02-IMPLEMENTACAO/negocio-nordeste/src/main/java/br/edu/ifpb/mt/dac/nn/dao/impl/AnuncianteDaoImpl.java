@@ -2,8 +2,6 @@ package br.edu.ifpb.mt.dac.nn.dao.impl;
 
 import java.util.List;
 
-import javax.inject.Inject;
-import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
 import javax.persistence.TypedQuery;
@@ -17,7 +15,7 @@ import br.edu.ifpb.mt.dac.nn.model.Anuncio;
 public class AnuncianteDaoImpl extends GenericDaoImpl<Anunciante, Long> implements AnuncianteDAO {
 
 	private static final long serialVersionUID = 1L;
-	
+
 	@SuppressWarnings("unchecked")
 	@Override
 	public List<Anunciante> buscarPorNome(String nome) {
