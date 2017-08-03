@@ -21,13 +21,14 @@ public class LocalizacaoUtils implements Serializable {
 
 	private static final long serialVersionUID = 4309798536454874L;
 
-	public static List<Cidade> buscarCidadePorCodigoDoEstado(String codigo) {
+	public List<Cidade> buscarCidadesPorCodigoDoEstado(String codigo) {
 
 		Gson gson = new Gson();
 		BufferedReader readerCidades = null;
 
 		try {
-			readerCidades = new BufferedReader(new FileReader("json/cidades-brasil.json"));
+			URL s = getClass().getResource("/json/cidades-brasil.json");
+			readerCidades = new BufferedReader(new FileReader(new File(s.toURI())));
 		} catch (Exception e) {
 			MessageUtils.messageError("Erro ao buscar cidades (JSON)");
 		}
@@ -44,21 +45,14 @@ public class LocalizacaoUtils implements Serializable {
 		return cidadesDoEstado;
 	}
 
-	public static void main(String[] args) {
-
-		LocalizacaoUtils e = new LocalizacaoUtils();
-		System.out.println(e.buscarEstadosDoNordeste());
-
-	}
-
 	public List<Estado> buscarEstadosDoNordeste() {
 
 		Gson gson = new Gson();
 		BufferedReader readerEstados = null;
 
 		try {
-			URL s = getClass().getResource("/json/estados-nordeste.json");
-			readerEstados = new BufferedReader(new FileReader(new File(s.toURI())));
+			URL url = getClass().getResource("/json/estados-nordeste.json");
+			readerEstados = new BufferedReader(new FileReader(new File(url.toURI())));
 		} catch (Exception e) {
 			e.printStackTrace();
 			MessageUtils.messageError("Erro ao buscar estados (JSON)");
@@ -72,6 +66,31 @@ public class LocalizacaoUtils implements Serializable {
 			estados.add(estado);
 		}
 		return estados;
+	}
+
+	public Estado buscarEstadoPorCodigo(String idEstado) {
+
+		Gson gson = new Gson();
+		BufferedReader readerEstados = null;
+
+		try {
+			URL url = getClass().getResource("/json/estados-nordeste.json");
+			readerEstados = new BufferedReader(new FileReader(new File(url.toURI())));
+		} catch (Exception e) {
+			e.printStackTrace();
+			MessageUtils.messageError("Erro ao buscar estados (JSON)");
+		}
+
+		JsonParser parser = new JsonParser();
+		JsonArray obj = parser.parse(readerEstados).getAsJsonArray();
+		List<Estado> estados = new ArrayList<>();
+		for (JsonElement jsonElement : obj) {
+			Estado estado = gson.fromJson(jsonElement, Estado.class);
+			if (estado.getId().equals(idEstado)) {
+				return estado;
+			}
+		}
+		return null;
 	}
 
 }

@@ -1,8 +1,12 @@
 package br.edu.ifpb.mt.dac.nn.model;
 
+import java.io.Serializable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Estado {
+public class Estado implements Serializable {
+
+	private static final long serialVersionUID = -37984257645544778L;
 
 	@SerializedName("ID")
 	private String id;

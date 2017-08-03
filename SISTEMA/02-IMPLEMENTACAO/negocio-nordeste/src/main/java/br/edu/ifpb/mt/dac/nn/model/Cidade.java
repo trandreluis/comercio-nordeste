@@ -1,8 +1,12 @@
 package br.edu.ifpb.mt.dac.nn.model;
 
+import java.io.Serializable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Cidade {
+public class Cidade implements Serializable {
+
+	private static final long serialVersionUID = 4093478932453189L;
 
 	@SerializedName("ID")
 	private String id;

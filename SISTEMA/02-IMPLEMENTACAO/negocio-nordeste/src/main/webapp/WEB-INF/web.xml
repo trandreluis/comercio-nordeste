@@ -30,17 +30,17 @@
 		<param-name>javax.faces.DATETIMECONVERTER_DEFAULT_TIMEZONE_IS_SYSTEM_TIMEZONE</param-name>
 		<param-value>true</param-value>
 	</context-param>
-	
+
 	<context-param>
 		<param-name>javax.faces.FACELETS_SKIP_COMMENTS</param-name>
 		<param-value>true</param-value>
 	</context-param>
-	
+
 	<error-page>
 		<error-code>403</error-code>
 		<location>/paginas/403.xhtml</location>
 	</error-page>
-	
+
 	<login-config>
 		<!-- NONE, BASIC, DIGEST, FORM, or CLIENT-CERT -->
 		<!-- Referência: https://docs.oracle.com/javaee/7/tutorial/security-webtier002.htm#JEETT01227 -->
@@ -51,7 +51,7 @@
 			<form-error-page>/paginas/login_erro.xhtml</form-error-page>
 		</form-login-config>
 	</login-config>
-	
+
 	<security-constraint>
 		<display-name>Páginas do administrador</display-name>
 		<web-resource-collection>
@@ -79,7 +79,7 @@
 			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
 		</user-data-constraint>
 	</security-constraint>
-	
+
 	<!-- Security roles used by this web application -->
 	<security-role>
 		<role-name>ADMIN</role-name>

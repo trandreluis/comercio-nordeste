@@ -21,33 +21,30 @@ public class DaoTest {
 		EntityTransaction tx = null;
 
 		try {
-//			emf = Persistence.createEntityManagerFactory("bdnordesteP");
-//			em = emf.createEntityManager();
-//
-//			Operador operador = new Operador(); 
-//			
-//			Conta conta = new Conta();
-//			conta.setEmail("admin");
-//			conta.setSenha("admin");
-//			conta.setTipo(TipoUsuario.ADMIN);
-//			conta.setUsername("admin");
-//
-//			operador.setConta(conta);
-//
-//			tx = em.getTransaction();
-//			tx.begin();
-//
-//			em.persist(operador);
-//
-//			tx.commit();
+			emf = Persistence.createEntityManagerFactory("bdnordesteP");
+			em = emf.createEntityManager();
+
+			Anunciante anunciante = new Anunciante();
+			Conta conta = new Conta();
+			conta.setEmail("tr.andreluis@gmail.com");
+			conta.setSenha("5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5");
+			conta.setUsername("siqueira");
+			conta.setTipo(TipoUsuario.ANUNCIANTE);
+			anunciante.setConta(conta);
+			anunciante.setDataNascimento(new Date(10, 25, 1996));
+			anunciante.setNome("André");
+			anunciante.setSobrenome("Luís");
+			
+			tx = em.getTransaction();
+			tx.begin();
+
+			em.persist(anunciante);
+
+			tx.commit();
 			
 			emf = Persistence.createEntityManagerFactory("bdnordesteP");
 			em = emf.createEntityManager();
 			
-			Conta conta = new Conta();
-			
-			em.persist(conta);
-
 		} catch (Exception pe) {
 			tx.rollback();
 			em.close();

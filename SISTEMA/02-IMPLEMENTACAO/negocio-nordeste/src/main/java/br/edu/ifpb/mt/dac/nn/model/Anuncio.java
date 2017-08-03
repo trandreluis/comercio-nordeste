@@ -22,6 +22,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
@@ -41,28 +42,34 @@ public class Anuncio implements Serializable {
 	private Long id;
 
 	@Column(name = "TITULO")
+	@NotNull
 	private String titulo;
 
 	@Column(name = "DESCRICAO")
+	@NotNull
 	private String descricao;
 
 	@Column(name = "PRECO")
+	@NotNull
 	private Double preco;
 
 	@Embedded
 	@AttributeOverrides({ @AttributeOverride(name = "estado", column = @Column(name = "ESTADO")),
 			@AttributeOverride(name = "cidade", column = @Column(name = "CIDADE")) })
+	@NotNull
 	private Localizacao localizacao;
 
 	@Column(name = "DATA_PUCLICACAO")
+	@NotNull
 	private Date dataPublicacao;
-
 	@Lob
 	@Column(name = "IMAGEM", columnDefinition = "mediumblob")
+	@NotNull
 	private byte[] imagem;
 
 	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
 	@JoinColumn(name = "ANUNCIANTE_FK")
+	@NotNull
 	private Anunciante anunciante;
 
 	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "anuncio")
