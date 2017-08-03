@@ -37,7 +37,7 @@
 		<!-- Comentado pois a conexão será realizada pelo servidor de aplicação 
 			GlassFish -->
 		<!-- JDBC Driver do MySQL -->
-		<!-- <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> 
+		<!--  <dependency> <groupId>mysql</groupId> <artifactId>mysql-connector-java</artifactId> 
 			<version>6.0.6</version> <scope>provided</scope> </dependency> -->
 
 		<!-- Dependencia do Java EE completo -->

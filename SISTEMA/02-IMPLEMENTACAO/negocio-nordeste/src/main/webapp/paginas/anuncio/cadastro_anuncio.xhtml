@@ -23,7 +23,7 @@
 			class="fa fa-user"></i>Anunciante</a>
 		<li class="active"><a
 			href="#{request.contextPath}/paginas/anuncio/cadastro_anuncio.xhtml"><i
-				class="fa fa-pencil-square-o"></i>Cadastrar Anúncio</a></li>
+				class="fa fa-newspaper-o"></i>Cadastrar Anúncio</a></li>
 	</ui:define>
 
 	<ui:define name="content">
@@ -47,11 +47,11 @@
 						required="true" requiredMessage="Por favor, envie uma imagem!"
 						fileLimitMessage="O limite máximo é de 1 (uma) imagem."
 						invalidFileMessage="Somente são aceitas imgens .jpeg, .jpg e .png."
-						invalidSizeMessage="A imagem excedeu o tamanho de 4 MB"
+						invalidSizeMessage="A imagem excedeu o tamanho de 10 MB"
 						label="Selecionar arquivo" fileLimit="1" uploadLabel="Enviar"
 						cancelLabel="Cancelar" mode="advanced" dragDropSupport="true"
-						sizeLimit="400000" update="nomeImagem"
-						messageTemplate="Envie a imagem do seu anúncio!" previewWidth="70"
+						sizeLimit="10000000" update="nomeImagem"
+						messageTemplate="Tente outra imagem do seu anúncio!" previewWidth="70"
 						allowTypes="/(\.|\/)(jpe?g|png)$/" />
 
 

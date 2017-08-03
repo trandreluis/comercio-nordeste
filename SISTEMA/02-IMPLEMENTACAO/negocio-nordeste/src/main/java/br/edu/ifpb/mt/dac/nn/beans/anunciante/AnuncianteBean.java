@@ -10,6 +10,7 @@ import br.edu.ifpb.mt.dac.nn.beans.AbstractBean;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.model.Conta;
 import br.edu.ifpb.mt.dac.nn.services.ContaService;
+import br.edu.ifpb.mt.dac.nn.util.mensagens.MessageUtils;
 
 @Named
 @ViewScoped
@@ -27,9 +28,13 @@ public class AnuncianteBean extends AbstractBean implements Serializable {
 	public void preRenderView() {
 		try {
 			conta = contaService.buscarPorUsername(getUsernameUsuarioLogado());
+			if(conta == null) {
+				MessageUtils.messageSucess("Conta está sendo nula");
+			}
 			anunciante = conta.getAnunciante();
 		} catch (Exception e) {
 			e.printStackTrace();
+			MessageUtils.messageError("Error no pre-render-view.");
 		}
 	}
 

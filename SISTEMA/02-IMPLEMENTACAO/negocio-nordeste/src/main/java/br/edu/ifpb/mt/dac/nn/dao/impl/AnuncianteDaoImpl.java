@@ -7,8 +7,6 @@ import javax.persistence.Query;
 import javax.persistence.TypedQuery;
 
 import br.edu.ifpb.mt.dac.nn.dao.AnuncianteDAO;
-import br.edu.ifpb.mt.dac.nn.enumerations.NivelAnunciante;
-import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.model.Anuncio;
 
@@ -49,20 +47,6 @@ public class AnuncianteDaoImpl extends GenericDaoImpl<Anunciante, Long> implemen
 			resultado = query.getSingleResult();
 		} catch (PersistenceException pe) {
 			return null;
-		}
-		return resultado;
-	}
-
-	@SuppressWarnings("unchecked")
-	@Override
-	public List<Anunciante> buscarPorNivel(NivelAnunciante nivel) throws NegocioNordesteException {
-		List<Anunciante> resultado = null;
-		try {
-			Query query = entityManager.createNamedQuery("Anunciante.buscarPorNivel");
-			query.setParameter("nivel", "%" + nivel.toString() + "%");
-			resultado = query.getResultList();
-		} catch (PersistenceException pe) {
-			throw new NegocioNordesteException("Erro ao realizar busca por nível: " + pe.getMessage());
 		}
 		return resultado;
 	}

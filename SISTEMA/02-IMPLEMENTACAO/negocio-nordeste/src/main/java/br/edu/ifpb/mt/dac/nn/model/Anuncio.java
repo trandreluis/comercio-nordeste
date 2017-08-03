@@ -67,7 +67,7 @@ public class Anuncio implements Serializable {
 	@NotNull
 	private byte[] imagem;
 
-	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+	@ManyToOne(fetch = FetchType.EAGER, cascade = CascadeType.REFRESH)
 	@JoinColumn(name = "ANUNCIANTE_FK")
 	@NotNull
 	private Anunciante anunciante;

@@ -1,9 +1,13 @@
 package br.edu.ifpb.mt.dac.nn.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Embeddable;
 
 @Embeddable
-public class Localizacao {
+public class Localizacao implements Serializable {
+
+	private static final long serialVersionUID = -71121038044699795L;
 
 	private String estado;
 	private String cidade;

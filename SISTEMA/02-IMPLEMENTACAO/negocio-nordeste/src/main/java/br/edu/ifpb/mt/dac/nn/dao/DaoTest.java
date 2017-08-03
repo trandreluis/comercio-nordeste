@@ -26,9 +26,9 @@ public class DaoTest {
 
 			Anunciante anunciante = new Anunciante();
 			Conta conta = new Conta();
-			conta.setEmail("tr.andreluis@gmail.com");
+			conta.setEmail("mail@gmail.com");
 			conta.setSenha("5994471abb01112afcc18159f6cc74b4f511b99806da59b3caf5a9c173cacfc5");
-			conta.setUsername("siqueira");
+			conta.setUsername("disso1");
 			conta.setTipo(TipoUsuario.ANUNCIANTE);
 			anunciante.setConta(conta);
 			anunciante.setDataNascimento(new Date(10, 25, 1996));
@@ -46,8 +46,9 @@ public class DaoTest {
 			em = emf.createEntityManager();
 			
 		} catch (Exception pe) {
-			tx.rollback();
-			em.close();
+			pe.printStackTrace();
+//			tx.rollback();
+//			em.close();
 		}
 
 	}

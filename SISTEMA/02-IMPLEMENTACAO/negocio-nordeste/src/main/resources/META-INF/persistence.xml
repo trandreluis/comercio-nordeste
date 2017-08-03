@@ -13,6 +13,7 @@
 		<class>br.edu.ifpb.mt.dac.nn.model.Operador</class>
 		<class>br.edu.ifpb.mt.dac.nn.model.Conta</class>
 		<class>br.edu.ifpb.mt.dac.nn.model.Visualizacao</class>
+		<class>br.edu.ifpb.mt.dac.nn.model.SolicitacaoNegocio</class>
 
 		<properties>
 

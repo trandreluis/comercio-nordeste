@@ -6,7 +6,6 @@ import javax.inject.Inject;
 import javax.persistence.PersistenceException;
 
 import br.edu.ifpb.mt.dac.nn.dao.AnuncianteDAO;
-import br.edu.ifpb.mt.dac.nn.enumerations.NivelAnunciante;
 import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.model.Anuncio;
@@ -64,8 +63,8 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 			if (!antigo.getConta().getUsername().equals(entidade.getConta().getUsername())) {
 				for (Anunciante anunciante : anunciantes) {
 					if (anunciante.getConta().getUsername().equals(entidade.getConta().getUsername())) {
-						throw new NegocioNordesteException("Já existe um anunciante com"
-								+ " este username cadastrado.");
+						throw new NegocioNordesteException(
+								"Já existe um anunciante com" + " este username cadastrado.");
 					}
 				}
 			}
@@ -74,8 +73,8 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 			if (!antigo.getConta().getEmail().equals(entidade.getConta().getEmail())) {
 				for (Anunciante anunciante : anunciantes) {
 					if (anunciante.getConta().getEmail().equals(entidade.getConta().getEmail())) {
-						throw new NegocioNordesteException("Já existe um anunciante com"
-								+ " este username cadastrado.");
+						throw new NegocioNordesteException(
+								"Já existe um anunciante com" + " este username cadastrado.");
 					}
 				}
 			}
@@ -117,18 +116,6 @@ public class AnuncianteServiceImpl extends GenericServiceImpl<Anunciante, Long> 
 		} catch (Exception e) {
 			throw new NegocioNordesteException("Ocorreu um erro ao buscar o anunciante pelo username.");
 		}
-	}
-
-	@Override
-	public List<Anunciante> buscarPorNivel(NivelAnunciante nivel) throws NegocioNordesteException {
-		AnuncianteDAO anuncianteDAO = (AnuncianteDAO) this.dao;
-		List<Anunciante> anunciantes = null;
-		try {
-			anunciantes = anuncianteDAO.buscarPorNivel(nivel);
-		} catch (NegocioNordesteException e) {
-			throw new NegocioNordesteException("Já existe um anunciante com este username cadastrado");
-		}
-		return anunciantes;
 	}
 
 	@Override

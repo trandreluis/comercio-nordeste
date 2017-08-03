@@ -48,8 +48,19 @@ public class Anunciante implements Serializable {
 	@Column(name = "DATA_NASCIMENTO", nullable = false)
 	private Date dataNascimento;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "anunciante")
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH }, mappedBy = "anunciante")
 	private List<Anuncio> anuncios;
+
+	@Column(name = "NIVEL", columnDefinition="Decimal(10,2) default '3.00'")
+	private Double nivel;
+	
+	public Double getNivel() {
+		return nivel;
+	}
+
+	public void setNivel(Double nivel) {
+		this.nivel = nivel;
+	}
 
 	public Long getId() {
 		return id;
@@ -151,7 +162,7 @@ public class Anunciante implements Serializable {
 	@Override
 	public String toString() {
 		return "Anunciante [id=" + id + ", conta=" + conta + ", nome=" + nome + ", sobrenome=" + sobrenome
-				+ ", dataNascimento=" + dataNascimento + ", anuncios=" + anuncios + "]";
+				+ ", dataNascimento=" + dataNascimento + ", anuncios=" + anuncios + ", nivel=" + nivel + "]";
 	}
 	
 }

@@ -20,3 +20,17 @@
   border-color: #adadad !important;
   
 }
+
+.btn-update {
+  color: #333 !important;
+  background-color: #338831!important;
+  border-color: #ccc !important;
+}
+
+.btn-update:hover {
+  border-color: #adadad !important;
+}
+
+.ui-datagrid-content {
+	border: none;
+}

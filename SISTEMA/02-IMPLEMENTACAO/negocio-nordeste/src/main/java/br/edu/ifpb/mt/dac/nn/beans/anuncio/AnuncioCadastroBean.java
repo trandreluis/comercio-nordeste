@@ -19,7 +19,9 @@ import br.edu.ifpb.mt.dac.nn.model.Conta;
 import br.edu.ifpb.mt.dac.nn.model.Estado;
 import br.edu.ifpb.mt.dac.nn.model.Localizacao;
 import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
+import br.edu.ifpb.mt.dac.nn.services.AnuncioService;
 import br.edu.ifpb.mt.dac.nn.services.ContaService;
+import br.edu.ifpb.mt.dac.nn.util.jsf.JSFUtils;
 import br.edu.ifpb.mt.dac.nn.util.json.LocalizacaoUtils;
 import br.edu.ifpb.mt.dac.nn.util.mensagens.MessageUtils;
 
@@ -31,7 +33,7 @@ public class AnuncioCadastroBean extends AbstractBean implements Serializable {
 	@Inject
 	private ContaService contaService;
 	@Inject
-	private AnuncianteService anuncianteService;
+	private AnuncioService anuncioService;
 	private Conta conta;
 	private Anunciante anunciante;
 	private Anuncio anuncio;
@@ -58,34 +60,39 @@ public class AnuncioCadastroBean extends AbstractBean implements Serializable {
 
 	public void cadastrar() {
 		try {
-			LocalizacaoUtils util = new LocalizacaoUtils();			
+			LocalizacaoUtils util = new LocalizacaoUtils();
 			Localizacao localizacao = new Localizacao();
 			for (Cidade cidade : cidadesDoEstado) {
-				if(cidade.getId().equals(idCidadeSelecionada)) {
+				if (cidade.getId().equals(idCidadeSelecionada)) {
 					Estado estado = util.buscarEstadoPorCodigo(idEstadoSelecionado);
 					localizacao.setCidade(cidade.getNome());
 					localizacao.setEstado(estado.getNome());
 				}
 			}
-			
+
 			anuncio.setDataPublicacao(new Date());
 			anuncio.setLocalizacao(localizacao);
+
 			anuncio.setImagem(imagem.getContents());
-			
-			List<Anuncio> anuncios = anunciante.getAnuncios();
-			
+
 			anuncio.setAnunciante(anunciante);
-			anuncios.add(anuncio);
+
+			anuncioService.salvar(anuncio);
+
+			if(anuncio.getId() != null) {
+				MessageUtils.messageSucess("Anuncio cadastrado.");
+			} else {
+				MessageUtils.messageError("Erro ao cadatsrar anúncio.");
+			}
 			
-			anunciante.setAnuncios(anuncios);
-			
-			anuncianteService.atualizar(anunciante);
-			
-			MessageUtils.messageSucess("Anuncio cadastrado.");
-			
-		} catch(Exception e) {
-			e.printStackTrace();
-			MessageUtils.messageError("Erro ao cadatsrar anúncio.");
+			JSFUtils.rederTo("anuncios.xhtml");
+
+		} catch (Exception e) {
+			if (imagem == null) {
+				MessageUtils.messageError("Por favor, selecione uma imagem para o anúncio.");
+			} else {
+				MessageUtils.messageError("Erro ao cadatsrar anúncio.");
+			}
 		}
 	}
 
@@ -108,7 +115,7 @@ public class AnuncioCadastroBean extends AbstractBean implements Serializable {
 			imagem = eventoArquivo.getFile();
 			anuncio.setImagem(imagem.getContents());
 			MessageUtils.messageSucess("Imagem enviada.");
-		} catch(Exception e) {
+		} catch (Exception e) {
 			MessageUtils.messageError("Imagem inválida.");
 		}
 	}
@@ -188,5 +195,5 @@ public class AnuncioCadastroBean extends AbstractBean implements Serializable {
 	public void setImagem(UploadedFile imagem) {
 		this.imagem = imagem;
 	}
-	
+
 }

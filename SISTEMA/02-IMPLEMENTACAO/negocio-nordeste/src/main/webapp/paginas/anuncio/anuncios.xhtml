@@ -9,94 +9,68 @@
 	template="/WEB-INF/templates/anunciante/_template_admin.xhtml">
 
 	<f:metadata>
-		<f:event listener="#{anuncioCadastroBean.preRenderView}"
-			type="preRenderView" />
+		<f:event listener="#{anuncioBean.preRenderView}" type="preRenderView" />
 	</f:metadata>
 
-	<ui:define name="title">Cadastrar Anúncio</ui:define>
-	<ui:define name="content-header">Anunciante <small>Cadastre
-			novos anúncios de produtos ou serviços</small>
+	<ui:define name="title">Gerenciar Anúncios</ui:define>
+	<ui:define name="content-header">Anunciante <small>Visualize,
+			edite ou exclua anúncios</small>
 	</ui:define>
 	<ui:define name="breadcrumb-active">
 		<a href="#{request.contextPath}/paginas/anunciante/anunciante.xhtml"><i
 			class="fa fa-user"></i>Anunciante</a>
 		<li class="active"><a
-			href="#{request.contextPath}/paginas/anuncio/cadastro_anuncio.xhtml"><i
-				class="fa fa-pencil-square-o"></i>Cadastrar Anúncio</a></li>
+			href="#{request.contextPath}/paginas/anuncio/anuncios.xhtml"><i
+				class="fa fa-eye"></i>Gerenciar Anúncios</a></li>
 	</ui:define>
 
 	<ui:define name="content">
 
-		<h:form id="formCadastroAnuncio">
+		<h:form id="formAnuncios">
 
-			<div id="divPrincipal" align="center" class="ui-fluid">
+			<div align="center">
 
-				<p:graphicImage library="images" name="anuncio.png" />
-
-				<br /> <br />
-
-				<p:panelGrid id="panelPrincipal" columns="1"
-					styleClass="ui-panelgrid-blank">
-
-					<h:outputLabel for="imagem" value="Imagem" />
-					<p:outputLabel id="nomeImagem"
-						value="#{anuncioCadastroBean.imagem.getFileName()}" />
-					<p:fileUpload id="imagem" auto="true"
-						fileUploadListener="#{anuncioCadastroBean.uploadImagem}"
-						required="true" requiredMessage="Por favor, envie uma imagem!"
-						fileLimitMessage="O limite máximo é de 1 (uma) imagem."
-						invalidFileMessage="Somente são aceitas imgens .jpeg, .jpg e .png."
-						invalidSizeMessage="A imagem excedeu o tamanho de 4 MB"
-						label="Selecionar arquivo" fileLimit="1" uploadLabel="Enviar"
-						cancelLabel="Cancelar" mode="advanced" dragDropSupport="true"
-						sizeLimit="400000" update="nomeImagem"
-						messageTemplate="Envie a imagem do seu anúncio!" previewWidth="70"
-						allowTypes="/(\.|\/)(jpe?g|png)$/" />
-
-
-					<h:outputLabel for="titulo" value="Título" />
-					<p:inputText id="titulo" required="true"
-						requiredMessage="Por favor, informe o titulo!"
-						value="#{anuncioCadastroBean.anuncio.titulo}" />
-
-					<h:outputLabel for="descricao" value="Descrição" />
-					<p:inputTextarea id="descricao" required="true"
-						requiredMessage="Por favor, informe a descrição!"
-						value="#{anuncioCadastroBean.anuncio.descricao}" />
-
-					<h:outputLabel for="preco" value="Preço (R$)" />
-					<p:inputNumber id="preco" required="true"
-						requiredMessage="Por favor, informe o preço!"
-						value="#{anuncioCadastroBean.anuncio.preco}" emptyValue="0,00" />
-
-					<h:outputLabel for="estados" value="Estado" />
-					<p:selectOneMenu id="estados"
-						value="#{anuncioCadastroBean.idEstadoSelecionado}"
-						effect="explode" filter="true" filterMatchMode="startsWith">
-						<p:ajax update="cidades"
-							listener="#{anuncioCadastroBean.carregarCidadesDoEstado}" />
-						<f:selectItems value="#{anuncioCadastroBean.estadosNordeste}"
-							var="estado" itemLabel="#{estado.nome}" itemValue="#{estado.id}" />
-					</p:selectOneMenu>
-
-					<h:outputLabel for="cidades" value="Cidade" />
-					<p:selectOneMenu id="cidades"
-						value="#{anuncioCadastroBean.idCidadeSelecionada}"
-						effect="explode" filter="true" filterMatchMode="startsWith">
-						<f:selectItems value="#{anuncioCadastroBean.cidadesDoEstado}"
-							var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade.id}" />
-					</p:selectOneMenu>
-
-					<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-						<p:commandButton styleClass="btn btn-primary" value="Cadastrar"
-							action="#{anuncioCadastroBean.cadastrar}" ajax="false" />
-						<p:button styleClass="btn btn-default" value="Cancelar"
-							href="busca.xhtml" />
-					</p:panelGrid>
-
-				</p:panelGrid>
+				<p:dataGrid value="#{anuncioBean.anunciante.anuncios}" var="anuncio"
+					columns="2" layout="grid"
+					emptyMessage="Você não tem anúncios cadastrados, 
+				cadastre um e poderá vê-lo aqui.">
+					<p:panel header="#{anuncio.titulo}">
+						<h:panelGrid columns="1" styleClass="ui-panelgrid-blank">
+							<div align="center">
+								<img style="width: 100%; max-width: 100px"
+									src="data:image/png;base64,#{imagemBean.getImageContent(anuncio.imagem)}" />
+								<br />
+								<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+									<p:outputLabel value="Preço: R$ " />
+									<h:outputText value="#{anuncio.preco}" />
+									<p:outputLabel value="Descrição: " />
+									<h:outputText value="#{anuncio.descricao}" />
+								</p:panelGrid>
+								<p:panelGrid columns="3" styleClass="ui-panelgrid-blank">
+									<p:commandButton styleClass="btn btn-primary"
+										value="Visualizar" />
+									<p:commandButton styleClass="btn btn-update" value="Editar" />
+									<p:commandButton styleClass="btn btn-default" value="Excluir"
+									action="#{anuncioBean.excluirAnuncio(anuncio)}" update="@form">
+										<p:confirm
+											header="Tem certeza que deseja este anúncio?"
+											message="Esta ação não poderá ser desfeita."
+											icon="fa fa-exclamation-triangle" />
+									</p:commandButton>
+								</p:panelGrid>
+							</div>
+						</h:panelGrid>
+					</p:panel>
+				</p:dataGrid>
 
 			</div>
+			
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Confirmar" type="button"
+					styleClass="btn btn-primary ui-confirmdialog-yes" icon="ui-icon-check" />
+				<p:commandButton value="Cancelar" type="button"
+					styleClass="btn btn-default ui-confirmdialog-no" icon="ui-icon-close" />
+			</p:confirmDialog>
 
 		</h:form>
 
@@ -114,8 +88,7 @@
 					<p style="font-size: 17px !important;"></p>
 					<p>
 						Usuário:
-						<p:outputLabel
-							value="#{anuncioCadastroBean.anunciante.conta.username}" />
+						<p:outputLabel value="#{anuncioBean.anunciante.conta.username}" />
 					</p>
 				</li>
 
