@@ -20,11 +20,11 @@
 
 				<p:graphicImage library="images" name="1p.png" />
 				<br />
-				<p:inputText size="80"
+				<p:inputText size="80" value="#{buscaBean.stringDeBusca}"
 					placeholder="Ex: bicicleta em monteiro, encanador em caruaru, smartphone em campina grande" />
 				<br /> <br />
 				<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-					<p:commandButton styleClass="btn btn-primary" value="Buscar" />
+					<p:commandButton styleClass="btn btn-primary" action="#{buscaBean.buscar}" value="Buscar" ajax="false" />
 					<p:commandButton styleClass="btn btn-default" value="Limpar" />
 				</p:panelGrid>
 			</div>
@@ -44,9 +44,7 @@
 				<li class="user-header">
 					<p style="font-size: 17px !important;"></p>
 					<p>
-						#{buscaBean.isLogged() ? "Usuário: " : "Realize login"}
-						<p:outputLabel value="#{loggedBean.getUsernameUsuarioLogado()}"
-							rendered="#{buscaBean.isLogged()}" />
+						<p:outputLabel value="#{loggedBean.getUsernameUsuarioLogado()}" />
 					</p>
 				</li>
 

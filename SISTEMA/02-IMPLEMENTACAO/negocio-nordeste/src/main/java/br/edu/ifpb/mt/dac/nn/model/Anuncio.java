@@ -152,7 +152,6 @@ public class Anuncio implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((anunciante == null) ? 0 : anunciante.hashCode());
 		result = prime * result + ((dataPublicacao == null) ? 0 : dataPublicacao.hashCode());
 		result = prime * result + ((descricao == null) ? 0 : descricao.hashCode());
 		result = prime * result + ((localizacao == null) ? 0 : localizacao.hashCode());
@@ -160,7 +159,6 @@ public class Anuncio implements Serializable {
 		result = prime * result + Arrays.hashCode(imagem);
 		result = prime * result + ((preco == null) ? 0 : preco.hashCode());
 		result = prime * result + ((titulo == null) ? 0 : titulo.hashCode());
-		result = prime * result + ((vizualizacoes == null) ? 0 : vizualizacoes.hashCode());
 		return result;
 	}
 
@@ -173,11 +171,6 @@ public class Anuncio implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Anuncio other = (Anuncio) obj;
-		if (anunciante == null) {
-			if (other.anunciante != null)
-				return false;
-		} else if (!anunciante.equals(other.anunciante))
-			return false;
 		if (dataPublicacao == null) {
 			if (other.dataPublicacao != null)
 				return false;
@@ -207,20 +200,14 @@ public class Anuncio implements Serializable {
 				return false;
 		} else if (!titulo.equals(other.titulo))
 			return false;
-		if (vizualizacoes == null) {
-			if (other.vizualizacoes != null)
-				return false;
-		} else if (!vizualizacoes.equals(other.vizualizacoes))
-			return false;
 		return true;
 	}
 
 	@Override
 	public String toString() {
 		return "Anuncio [id=" + id + ", titulo=" + titulo + ", descricao=" + descricao + ", preco=" + preco
-				+ ", localizacao=" + localizacao + ", dataPublicacao=" + dataPublicacao
-				+ ", imagem=" + Arrays.toString(imagem) + ", anunciante=" + anunciante + ", vizualizacoes="
-				+ vizualizacoes + "]";
+				+ ", localizacao=" + localizacao + ", dataPublicacao=" + dataPublicacao + ", imagem="
+				+ Arrays.toString(imagem) + "]";
 	}
 
 }

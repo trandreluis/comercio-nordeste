@@ -18,7 +18,6 @@ import br.edu.ifpb.mt.dac.nn.model.Cidade;
 import br.edu.ifpb.mt.dac.nn.model.Conta;
 import br.edu.ifpb.mt.dac.nn.model.Estado;
 import br.edu.ifpb.mt.dac.nn.model.Localizacao;
-import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
 import br.edu.ifpb.mt.dac.nn.services.AnuncioService;
 import br.edu.ifpb.mt.dac.nn.services.ContaService;
 import br.edu.ifpb.mt.dac.nn.util.jsf.JSFUtils;
@@ -79,12 +78,12 @@ public class AnuncioCadastroBean extends AbstractBean implements Serializable {
 
 			anuncioService.salvar(anuncio);
 
-			if(anuncio.getId() != null) {
+			if (anuncio.getId() != null) {
 				MessageUtils.messageSucess("Anuncio cadastrado.");
 			} else {
 				MessageUtils.messageError("Erro ao cadatsrar anúncio.");
 			}
-			
+
 			JSFUtils.rederTo("anuncios.xhtml");
 
 		} catch (Exception e) {

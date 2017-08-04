@@ -34,7 +34,7 @@ public class AnuncioDaoImpl extends GenericDaoImpl<Anuncio, Long> implements Anu
 		List<Anuncio> resultado = null;
 		try {
 			Query query = entityManager.createNamedQuery("Anuncio.buscarPorDescricao");
-			query.setParameter("titulo", "%" + descricao + "%");
+			query.setParameter("descricao", "%" + descricao + "%");
 			resultado = query.getResultList();
 		} catch (PersistenceException pe) {
 			throw new NegocioNordesteException("Erro ao realizar busca pela descrição: " + pe.getMessage());

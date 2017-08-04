@@ -19,7 +19,7 @@ public class JSFUtils implements Serializable {
 	            throw new FacesException(ex);
 	        }
 	}
-
+	
 	public static void setParam(String tag, Object obj) {
 		FacesContext.getCurrentInstance().getExternalContext().getApplicationMap().put(tag, obj);
 	}

@@ -111,7 +111,6 @@ public class Conta implements Serializable {
 		final int prime = 31;
 		int result = 1;
 		result = prime * result + ((admin == null) ? 0 : admin.hashCode());
-		result = prime * result + ((anunciante == null) ? 0 : anunciante.hashCode());
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((senha == null) ? 0 : senha.hashCode());
@@ -129,16 +128,6 @@ public class Conta implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Conta other = (Conta) obj;
-		if (admin == null) {
-			if (other.admin != null)
-				return false;
-		} else if (!admin.equals(other.admin))
-			return false;
-		if (anunciante == null) {
-			if (other.anunciante != null)
-				return false;
-		} else if (!anunciante.equals(other.anunciante))
-			return false;
 		if (email == null) {
 			if (other.email != null)
 				return false;
@@ -167,7 +156,7 @@ public class Conta implements Serializable {
 	@Override
 	public String toString() {
 		return "Conta [id=" + id + ", tipo=" + tipo + ", username=" + username + ", senha=" + senha + ", email=" + email
-				+ ", anunciante=" + anunciante + ", admin=" + admin + "]";
+				+ "]";
 	}
 
 }

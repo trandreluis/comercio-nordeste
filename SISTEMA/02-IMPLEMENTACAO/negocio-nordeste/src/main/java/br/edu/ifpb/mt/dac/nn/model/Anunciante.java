@@ -114,7 +114,6 @@ public class Anunciante implements Serializable {
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((anuncios == null) ? 0 : anuncios.hashCode());
 		result = prime * result + ((dataNascimento == null) ? 0 : dataNascimento.hashCode());
 		result = prime * result + ((id == null) ? 0 : id.hashCode());
 		result = prime * result + ((nome == null) ? 0 : nome.hashCode());
@@ -131,11 +130,6 @@ public class Anunciante implements Serializable {
 		if (getClass() != obj.getClass())
 			return false;
 		Anunciante other = (Anunciante) obj;
-		if (anuncios == null) {
-			if (other.anuncios != null)
-				return false;
-		} else if (!anuncios.equals(other.anuncios))
-			return false;
 		if (dataNascimento == null) {
 			if (other.dataNascimento != null)
 				return false;
@@ -161,8 +155,8 @@ public class Anunciante implements Serializable {
 
 	@Override
 	public String toString() {
-		return "Anunciante [id=" + id + ", conta=" + conta + ", nome=" + nome + ", sobrenome=" + sobrenome
-				+ ", dataNascimento=" + dataNascimento + ", anuncios=" + anuncios + ", nivel=" + nivel + "]";
+		return "Anunciante [id=" + id + ", nome=" + nome + ", sobrenome=" + sobrenome
+				+ ", dataNascimento=" + dataNascimento + " nivel=" + nivel + "]";
 	}
 	
 }
