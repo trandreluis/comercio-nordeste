@@ -3,22 +3,24 @@ package br.edu.ifpb.mt.dac.nn.beans;
 import java.io.Serializable;
 import java.util.List;
 
-import javax.faces.view.ViewScoped;
+import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.model.Anuncio;
 import br.edu.ifpb.mt.dac.nn.model.Cidade;
 import br.edu.ifpb.mt.dac.nn.model.Conta;
 import br.edu.ifpb.mt.dac.nn.model.Estado;
+import br.edu.ifpb.mt.dac.nn.services.AnuncioService;
 import br.edu.ifpb.mt.dac.nn.services.ContaService;
 import br.edu.ifpb.mt.dac.nn.util.jsf.JSFUtils;
-import br.edu.ifpb.mt.dac.nn.util.json.LocalizacaoUtils;
+import br.edu.ifpb.mt.dac.nn.util.mensagens.MessageUtils;
 
 @Named
-@ViewScoped
-public class BuscaBean extends AbstractBean implements Serializable {
+@ApplicationScoped
+public class ResultadoBuscaBean extends AbstractBean implements Serializable {
 
 	private static final long serialVersionUID = 587624597454565L;
 
@@ -27,6 +29,8 @@ public class BuscaBean extends AbstractBean implements Serializable {
 	private String stringDeBusca;
 	@Inject
 	private ContaService contaService;
+	@Inject
+	private AnuncioService anuncioService;
 	private Conta conta;
 	private Anunciante anunciante;
 	private List<Estado> estadosNordeste;
@@ -35,11 +39,19 @@ public class BuscaBean extends AbstractBean implements Serializable {
 	private String idCidadeSelecionada;
 	private Cidade cidadeSelecionada;
 	private Estado estadoSelecionado;
-	private boolean buscaOtimizada;
+	private List<Anuncio> resultadoBusca;
 
 	public void preRenderView() {
 		conta = contaService.buscarPorUsername(getUsernameUsuarioLogado());
-		carregarEstadosECidades();
+		MessageUtils.messageSucess("String de busca: " + stringDeBusca);
+		
+		try {
+			resultadoBusca = anuncioService.buscaPorTag(stringDeBusca);
+		} catch (NegocioNordesteException e) {
+			MessageUtils.messageError("Houve um erro ao relizar a busca no banco.");
+			e.printStackTrace();
+		}
+		
 		if (conta == null) {
 			textoBotaoNovo = "Novo";
 			paginaBotaoNovo = "/cadastro_anunciante.xhtml?faces-redirect=true";
@@ -50,30 +62,10 @@ public class BuscaBean extends AbstractBean implements Serializable {
 		}
 	}
 
-	public void buscar() {
-		JSFUtils.rederTo("resultado_busca.xhtml");
-	}
-
 	public void visualizarAnuncio(Anuncio anuncio) {
 		if (anuncio != null) {
 			JSFUtils.setParam("anuncio", anuncio);
 			JSFUtils.rederTo("/anuncio/visualizar_anuncio.xhtml");
-		}
-	}
-
-	public void carregarCidadesDoEstado() {
-		LocalizacaoUtils localizacao = new LocalizacaoUtils();
-		estadoSelecionado = localizacao.buscarEstadoPorCodigo(idEstadoSelecionado);
-		cidadesDoEstado = localizacao.buscarCidadesPorCodigoDoEstado(estadoSelecionado.getId());
-	}
-
-	public void carregarEstadosECidades() {
-		LocalizacaoUtils localizacao = new LocalizacaoUtils();
-		estadosNordeste = localizacao.buscarEstadosDoNordeste();
-		if (idEstadoSelecionado == null) {
-			cidadesDoEstado = localizacao.buscarCidadesPorCodigoDoEstado("2");
-		} else {
-			cidadesDoEstado = localizacao.buscarCidadesPorCodigoDoEstado(idEstadoSelecionado);
 		}
 	}
 
@@ -157,20 +149,20 @@ public class BuscaBean extends AbstractBean implements Serializable {
 		this.anunciante = anunciante;
 	}
 
+	public List<Anuncio> getResultadoBusca() {
+		return resultadoBusca;
+	}
+
+	public void setResultadoBusca(List<Anuncio> resultadoBusca) {
+		this.resultadoBusca = resultadoBusca;
+	}
+
 	public String getStringDeBusca() {
 		return stringDeBusca;
 	}
 
 	public void setStringDeBusca(String stringDeBusca) {
 		this.stringDeBusca = stringDeBusca;
-	}
-
-	public boolean isBuscaOtimizada() {
-		return buscaOtimizada;
-	}
-
-	public void setBuscaOtimizada(boolean buscaOtimizada) {
-		this.buscaOtimizada = buscaOtimizada;
 	}
 
 }

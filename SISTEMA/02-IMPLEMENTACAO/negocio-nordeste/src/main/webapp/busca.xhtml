@@ -20,14 +20,49 @@
 
 				<p:graphicImage library="images" name="1p.png" />
 				<br />
-				<p:inputText size="80" value="#{buscaBean.stringDeBusca}"
+				<p:inputText id="busca" size="80" required="true" value="#{resultadoBuscaBean.stringDeBusca}"
 					placeholder="Ex: bicicleta em monteiro, encanador em caruaru, smartphone em campina grande" />
 				<br /> <br />
 				<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
-					<p:commandButton styleClass="btn btn-primary" action="#{buscaBean.buscar}" value="Buscar" ajax="false" />
-					<p:commandButton styleClass="btn btn-default" value="Limpar" />
+					<p:commandButton styleClass="btn btn-primary"
+						action="#{buscaBean.buscar}" value="Busca normal" ajax="false" icon="fa fa-bullhorn" />
+					<p:commandButton value="Busca otimizada"
+					styleClass="btn btn-default" type="button" icon="fa fa-bar-chart"
+					onclick="PF('dialogLocalizacao').show();" />
 				</p:panelGrid>
+
 			</div>
+
+			<p:dialog header="Informe a localização que deseja utilizar"
+				widgetVar="dialogLocalizacao" showEffect="explode" hideEffect="fold"
+				modal="true" resizable="false" responsive="true">
+
+				<p:panelGrid id="panelLocalizacao" columns="2"
+					styleClass="ui-panelgrid-blank">
+
+					<h:outputLabel for="estados" value="Estado" />
+					<p:selectOneMenu id="estados"
+						value="#{buscaBean.idEstadoSelecionado}" effect="explode"
+						filter="true" filterMatchMode="startsWith">
+						<p:ajax update="cidades"
+							listener="#{buscaBean.carregarCidadesDoEstado}" />
+						<f:selectItems value="#{buscaBean.estadosNordeste}" var="estado"
+							itemLabel="#{estado.nome}" itemValue="#{estado.id}" />
+					</p:selectOneMenu>
+
+					<h:outputLabel for="cidades" value="Cidade" />
+					<p:selectOneMenu id="cidades"
+						value="#{buscaBean.idCidadeSelecionada}" effect="explode"
+						filter="true" filterMatchMode="startsWith">
+						<f:selectItems value="#{buscaBean.cidadesDoEstado}" var="cidade"
+							itemLabel="#{cidade.nome}" itemValue="#{cidade.id}" />
+					</p:selectOneMenu>
+				</p:panelGrid>
+				<div align="center" class="ui-fluid">
+					<p:commandButton value="Utilizar" styleClass="btn btn-primary"
+						type="button" onclick="PF('dialogLocalizacao').hide();" />
+				</div>
+			</p:dialog>
 
 		</h:body>
 
@@ -50,9 +85,8 @@
 
 				<li class="user-footer">
 					<div class="pull-left">
-						<p:commandButton value="#{buscaBean.textoBotaoNovo}"
-							styleClass="btnn btnn-primary" action="#{buscaBean.novo}"
-							ajax="false" />
+						<p:button value="#{buscaBean.textoBotaoNovo}"
+							styleClass="btnn btnn-primary" outcome="#{buscaBean.novo()}" />
 					</div>
 					<div class="pull-right">
 						<p:commandButton value="Sair" rendered="#{buscaBean.isLogged()}"

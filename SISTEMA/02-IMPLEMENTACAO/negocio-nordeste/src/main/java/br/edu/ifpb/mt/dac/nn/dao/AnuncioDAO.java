@@ -11,6 +11,8 @@ public interface AnuncioDAO extends GenericDAO<Anuncio, Long> {
 	List<Anuncio> buscarPorTitulo(String titulo) throws NegocioNordesteException;
 
 	List<Anuncio> buscarPorDescricao(String descricao) throws NegocioNordesteException;
+	
+	List<Anuncio> buscaPorTag(String stringDeBusca) throws NegocioNordesteException;
 
 	List<Anuncio> buscarPorPrecoMaximo(Double precoMaximo);
 

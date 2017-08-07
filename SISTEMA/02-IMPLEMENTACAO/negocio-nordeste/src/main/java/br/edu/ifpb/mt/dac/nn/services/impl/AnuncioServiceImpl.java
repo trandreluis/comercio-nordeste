@@ -79,6 +79,17 @@ public class AnuncioServiceImpl extends GenericServiceImpl<Anuncio, Long> implem
 			throw new NegocioNordesteException("Ocorreu um erro ao tentar buscar o anúncio pela descrição.");
 		}
 	}
+	
+	@Override
+	public List<Anuncio> buscaPorTag(String stringDeBusca) throws NegocioNordesteException {
+		AnuncioDAO anuncioDAO = (AnuncioDAO) this.dao;
+
+		try {
+			return anuncioDAO.buscarPorDescricao(stringDeBusca);
+		} catch (PersistenceException pe) {
+			throw new NegocioNordesteException("Ocorreu um erro ao tentar buscar o anúncio pela tag.");
+		}
+	}
 
 	@Override
 	public List<Anuncio> buscarPorPrecoMaximo(Double precoMaximo) throws NegocioNordesteException {

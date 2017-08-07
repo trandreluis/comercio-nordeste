@@ -42,6 +42,19 @@ public class AnuncioDaoImpl extends GenericDaoImpl<Anuncio, Long> implements Anu
 		return resultado;
 	}
 
+	@Override
+	public List<Anuncio> buscaPorTag(String stringDeBusca) throws NegocioNordesteException {
+		List<Anuncio> resultado = null;
+		try {
+			Query query = entityManager.createNamedQuery("Anuncio.buscaPorTag");
+			query.setParameter("stringDeBusca", "%" + stringDeBusca + "%");
+			resultado = query.getResultList();
+		} catch (PersistenceException pe) {
+			throw new NegocioNordesteException("Erro ao realizar busca por tag: " + pe.getMessage());
+		}
+		return resultado;
+	}
+	
 	/*
 	 * Falta implementar
 	 */

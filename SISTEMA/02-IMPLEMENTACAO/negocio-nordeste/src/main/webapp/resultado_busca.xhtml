@@ -9,11 +9,11 @@
 	template="/WEB-INF/templates/_template.xhtml">
 
 	<f:metadata>
-		<f:event listener="#{buscaBean.preRenderView}" type="preRenderView" />
+		<f:event listener="#{resultadoBuscaBean.preRenderView}" type="preRenderView" />
 	</f:metadata>
 
 	<ui:define name="title">Reultado da busca</ui:define>
-	<ui:define name="content-header">Resultados <small>Visualize,
+	<ui:define name="content-header">Resultados <small>Visualize
 			os melhores resultados para sua busca na região</small>
 	</ui:define>
 
@@ -24,14 +24,13 @@
 			<div align="center">
 
 				<p:dataGrid id="dataAnuncios"
-					value="#{buscaBean.resultadoBusca}" var="anuncio"
+					value="#{resultadoBuscaBean.resultadoBusca}" var="anuncio"
 					columns="2" layout="grid"
-					emptyMessage="Você não tem anúncios cadastrados, 
-				cadastre um e poderá vê-lo aqui.">
+					emptyMessage="Sua busca não retornou nenhum resultado. Tente utilizar palavra-chave, como: celular, eletricista ou o nome do produto + cidade.">
 					<p:panel header="#{anuncio.titulo}">
 						<h:panelGrid columns="1" styleClass="ui-panelgrid-blank">
 							<div align="center">
-								<img style="width: 100%; max-width: 100px"
+								<img style="width: 100%; max-width: 200px"
 									src="data:image/png;base64,#{imagemBean.getImageContent(anuncio.imagem)}" />
 								<br />
 								<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
@@ -39,11 +38,15 @@
 									<h:outputText value="#{anuncio.preco}" />
 									<p:outputLabel value="Descrição: " />
 									<h:outputText value="#{anuncio.descricao}" />
+									<p:outputLabel value="Cidade: " />
+									<h:outputText value="#{anuncio.localizacao.cidade}" />
+									<p:outputLabel value="Estado: " />
+									<h:outputText value="#{anuncio.localizacao.estado}" />
 								</p:panelGrid>
 								<p:panelGrid columns="3" styleClass="ui-panelgrid-blank">
 									<p:commandButton styleClass="btn btn-primary"
 										value="Visualizar"
-										action="#{buscaBean.visualizarAnuncio(anuncio)}" />
+										action="#{resultadoBuscaBean.visualizarAnuncio(anuncio)}" />
 									<p:commandButton styleClass="btn btn-update" value="Editar" />
 								</p:panelGrid>
 							</div>
@@ -77,7 +80,7 @@
 				<li class="user-header">
 					<p style="font-size: 17px !important;"></p>
 					<p>
-						<p:outputLabel value="#{buscaBean.usernameUsuarioLogado}" />
+						<p:outputLabel value="#{resultadoBuscaBean.usernameUsuarioLogado}" />
 					</p>
 				</li>
 

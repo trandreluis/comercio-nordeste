@@ -30,8 +30,14 @@ import org.hibernate.annotations.FetchMode;
 @Entity
 @Table(name = "ANUNCIO")
 @NamedQueries({
-		@NamedQuery(name = "Anuncio.buscarPorTitulo", query = "SELECT a FROM Anuncio a WHERE LOWER(a.titulo) LIKE LOWER(:titulo)"),
-		@NamedQuery(name = "Anuncio.buscarPorDescricao", query = "SELECT a FROM Anuncio a WHERE LOWER(a.descricao) LIKE LOWER(:descricao)"), })
+		@NamedQuery(name = "Anuncio.buscarPorTitulo", query = "SELECT a FROM Anuncio a WHERE LOWER(a.titulo)"
+				+ " LIKE LOWER(:titulo)"),
+		@NamedQuery(name = "Anuncio.buscarPorDescricao", query = "SELECT a FROM Anuncio a WHERE LOWER(a.descricao)"
+				+ " LIKE LOWER(:descricao)"),
+		@NamedQuery(name = "Anuncio.buscaPorTag", query = "SELECT a FROM Anuncio a WHERE LOWER(a.titulo) "
+				+ "LIKE LOWER(:stringDeBusca) OR LOWER(a.descricao) LIKE LOWER(:stringDeBusca) OR LOWER(a.localizacao.cidade) "
+				+ "LIKE LOWER(:stringDeBusca) OR LOWER(a.localizacao.estado) LIKE LOWER(:stringDeBusca)") })
+
 public class Anuncio implements Serializable {
 
 	private static final long serialVersionUID = 638476832749347364L;

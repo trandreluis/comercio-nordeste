@@ -1,11 +1,9 @@
 package br.edu.ifpb.mt.dac.nn.converters;
 
 import javax.enterprise.context.RequestScoped;
-import javax.faces.application.FacesMessage;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
 import javax.faces.convert.Converter;
-import javax.faces.convert.ConverterException;
 import javax.faces.convert.FacesConverter;
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -15,31 +13,24 @@ import br.edu.ifpb.mt.dac.nn.services.AnuncianteService;
 
 @Named
 @RequestScoped
-@FacesConverter(forClass=Anunciante.class)
+@FacesConverter(forClass = Anunciante.class)
 public class AnuncianteConverter implements Converter {
 
 	@Inject
 	private AnuncianteService anuncianteService;
-	
+
 	@Override
-	public Object getAsObject(FacesContext context, UIComponent component,
-			String value) {
+	public Object getAsObject(FacesContext context, UIComponent component, String value) {
 		if (value == null || value.trim().isEmpty()) {
 			return null;
 		}
 		Long id = 0l;
-		try {
-			id = Long.parseLong(value);
-			return anuncianteService.buscarPorID(id);
-		} catch (NumberFormatException e) {
-			throw new ConverterException(new FacesMessage(String.format(
-					"%s é invalido para o anunciante", id)), e);
-		}
+		id = Long.parseLong(value);
+		return anuncianteService.buscarPorID(id);
 	}
 
 	@Override
-	public String getAsString(FacesContext context, UIComponent component,
-			Object value) {
+	public String getAsString(FacesContext context, UIComponent component, Object value) {
 		if (value == null) {
 			return null;
 		}
