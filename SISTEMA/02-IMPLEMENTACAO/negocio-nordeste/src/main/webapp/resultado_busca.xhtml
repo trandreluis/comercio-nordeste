@@ -9,7 +9,8 @@
 	template="/WEB-INF/templates/_template.xhtml">
 
 	<f:metadata>
-		<f:event listener="#{resultadoBuscaBean.preRenderView}" type="preRenderView" />
+		<f:event listener="#{resultadoBuscaBean.preRenderView}"
+			type="preRenderView" />
 	</f:metadata>
 
 	<ui:define name="title">Reultado da busca</ui:define>
@@ -21,11 +22,27 @@
 
 		<h:form id="formAnuncios">
 
+
+			<p:inputText id="busca" size="80" required="true"
+				value="#{resultadoBuscaBean.stringDeBusca}"
+				placeholder="Ex: bicicleta em monteiro, encanador em caruaru, smartphone em campina grande" />
+			<br />
+			<br />
+			<p:commandButton styleClass="btn btn-primary"
+				action="#{buscaBean.buscar}" value="Busca normal" ajax="false"
+				icon="fa fa-bullhorn" />
+			<p:commandButton value="Busca otimizada" styleClass="btn btn-default"
+				type="button" icon="fa fa-bar-chart"
+				onclick="PF('dialogLocalizacao').show();" />
+
+			<br />
+			<br />
 			<div align="center">
+
 
 				<p:dataGrid id="dataAnuncios"
 					value="#{resultadoBuscaBean.resultadoBusca}" var="anuncio"
-					columns="2" layout="grid"
+					columns="4" layout="grid"
 					emptyMessage="Sua busca não retornou nenhum resultado. Tente utilizar palavra-chave, como: celular, eletricista ou o nome do produto + cidade.">
 					<p:panel header="#{anuncio.titulo}">
 						<h:panelGrid columns="1" styleClass="ui-panelgrid-blank">
@@ -43,12 +60,9 @@
 									<p:outputLabel value="Estado: " />
 									<h:outputText value="#{anuncio.localizacao.estado}" />
 								</p:panelGrid>
-								<p:panelGrid columns="3" styleClass="ui-panelgrid-blank">
 									<p:commandButton styleClass="btn btn-primary"
 										value="Visualizar"
 										action="#{resultadoBuscaBean.visualizarAnuncio(anuncio)}" />
-									<p:commandButton styleClass="btn btn-update" value="Editar" />
-								</p:panelGrid>
 							</div>
 						</h:panelGrid>
 					</p:panel>

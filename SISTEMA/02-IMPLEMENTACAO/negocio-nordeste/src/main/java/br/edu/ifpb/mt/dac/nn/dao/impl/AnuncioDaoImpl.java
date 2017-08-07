@@ -1,9 +1,14 @@
 package br.edu.ifpb.mt.dac.nn.dao.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.PersistenceException;
 import javax.persistence.Query;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Predicate;
+import javax.persistence.criteria.Root;
 
 import br.edu.ifpb.mt.dac.nn.dao.AnuncioDAO;
 import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
@@ -44,17 +49,25 @@ public class AnuncioDaoImpl extends GenericDaoImpl<Anuncio, Long> implements Anu
 
 	@Override
 	public List<Anuncio> buscaPorTag(String stringDeBusca) throws NegocioNordesteException {
-		List<Anuncio> resultado = null;
-		try {
-			Query query = entityManager.createNamedQuery("Anuncio.buscaPorTag");
-			query.setParameter("stringDeBusca", "%" + stringDeBusca + "%");
-			resultado = query.getResultList();
-		} catch (PersistenceException pe) {
-			throw new NegocioNordesteException("Erro ao realizar busca por tag: " + pe.getMessage());
+		CriteriaBuilder criteria = entityManager.getCriteriaBuilder();
+		CriteriaQuery<Anuncio> query = criteria.createQuery(Anuncio.class);
+		Root<Anuncio> root = query.from(Anuncio.class);
+
+		List<Predicate> predicates = new ArrayList<Predicate>();
+
+		if (stringDeBusca != null && !"".equals(stringDeBusca)) {
+			predicates.add(criteria.like(criteria.lower(root.<String> get("titulo")), "%" + stringDeBusca + "%"));
+			predicates.add(criteria.like(criteria.lower(root.<String> get("descricao")), "%" + stringDeBusca + "%"));
 		}
-		return resultado;
+
+		if (predicates.size() > 0) {
+			query.where(criteria.or(predicates.toArray(new Predicate[] {})));
+		}
+
+		return entityManager.createQuery(query).getResultList();
+
 	}
-	
+
 	/*
 	 * Falta implementar
 	 */

@@ -85,7 +85,7 @@ public class AnuncioServiceImpl extends GenericServiceImpl<Anuncio, Long> implem
 		AnuncioDAO anuncioDAO = (AnuncioDAO) this.dao;
 
 		try {
-			return anuncioDAO.buscarPorDescricao(stringDeBusca);
+			return anuncioDAO.buscaPorTag(stringDeBusca);
 		} catch (PersistenceException pe) {
 			throw new NegocioNordesteException("Ocorreu um erro ao tentar buscar o anúncio pela tag.");
 		}

@@ -22,6 +22,7 @@ import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
+import javax.persistence.Transient;
 import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.Fetch;
@@ -81,7 +82,7 @@ public class Anuncio implements Serializable {
 	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.ALL }, mappedBy = "anuncio")
 	@Fetch(FetchMode.SUBSELECT)
 	private List<Visualizacao> vizualizacoes;
-
+	
 	public Long getId() {
 		return id;
 	}
