@@ -63,6 +63,15 @@ public class AnuncioBean extends AbstractBean implements Serializable {
 		}
 	}
 
+	public void editarAnuncio(Anuncio anuncio) {
+		if (anuncioService.buscarPorID(anuncio.getId()) != null) {
+			JSFUtils.setParam("anuncio", anuncio);
+			JSFUtils.rederTo("editar_anuncio.xhtml");
+		} else {
+			MessageUtils.messageError("Erro ao editar anúncio.");
+		}
+	}
+	
 	public Conta getConta() {
 		return conta;
 	}

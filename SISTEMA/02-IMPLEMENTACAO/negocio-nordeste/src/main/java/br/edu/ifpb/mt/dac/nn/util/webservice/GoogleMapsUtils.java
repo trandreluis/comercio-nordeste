@@ -5,7 +5,6 @@ import java.io.InputStreamReader;
 import java.net.URL;
 
 import com.google.gson.Gson;
-import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -31,10 +30,9 @@ public class GoogleMapsUtils {
 		Gson gson = new Gson();
 
 		try {
-			System.out.println(readUrl(consultaSertaniaMonteiro)
-					.getAsJsonArray("rows").getAsJsonArray().get(0)
-					.getAsJsonObject().getAsJsonArray("elements").get(0)
-					.getAsJsonObject().getAsJsonObject("distance").get("text"));
+			System.out.println(readUrl(consultaSertaniaMonteiro).getAsJsonArray("rows").getAsJsonArray().get(0)
+					.getAsJsonObject().getAsJsonArray("elements").get(0).getAsJsonObject().getAsJsonObject("distance")
+					.get("text"));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

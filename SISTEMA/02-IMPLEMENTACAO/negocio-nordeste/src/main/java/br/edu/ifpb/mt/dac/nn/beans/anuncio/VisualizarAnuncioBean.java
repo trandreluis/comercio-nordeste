@@ -32,19 +32,13 @@ public class VisualizarAnuncioBean extends AbstractBean implements Serializable 
 		try {
 			conta = contaService.buscarPorUsername(getUsernameUsuarioLogado());
 			anunciante = conta.getAnunciante();
-			 anuncio = (Anuncio) JSFUtils.getParam("anuncio");
-			if (anuncio != null) {
-				MessageUtils.messageSucess("Anúncio já com valor");
-			} else {
-				MessageUtils.messageError("Não foi possível visualizar o anúncio.");
-				JSFUtils.rederTo("");
-			}
+			anuncio = (Anuncio) JSFUtils.getParam("anuncio");
 		} catch (Exception e) {
 			e.printStackTrace();
-			MessageUtils.messageSucess("Erro no pre-render-view");
+			MessageUtils.messageSucess("Não foi possível visualizar o anúncio.");
 		}
 	}
-	
+
 	public Conta getConta() {
 		return conta;
 	}

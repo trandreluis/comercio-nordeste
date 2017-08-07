@@ -51,10 +51,12 @@
 									<p:commandButton styleClass="btn btn-primary"
 										value="Visualizar"
 										action="#{anuncioBean.visualizarAnuncio(anuncio)}" />
-									<p:commandButton styleClass="btn btn-update" value="Editar" />
+									<p:commandButton styleClass="btn btn-update" value="Editar"
+										action="#{anuncioBean.editarAnuncio(anuncio)}" />
 									<p:commandButton styleClass="btn btn-default" value="Excluir"
 										action="#{anuncioBean.excluirAnuncio(anuncio)}">
-										<p:confirm header="Tem certeza que deseja excluir este anúncio?"
+										<p:confirm
+											header="Tem certeza que deseja excluir este anúncio?"
 											message="Esta ação não poderá ser desfeita."
 											icon="fa fa-exclamation-triangle" />
 									</p:commandButton>

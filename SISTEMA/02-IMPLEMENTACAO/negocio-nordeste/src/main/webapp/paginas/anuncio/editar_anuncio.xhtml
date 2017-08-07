@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	template="/WEB-INF/templates/anunciante/_template_admin.xhtml">
+
+	<f:metadata>
+		<o:viewParam name="anuncio" value="#{editarAnuncioBean.anuncio}"
+			converter="#{anuncioConverter}" />
+		<f:event listener="#{anuncioEdicaoBean.preRenderView}"
+			type="preRenderView" />
+	</f:metadata>
+
+
+	<ui:define name="title">Cadastrar Anúncio</ui:define>
+	<ui:define name="content-header">Anunciante <small>Cadastre
+			novos anúncios de produtos ou serviços</small>
+	</ui:define>
+	<ui:define name="breadcrumb-active">
+		<a href="#{request.contextPath}/paginas/anunciante/anunciante.xhtml"><i
+			class="fa fa-user"></i>Anunciante</a>
+		<li class="active"><a
+			href="#{request.contextPath}/paginas/anuncio/editar_anuncio.xhtml"><i
+				class="fa fa-newspaper-o"></i>Editar Anúncio</a></li>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<h:form id="formEdicaoAnuncio">
+
+			<div id="divPrincipal" align="center" class="ui-fluid">
+
+				<p:panelGrid id="panelPrincipal" columns="1"
+					styleClass="ui-panelgrid-blank">
+
+					<p:outputLabel
+						value="Imagem: #{anuncioEdicaoBean.imagem.getFileName()}" />
+					<img style="width: 100%; max-width: 100px"
+						src="data:image/png;base64,#{imagemBean.getImageContent(anuncioEdicaoBean.anuncio.imagem)}" />
+					<br />
+					<br />
+
+					<p:fileUpload id="imagem" auto="true"
+						fileUploadListener="#{anuncioEdicaoBean.uploadImagem}"
+						required="true" requiredMessage="Por favor, envie uma imagem!"
+						fileLimitMessage="O limite máximo é de 1 (uma) imagem."
+						invalidFileMessage="Somente são aceitas imgens .jpeg, .jpg e .png."
+						invalidSizeMessage="A imagem excedeu o tamanho de 10 MB"
+						label="Selecionar arquivo" fileLimit="1" uploadLabel="Enviar"
+						cancelLabel="Cancelar" mode="advanced" dragDropSupport="true"
+						sizeLimit="10000000" update="@form"
+						messageTemplate="Tente outra imagem do seu anúncio!"
+						previewWidth="70" allowTypes="/(\.|\/)(jpe?g|png)$/" />
+
+					<h:outputLabel for="titulo" value="Título" />
+					<p:inputText id="titulo" required="true"
+						requiredMessage="Por favor, informe o titulo!"
+						value="#{anuncioEdicaoBean.anuncio.titulo}" />
+
+					<h:outputLabel for="descricao" value="Descrição" />
+					<p:inputTextarea id="descricao" required="true"
+						requiredMessage="Por favor, informe a descrição!"
+						value="#{anuncioEdicaoBean.anuncio.descricao}" />
+
+					<h:outputLabel for="preco" value="Preço (R$)" />
+					<p:inputNumber id="preco" required="true"
+						requiredMessage="Por favor, informe o preço!"
+						value="#{anuncioEdicaoBean.anuncio.preco}" emptyValue="0,00" />
+
+					<h:outputLabel for="estadoAtual" value="Estado atual" />
+					<p:inputText id="estadoAtual" disabled="true"
+						value="#{anuncioEdicaoBean.anuncio.localizacao.estado}" />
+					<h:outputLabel for="cidadeAtual" value="Cidade atual" />
+					<p:inputText id="cidadeAtual" disabled="true"
+						value="#{anuncioEdicaoBean.anuncio.localizacao.cidade}" />
+
+					<br />
+
+					<h:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+						<h:outputText value="Editar localização? - " />
+						<p:selectBooleanCheckbox
+							value="#{anuncioEdicaoBean.editarLocalizacao}">
+							<p:ajax update="@form" />
+						</p:selectBooleanCheckbox>
+					</h:panelGrid>
+
+					<p:panelGrid rendered="#{anuncioEdicaoBean.editarLocalizacao}"
+						id="panelLocalizacao" columns="1" styleClass="ui-panelgrid-blank">
+
+						<h:outputLabel for="estados" value="Estado" />
+						<p:selectOneMenu id="estados"
+							value="#{anuncioEdicaoBean.idEstadoSelecionado}"
+							effect="explode" filter="true" filterMatchMode="startsWith">
+							<p:ajax update="cidades"
+								listener="#{anuncioEdicaoBean.carregarCidadesDoEstado}" />
+							<f:selectItems value="#{anuncioEdicaoBean.estadosNordeste}"
+								var="estado" itemLabel="#{estado.nome}" itemValue="#{estado.id}" />
+						</p:selectOneMenu>
+
+						<h:outputLabel for="cidades" value="Cidade" />
+						<p:selectOneMenu id="cidades"
+							value="#{anuncioEdicaoBean.idCidadeSelecionada}"
+							effect="explode" filter="true" filterMatchMode="startsWith">
+							<f:selectItems value="#{anuncioEdicaoBean.cidadesDoEstado}"
+								var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade.id}" />
+						</p:selectOneMenu>
+
+					</p:panelGrid>
+
+					<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
+						<p:commandButton styleClass="btn btn-primary" value="Atualizar"
+							action="#{anuncioEdicaoBean.atualizar}" update="@form" />
+						<p:button styleClass="btn btn-default" value="Cancelar"
+							href="busca.xhtml" />
+					</p:panelGrid>
+
+				</p:panelGrid>
+
+			</div>
+
+		</h:form>
+
+	</ui:define>
+
+	<ui:define name="user-logged">
+
+		<li class="dropdown user user-menu"><a href="#"
+			class="dropdown-toggle" data-toggle="dropdown"> <i
+				class="fa fa-user" aria-hidden="true"></i> <span class="hidden-xs">
+			</span> <i class="fa fa-caret-down" aria-hidden="true"></i>
+		</a>
+			<ul class="dropdown-menu">
+				<li class="user-header">
+					<p style="font-size: 17px !important;"></p>
+					<p>
+						Usuário:
+						<p:outputLabel
+							value="#{anuncioEdicaoBean.anunciante.conta.username}" />
+					</p>
+				</li>
+
+				<li class="user-footer">
+					<div class="pull-left">
+						<p:button value="Minha conta" styleClass="btnn btnn-primary"
+							outcome="/paginas/anunciante/anunciante.xhtml" />
+					</div>
+					<div class="pull-right">
+						<h:form>
+							<p:commandButton value="Sair" styleClass="btnn btnn-primary"
+								ajax="false" action="#{loggedBean.logout()}" />
+						</h:form>
+					</div>
+				</li>
+			</ul></li>
+
+	</ui:define>
+
+</ui:composition>
