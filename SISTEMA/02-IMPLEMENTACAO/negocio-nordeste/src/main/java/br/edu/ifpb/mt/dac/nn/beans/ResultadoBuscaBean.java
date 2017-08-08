@@ -8,13 +8,16 @@ import javax.inject.Inject;
 import javax.inject.Named;
 
 import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
+import br.edu.ifpb.mt.dac.nn.googlewebservice.GoogleWebServicesResponse;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.model.Anuncio;
 import br.edu.ifpb.mt.dac.nn.model.Cidade;
 import br.edu.ifpb.mt.dac.nn.model.Conta;
 import br.edu.ifpb.mt.dac.nn.model.Estado;
+import br.edu.ifpb.mt.dac.nn.model.Localizacao;
 import br.edu.ifpb.mt.dac.nn.services.AnuncioService;
 import br.edu.ifpb.mt.dac.nn.services.ContaService;
+import br.edu.ifpb.mt.dac.nn.services.impl.DistanciaServiceImpl;
 import br.edu.ifpb.mt.dac.nn.util.jsf.JSFUtils;
 import br.edu.ifpb.mt.dac.nn.util.mensagens.MessageUtils;
 
@@ -60,6 +63,23 @@ public class ResultadoBuscaBean extends AbstractBean implements Serializable {
 			textoBotaoNovo = "Minha conta";
 			paginaBotaoNovo = "/paginas/anunciante/anunciante.xhtml?faces-redirect=true";
 		}
+		
+		//TESTE
+		DistanciaServiceImpl distancia = new DistanciaServiceImpl();
+		Localizacao localizacao = new Localizacao();
+		localizacao.setCidade("Sertânia");
+		localizacao.setEstado("Pernambuco");
+		
+		List<Anuncio> anuncios = anuncioService.buscarTodos();
+		
+		try {
+			distancia.buscaOtimizadaPelaDistancia(localizacao, anuncios);
+		} catch (NegocioNordesteException e) {
+			MessageUtils.messageError("Deu merda na otimização");
+		}
+		
+		//FIM TESTE
+		
 	}
 
 	public void visualizarAnuncio(Anuncio anuncio) {
