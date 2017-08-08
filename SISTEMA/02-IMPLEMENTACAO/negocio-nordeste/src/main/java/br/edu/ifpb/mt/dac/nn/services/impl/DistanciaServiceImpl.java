@@ -1,30 +1,24 @@
 package br.edu.ifpb.mt.dac.nn.services.impl;
 
+import java.io.Serializable;
 import java.util.List;
-
-import javax.inject.Inject;
 
 import com.google.maps.model.DistanceMatrix;
 
-import br.edu.ifpb.mt.dac.nn.dao.impl.AnuncioDaoImpl;
 import br.edu.ifpb.mt.dac.nn.exceptions.NegocioNordesteException;
 import br.edu.ifpb.mt.dac.nn.googlewebservice.GoogleWebServicesResponse;
 import br.edu.ifpb.mt.dac.nn.model.Anuncio;
 import br.edu.ifpb.mt.dac.nn.model.Localizacao;
-import br.edu.ifpb.mt.dac.nn.services.AnuncioService;
 
-public class DistanciaServiceImpl {
+public class DistanciaServiceImpl implements Serializable {
 
-	private static final long serialVersionUID = 1865483278732134577L;
+	private static final long serialVersionUID = 186548342134577L;
 
 	private GoogleWebServicesResponse googleWebServicesResponse = new GoogleWebServicesResponse();
 
 	public List<Anuncio> buscaOtimizadaPelaDistancia(Localizacao localizacaoBuscador,
 			List<Anuncio> anunciosNaoOtimizados) throws NegocioNordesteException {
-
-		List<Anuncio> anunciosOtimizados = null;
-		long menorDistacia = 0;
-
+		List<Anuncio> anunciosOtimizados = anunciosNaoOtimizados;
 		if (anunciosNaoOtimizados != null) {
 			String[] localizacaoAnuncios = new String[anunciosNaoOtimizados.size()];
 
@@ -32,23 +26,35 @@ public class DistanciaServiceImpl {
 				localizacaoAnuncios[i] = anunciosNaoOtimizados.get(i).getLocalizacao().getCidade() + ","
 						+ anunciosNaoOtimizados.get(i).getLocalizacao().getEstado();
 			}
-
 			try {
 				DistanceMatrix matrix = googleWebServicesResponse.consultaDistancia(
 						localizacaoBuscador.getEstado() + "+" + localizacaoBuscador.getCidade(), localizacaoAnuncios);
 
-				for (int i = 0; i <= matrix.destinationAddresses.length-1; i++) {
-					System.out.println("Cidade:" + matrix.destinationAddresses[i] + "," + " Distancia: "
-							+ matrix.rows[0].elements[i].distance.inMeters);
+				long[] distancias = new long[matrix.destinationAddresses.length];
 
-//					
-//					if (menorDistacia > matrix.rows[0].elements[i].distance.inMeters || menorDistacia == 0) {
-//						menorDistacia = matrix.rows[0].elements[i].distance.inMeters;
-//						anunciosOtimizados = anunciosNaoOtimizados.get(i);
-//					}
+				for (int i = 0; i < matrix.destinationAddresses.length; i++) {
+					distancias[i] = matrix.rows[0].elements[i].distance.inMeters;
 				}
+
+				for (int i = distancias.length - 1; i >= 1; i--) {
+					for (int j = 0; j < i; j++) {
+						long aux;
+						Anuncio anuncio;
+						if (distancias[j] > distancias[j + 1]) {
+							aux = distancias[j];
+							distancias[j] = distancias[j + 1];
+							distancias[j + 1] = aux;
+
+							anuncio = anunciosOtimizados.get(j + 1);
+							anunciosOtimizados.set(j + 1, anunciosOtimizados.get(j));
+							anunciosOtimizados.set(j, anuncio);
+						}
+					}
+				}
+
 			} catch (Exception e) {
-				e.printStackTrace();
+				throw new NegocioNordesteException(
+						"Erro ao conectar com webservice do Google. Verifique a conexão com a internet.");
 			}
 		}
 		return anunciosOtimizados;
