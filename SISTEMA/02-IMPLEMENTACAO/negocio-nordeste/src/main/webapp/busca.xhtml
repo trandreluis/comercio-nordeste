@@ -10,6 +10,8 @@
 
 	<f:metadata>
 		<f:event listener="#{buscaBean.preRenderView}" type="preRenderView" />
+		<f:event listener="#{resultadoBuscaBean.carregarEstadosECidades}"
+			type="preRenderView" />
 	</f:metadata>
 
 	<ui:define name="content">
@@ -20,15 +22,17 @@
 
 				<p:graphicImage library="images" name="1p.png" />
 				<br />
-				<p:inputText id="busca" size="80" required="true" value="#{resultadoBuscaBean.stringDeBusca}"
+				<p:inputText id="busca" size="80" required="true" requiredMessage="Informe o que deseja buscar!"
+					value="#{resultadoBuscaBean.stringDeBusca}"
 					placeholder="Ex: bicicleta em monteiro, encanador em caruaru, smartphone em campina grande" />
 				<br /> <br />
 				<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
 					<p:commandButton styleClass="btn btn-primary"
-						action="#{buscaBean.buscar}" value="Busca normal" ajax="false" icon="fa fa-bullhorn" />
+						action="#{buscaBean.buscar}" value="Buscar" ajax="false"
+						icon="fa fa-search" />
 					<p:commandButton value="Busca otimizada"
-					styleClass="btn btn-default" type="button" icon="fa fa-bar-chart"
-					onclick="PF('dialogLocalizacao').show();" />
+						styleClass="btn btn-default" type="button" icon="fa fa-cog"
+						onclick="PF('dialogLocalizacao').show();" />
 				</p:panelGrid>
 
 			</div>
@@ -42,25 +46,31 @@
 
 					<h:outputLabel for="estados" value="Estado" />
 					<p:selectOneMenu id="estados"
-						value="#{buscaBean.idEstadoSelecionado}" effect="explode"
+						value="#{resultadoBuscaBean.idEstadoSelecionado}" effect="explode"
 						filter="true" filterMatchMode="startsWith">
 						<p:ajax update="cidades"
-							listener="#{buscaBean.carregarCidadesDoEstado}" />
-						<f:selectItems value="#{buscaBean.estadosNordeste}" var="estado"
-							itemLabel="#{estado.nome}" itemValue="#{estado.id}" />
+							listener="#{resultadoBuscaBean.carregarCidadesDoEstado}" />
+						<f:selectItems value="#{resultadoBuscaBean.estadosNordeste}"
+							var="estado" itemLabel="#{estado.nome}" itemValue="#{estado.id}" />
 					</p:selectOneMenu>
 
 					<h:outputLabel for="cidades" value="Cidade" />
 					<p:selectOneMenu id="cidades"
-						value="#{buscaBean.idCidadeSelecionada}" effect="explode"
+						value="#{resultadoBuscaBean.idCidadeSelecionada}" effect="explode"
 						filter="true" filterMatchMode="startsWith">
-						<f:selectItems value="#{buscaBean.cidadesDoEstado}" var="cidade"
-							itemLabel="#{cidade.nome}" itemValue="#{cidade.id}" />
+						<f:selectItems value="#{resultadoBuscaBean.cidadesDoEstado}"
+							var="cidade" itemLabel="#{cidade.nome}" itemValue="#{cidade.id}" />
 					</p:selectOneMenu>
+					
+					<p:selectBooleanCheckbox
+							value="#{resultadoBuscaBean.buscaOtimizada}" />
+					<p:outputLabel value="Ativar busca otimizada? " />	
+										
 				</p:panelGrid>
 				<div align="center" class="ui-fluid">
-					<p:commandButton value="Utilizar" styleClass="btn btn-primary"
-						type="button" onclick="PF('dialogLocalizacao').hide();" />
+				
+				<p:commandButton value="Confirmar" styleClass="btn btn-primary"
+						onclick="PF('dialogLocalizacao').hide();" />
 				</div>
 			</p:dialog>
 
