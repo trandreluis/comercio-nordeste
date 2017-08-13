@@ -7,6 +7,7 @@ import javax.faces.view.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
 
+import br.edu.ifpb.mt.dac.nn.enumerations.TipoUsuario;
 import br.edu.ifpb.mt.dac.nn.model.Anunciante;
 import br.edu.ifpb.mt.dac.nn.model.Anuncio;
 import br.edu.ifpb.mt.dac.nn.model.Cidade;
@@ -39,6 +40,11 @@ public class BuscaBean extends AbstractBean implements Serializable {
 
 	public void preRenderView() {
 		conta = contaService.buscarPorUsername(getUsernameUsuarioLogado());
+		if(conta != null) {
+			if(conta.getTipo() == TipoUsuario.ADMIN) {
+				conta = null;
+			}
+		}
 		carregarEstadosECidades();
 		if (conta == null) {
 			textoBotaoNovo = "Novo";
@@ -77,6 +83,17 @@ public class BuscaBean extends AbstractBean implements Serializable {
 		}
 	}
 
+	@Override
+	public String getUsernameUsuarioLogado() {
+		if(conta == null) {
+			return "";
+		}
+		if(conta.getTipo() == TipoUsuario.ADMIN) {
+			return "";
+		}
+		return super.getUsernameUsuarioLogado();
+	}
+	
 	public Cidade getCidadeSelecionada() {
 		return cidadeSelecionada;
 	}

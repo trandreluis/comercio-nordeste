@@ -74,7 +74,20 @@ public class ContaServiceImpl extends GenericServiceImpl<Conta, Long> implements
 
 		return contaDAO.atualizar(entidade);
 	}
-
+	
+	@Override
+	@Transactional
+	public void deletar(Conta entidade) throws NegocioNordesteException {
+		ContaDAO contaDAO = (ContaDAO) this.dao;
+		
+		try{
+			contaDAO.deletar(entidade);			
+		} catch (Exception e) {
+			throw new NegocioNordesteException("Não foi óssível excluir a conta.");
+		}
+		
+	}
+	
 	@Override
 	public List<Conta> buscarPorTipo(TipoUsuario tipo) {
 

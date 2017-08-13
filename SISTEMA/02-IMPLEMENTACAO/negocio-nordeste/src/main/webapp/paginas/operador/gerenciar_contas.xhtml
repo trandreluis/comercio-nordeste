@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
+	xmlns:pe="http://primefaces.org/ui/extensions"
+	xmlns:c="http://java.sun.com/jstl/core"
+	template="/WEB-INF/templates/admin/_template_admin.xhtml">
+
+	<f:metadata>
+		<f:event listener="#{adminBean.preRenderView}" type="preRenderView" />
+	</f:metadata>
+
+	<ui:define name="title">Administrador</ui:define>
+	<ui:define name="content-header">Administrador <small>Gerencie
+			as contas dos usuários do sistema</small>
+	</ui:define>
+	<ui:define name="breadcrumb-active">
+		<a href="#{request.contextPath}/paginas/operador/operador.xhtml"><i
+			class="fa fa-user"></i>Administrador</a>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<div align="center" class="ui-fluid">
+			<h:form id="formAnuncaintes">
+
+				<p:dataTable var="conta" value="#{adminBean.contas}">
+					<p:column headerText="Username">
+						<h:outputText value="#{conta.username}" />
+					</p:column>
+
+					<p:column headerText="E-mail">
+						<h:outputText value="#{conta.email}" />
+					</p:column>
+
+					<p:column headerText="Tipo">
+						<h:outputText value="#{conta.tipo}" />
+					</p:column>
+
+					<p:column headerText="Ação">
+						<p:commandButton styleClass="btn btn-default" value="Excluir"
+							action="#{adminBean.excluir(conta)}" ajax="false" update="@this" />
+					</p:column>
+				</p:dataTable>
+
+			</h:form>
+		</div>
+	</ui:define>
+
+	<ui:define name="admin-logged">
+
+		<li class="dropdown user user-menu"><a href="#"
+			class="dropdown-toggle" data-toggle="dropdown"> <i
+				class="fa fa-user-plus" aria-hidden="true"></i> <span
+				class="hidden-xs"> </span> <i class="fa fa-caret-down"
+				aria-hidden="true"></i>
+		</a>
+			<ul class="dropdown-menu">
+				<li class="user-header">
+					<p style="font-size: 17px !important;"></p>
+					<p>
+						Usuário:
+						<p:outputLabel value="#{adminBean.usernameUsuarioLogado}" />
+					</p>
+				</li>
+
+				<li class="user-footer">
+					<div class="pull-left">
+						<p:button value="Minha conta" styleClass="btnn btnn-primary"
+							outcome="/paginas/operador/operador.xhtml" />
+					</div>
+					<div class="pull-right">
+						<h:form>
+							<p:commandButton value="Sair" styleClass="btnn btnn-primary"
+								ajax="false" action="#{loggedBean.logout()}" />
+						</h:form>
+					</div>
+				</li>
+			</ul></li>
+
+	</ui:define>
+
+</ui:composition>

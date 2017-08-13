@@ -47,7 +47,7 @@
 					<p:panel header="#{anuncio.titulo}">
 						<h:panelGrid columns="1" styleClass="ui-panelgrid-blank">
 							<div align="center">
-								<img style="width: 100%; max-width: 200px"
+								<img style="width: 100%; max-width: 100px"
 									src="data:image/png;base64,#{imagemBean.getImageContent(anuncio.imagem)}" />
 								<br />
 								<p:panelGrid columns="2" styleClass="ui-panelgrid-blank">
@@ -60,9 +60,8 @@
 									<p:outputLabel value="Estado: " />
 									<h:outputText value="#{anuncio.localizacao.estado}" />
 								</p:panelGrid>
-									<p:commandButton styleClass="btn btn-primary"
-										value="Visualizar"
-										action="#{resultadoBuscaBean.visualizarAnuncio(anuncio)}" />
+								<p:commandButton styleClass="btn btn-primary" value="Visualizar"
+									ajax="false" action="#{resultadoBuscaBean.visualizarAnuncio(anuncio)}" />
 							</div>
 						</h:panelGrid>
 					</p:panel>
@@ -100,8 +99,14 @@
 
 				<li class="user-footer">
 					<div class="pull-left">
-						<p:button value="Minha conta" styleClass="btnn btnn-primary"
+						<p:button value="Minha conta"
+							rendered="#{not empty resultadoBuscaBean.usernameUsuarioLogado}"
+							styleClass="btnn btnn-primary"
 							outcome="/paginas/anunciante/anunciante.xhtml" />
+						<p:button value="Novo"
+							rendered="#{empty resultadoBuscaBean.usernameUsuarioLogado}"
+							styleClass="btnn btnn-primary"
+							outcome="/cadastro_anunciante.xhtml" />
 					</div>
 					<div class="pull-right">
 						<h:form>

@@ -56,7 +56,6 @@ public class ResultadoBuscaBean extends AbstractBean implements Serializable {
 		try {
 			if (buscaOtimizada) {
 				
-
 				LocalizacaoUtils util = new LocalizacaoUtils();
 				Localizacao localizacao = new Localizacao();
 				for (Cidade cidade : cidadesDoEstado) {
@@ -113,11 +112,12 @@ public class ResultadoBuscaBean extends AbstractBean implements Serializable {
 		}
 	}
 	
-	public void visualizarAnuncio(Anuncio anuncio) {
-		if (anuncio != null) {
+	public String visualizarAnuncio(Anuncio anuncio) {
+//		if (anuncio != null) {
+		MessageUtils.messageSucess("Renderizando anuncio "+anuncio.getTitulo());
 			JSFUtils.setParam("anuncio", anuncio);
-			JSFUtils.rederTo("/anuncio/visualizar_anuncio.xhtml");
-		}
+			return "/anuncio/visualizar_anuncio.xhtml?faces-redirect=true";
+//		}
 	}
 
 	public Cidade getCidadeSelecionada() {

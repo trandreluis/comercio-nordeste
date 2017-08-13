@@ -19,6 +19,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.validation.constraints.NotNull;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.validator.constraints.NotBlank;
 
 @Entity
@@ -33,7 +34,9 @@ public class Anunciante implements Serializable {
 	private Long id;
 
 	@NotNull
-	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.ALL })
+	@OneToOne(fetch = FetchType.EAGER, cascade = { CascadeType.PERSIST, CascadeType.MERGE,
+			CascadeType.REMOVE })
+	@Cascade(org.hibernate.annotations.CascadeType.DELETE)
 	@JoinColumn(name = "FK_CONTA", nullable = false)
 	private Conta conta;
 
@@ -48,7 +51,8 @@ public class Anunciante implements Serializable {
 	@Column(name = "DATA_NASCIMENTO", nullable = false)
 	private Date dataNascimento;
 
-	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH }, mappedBy = "anunciante")
+	@OneToMany(fetch = FetchType.EAGER, cascade = { CascadeType.REFRESH, CascadeType.REMOVE }, mappedBy = "anunciante")
+	@Cascade(org.hibernate.annotations.CascadeType.DELETE)
 	private List<Anuncio> anuncios;
 
 	@Column(name = "NIVEL", columnDefinition="Decimal(10,2) default '3.00'")

@@ -53,14 +53,16 @@
 	</login-config>
 
 	<security-constraint>
-		<display-name>Páginas do administrador</display-name>
+		<display-name>Páginas do Anunciante</display-name>
 		<web-resource-collection>
 			<web-resource-name>Área protegida do anunciante</web-resource-name>
 			<description></description>
 			<url-pattern>/paginas/anunciante/anunciante.xhtml</url-pattern>
 			<url-pattern>/paginas/anunciante/edicao_anunciante.xhtml</url-pattern>
 			<url-pattern>/paginas/conta/edicao_conta.xhtml</url-pattern>
+			<url-pattern>/paginas/anuncio/anuncios.xhtml</url-pattern>
 			<url-pattern>/paginas/anuncio/cadastro_anuncio.xhtml</url-pattern>
+			<url-pattern>/paginas/anuncio/editar_anuncio.xhtml</url-pattern>
 			<http-method>GET</http-method>
 			<http-method>POST</http-method>
 			<http-method>HEAD</http-method>
@@ -72,6 +74,32 @@
 		<auth-constraint>
 			<description />
 			<role-name>ANUNCIANTE</role-name>
+		</auth-constraint>
+		<user-data-constraint>
+			<!-- CONFIDENTIAL, INTEGRAL, or NONE -->
+			<!-- Referência: https://docs.oracle.com/javaee/7/tutorial/security-webtier002.htm#JEETT00775 -->
+			<transport-guarantee>CONFIDENTIAL</transport-guarantee>
+		</user-data-constraint>
+	</security-constraint>
+
+	<security-constraint>
+		<display-name>Páginas do administrador</display-name>
+		<web-resource-collection>
+			<web-resource-name>Área protegida do anunciante</web-resource-name>
+			<description></description>
+			<url-pattern>/paginas/operador/operador.xhtml</url-pattern>
+			<url-pattern>/paginas/operador/gerenciar_contas.xhtml</url-pattern>
+			<http-method>GET</http-method>
+			<http-method>POST</http-method>
+			<http-method>HEAD</http-method>
+			<http-method>PUT</http-method>
+			<http-method>OPTIONS</http-method>
+			<http-method>TRACE</http-method>
+			<http-method>DELETE</http-method>
+		</web-resource-collection>
+		<auth-constraint>
+			<description />
+			<role-name>ADMIN</role-name>
 		</auth-constraint>
 		<user-data-constraint>
 			<!-- CONFIDENTIAL, INTEGRAL, or NONE -->

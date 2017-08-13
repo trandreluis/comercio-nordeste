@@ -9,14 +9,25 @@
 <h:head>
 
 	<title>Acesso não autorizado</title>
+	<link rel="stylesheet" type="text/css"
+		href="#{request.contextPath}/resources/dist/css/style-components.css" />
 
 </h:head>
 
 <h:body>
 
-	<h:panelGrid columns="1">
-		<h:outputText value="Você não tem acesso a este recurso do sistema!" />
-	</h:panelGrid>
+	<div align="center" class="ui-fluid">
+
+		<p:graphicImage library="images" name="acess-denied.png" />
+		<br />
+
+		<p:panelGrid columns="1" styleClass="ui-panelgrid-blank">
+			<p:outputLabel value="Você não tem acesso a este recurso do sistema!" />
+			<p:button value="Voltar para o início" styleClass="btn btn-primary"
+				outcome="/busca.xhtml" />
+		</p:panelGrid>
+
+	</div>
 
 </h:body>
 

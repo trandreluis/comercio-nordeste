@@ -7,25 +7,25 @@
 	xmlns:p="http://primefaces.org/ui" xmlns:o="http://omnifaces.org/ui"
 	xmlns:pe="http://primefaces.org/ui/extensions"
 	xmlns:c="http://java.sun.com/jstl/core"
-	template="/WEB-INF/templates/anunciante/_template_admin.xhtml">
+	template="/WEB-INF/templates/admin/_template_admin.xhtml">
 
 	<f:metadata>
-		<f:event listener="#{anuncianteBean.preRenderView}"
+		<f:event listener="#{adminBean.preRenderView}"
 			type="preRenderView" />
 	</f:metadata>
 
-	<ui:define name="title">Anunciante</ui:define>
-	<ui:define name="content-header">Anunciante <small>Gerencie
-			seus anúncios de produtos e serviços</small>
+	<ui:define name="title">Administrador</ui:define>
+	<ui:define name="content-header">Administrador <small>Gerencie
+			as contas dos usuários do sistema</small>
 	</ui:define>
 	<ui:define name="breadcrumb-active">
-		<a href="#{request.contextPath}/paginas/anunciante/anunciante.xhtml"><i
-			class="fa fa-user"></i>Anunciante</a>
+		<a href="#{request.contextPath}/paginas/operador/operador.xhtml"><i
+			class="fa fa-user"></i>Administrador</a>
 	</ui:define>
 
 	<ui:define name="content">
 
-		<h:form id="formFuncionarios">
+		<h:form id="formAdmin">
 
 			<!-- <p:dataTable 
 				id="tablefuncionarios"
@@ -98,11 +98,11 @@
 		</h:form>
 	</ui:define>
 
-	<ui:define name="user-logged">
+	<ui:define name="admin-logged">
 
 		<li class="dropdown user user-menu"><a href="#"
 			class="dropdown-toggle" data-toggle="dropdown"> <i
-				class="fa fa-user" aria-hidden="true"></i> <span class="hidden-xs">
+				class="fa fa-user-plus" aria-hidden="true"></i> <span class="hidden-xs">
 			</span> <i class="fa fa-caret-down" aria-hidden="true"></i>
 		</a>
 			<ul class="dropdown-menu">
@@ -111,14 +111,14 @@
 					<p>
 						Usuário:
 						<p:outputLabel
-							value="#{anuncianteBean.anunciante.conta.username}" />
+							value="#{adminBean.admin.conta.username}" />
 					</p>
 				</li>
 
 				<li class="user-footer">
 					<div class="pull-left">
 						<p:button value="Minha conta" styleClass="btnn btnn-primary"
-							outcome="/paginas/anunciante/anunciante.xhtml" />
+							outcome="/paginas/operador/operador.xhtml" />
 					</div>
 					<div class="pull-right">
 						<h:form>
